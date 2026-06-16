@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aiforbusiness24 — AI dla Twojego Biznesu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #050A14;
+      --bg2:       #080F1E;
+      --blue:      #0066FF;
+      --blue-dark: #003399;
+      --blue-dim:  #0044BB;
+      --blue-glow: rgba(0,102,255,0.18);
+      --blue-glow2:rgba(0,102,255,0.06);
+      --white:     #FFFFFF;
+      --muted:     #A0AEC0;
+      --card-bg:   rgba(8,18,40,0.72);
+      --border:    rgba(0,102,255,0.18);
+      --radius:    16px;
+      --radius-sm: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', 'Space Grotesk', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
+    h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 5vw, 3.6rem); }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+    p  { color: var(--muted); }
+
+    a { text-decoration: none; color: inherit; }
+
+    .section { padding: 100px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .label {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(0,102,255,.1);
+      border: 1px solid rgba(0,102,255,.25);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+
+    /* ─── BUTTONS ──────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .9rem; font-weight: 600;
+      cursor: pointer; border: none;
+      transition: all .25s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 0 24px rgba(0,102,255,.4);
+    }
+    .btn-primary:hover {
+      background: #1a7aff;
+      box-shadow: 0 0 36px rgba(0,102,255,.65);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: rgba(0,102,255,.08);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      font-size: .82rem; padding: 9px 20px;
+    }
+    .btn-ghost:hover {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(0,102,255,.45);
+    }
+
+    /* ─── NAVBAR ───────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 16px 0;
+      transition: background .35s, backdrop-filter .35s, border-bottom .35s;
+    }
+    #navbar.scrolled {
+      background: rgba(5,10,20,.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav-logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+      font-size: .88rem; font-weight: 500;
+    }
+    .nav-links a { color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    .lang-btn {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--muted); font-size: .82rem; font-weight: 600;
+      padding: 7px 14px; border-radius: 8px;
+      cursor: pointer; transition: all .2s;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .lang-btn:hover { color: var(--white); border-color: var(--blue); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(5,10,20,.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a, .mobile-menu button {
+      font-size: 1.5rem; font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--white); background: none; border: none; cursor: pointer;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover, .mobile-menu button:hover { color: var(--blue); }
+
+    @media(max-width:768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; padding: 140px 0 80px;
+      text-align: center;
+    }
+    .hero-canvas {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    /* grid overlay */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(0,102,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,102,255,.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+    }
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(0,60,180,.22) 0%, transparent 70%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 860px; margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,102,255,.1);
+      border: 1px solid rgba(0,102,255,.3);
+      padding: 8px 18px; border-radius: 99px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .1em;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--blue); border-radius: 50%;
+      box-shadow: 0 0 8px var(--blue);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    .hero-title {
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #fff 0%, #c8d8ff 50%, #7aa8ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted); max-width: 600px; margin: 0 auto 40px;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .hero-metrics {
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+      margin-top: 64px;
+    }
+    .metric-badge {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 12px 22px; border-radius: 12px;
+      font-size: .82rem; font-weight: 600;
+      color: var(--white);
+      display: flex; align-items: center; gap: 8px;
+      animation: float 4s ease-in-out infinite;
+    }
+    .metric-badge:nth-child(2) { animation-delay: -.8s; }
+    .metric-badge:nth-child(3) { animation-delay: -1.6s; }
+    .metric-badge:nth-child(4) { animation-delay: -2.4s; }
+    .metric-badge .dot { width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+    /* ─── CANVAS PARTICLES ─────────────────────────────────────── */
+    canvas#particles { position:absolute;inset:0;width:100%;height:100%; }
+
+    /* ─── ABOUT ────────────────────────────────────────────────── */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .about-text h2 { margin-bottom: 20px; }
+    .about-text p { margin-bottom: 16px; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius);
+      padding: 28px 20px; text-align: center;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .stat-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 0 28px var(--blue-glow);
+    }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--blue); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: .82rem; color: var(--muted); font-weight: 500; }
+
+    @media(max-width:768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-grid { grid-template-columns: repeat(3,1fr); gap: 16px; }
+      .about-text { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    }
+
+    /* ─── SERVICES ─────────────────────────────────────────────── */
+    #services { background: var(--bg); }
+    .services-header { text-align: center; margin-bottom: 60px; }
+    .services-header p { max-width: 560px; margin: 12px auto 0; }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px,100%), 1fr)); gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: rgba(0,102,255,.5);
+      box-shadow: 0 0 40px var(--blue-glow), 0 8px 32px rgba(0,0,0,.4);
+      transform: translateY(-4px);
+    }
+    .service-card.featured {
+      border-color: rgba(0,102,255,.45);
+      box-shadow: 0 0 32px var(--blue-glow);
+    }
+    .service-card.featured:hover {
+      box-shadow: 0 0 56px var(--blue-glow), 0 8px 32px rgba(0,0,0,.4);
+    }
+    .featured-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--blue); background: rgba(0,102,255,.12);
+      border: 1px solid rgba(0,102,255,.3);
+      padding: 3px 9px; border-radius: 20px;
+      align-self: flex-start;
+    }
+    .service-header {
+      padding: 28px 28px 20px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(0,102,255,.12);
+      border: 1px solid rgba(0,102,255,.25);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+    }
+    .service-icon svg { width:24px; height:24px; }
+    .service-short { font-size: .88rem; margin-top: 4px; }
+    .service-toggle-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: none; border: none; color: var(--blue);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .82rem; font-weight: 600;
+      cursor: pointer; padding: 0 28px 24px;
+      transition: gap .2s;
+    }
+    .service-toggle-btn:hover { gap: 12px; }
+    .toggle-arrow {
+      width: 16px; height: 16px;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      flex-shrink: 0;
+    }
+    .service-card.open .toggle-arrow { transform: rotate(180deg); }
+
+    .service-expand {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s;
+      opacity: 0;
+    }
+    .service-card.open .service-expand { max-height: 1200px; opacity: 1; }
+
+    .service-expand-inner {
+      padding: 0 28px 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+    .service-expand-inner p { font-size: .9rem; margin-bottom: 14px; }
+    .expand-title { color: var(--white); font-weight: 600; margin-bottom: 8px; font-size:.95rem; }
+    .expand-list {
+      list-style: none; padding: 0; margin-bottom: 18px;
+    }
+    .expand-list li {
+      font-size: .88rem; color: var(--muted);
+      padding: 5px 0;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .expand-list li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0; margin-top: 7px;
+    }
+    .expand-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .86rem; font-weight: 600; color: var(--blue);
+      margin-top: 8px; transition: gap .2s;
+    }
+    .expand-cta:hover { gap: 10px; }
+
+    /* mini product cards inside AI Apps */
+    .mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .mini-card {
+      background: rgba(0,102,255,.06);
+      border: 1px solid rgba(0,102,255,.15);
+      border-radius: 10px; padding: 12px 14px;
+      font-size: .8rem;
+    }
+    .mini-card strong { color: var(--white); display: block; margin-bottom: 3px; font-size:.82rem; }
+    .mini-card span { color: var(--muted); }
+
+    @media(max-width:600px){ .mini-cards{grid-template-columns:1fr;} }
+
+    /* ─── FAQ ──────────────────────────────────────────────────── */
+    #faq { background: var(--bg2); }
+    .faq-header { text-align: center; margin-bottom: 54px; }
+    .faq-header p { max-width: 520px; margin: 12px auto 0; }
+    .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .faq-item.open { border-color: rgba(0,102,255,.45); }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; cursor: pointer;
+      font-weight: 600; font-size: .95rem; color: var(--white);
+      gap: 16px;
+    }
+    .faq-question:hover { color: var(--blue); }
+    .faq-icon {
+      width: 20px; height: 20px; flex-shrink: 0; color: var(--blue);
+      transition: transform .35s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .35s;
+      opacity: 0;
+    }
+    .faq-item.open .faq-answer { max-height: 400px; opacity: 1; }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: .9rem; }
+
+    /* ─── CONTACT ──────────────────────────────────────────────── */
+    #contact { background: var(--bg); }
+    .contact-header { text-align: center; margin-bottom: 54px; }
+    .contact-header p { max-width: 500px; margin: 12px auto 0; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px;
+      max-width: 900px; margin: 0 auto; align-items: start;
+    }
+    .contact-info h3 { margin-bottom: 14px; }
+    .contact-info p { margin-bottom: 24px; }
+    .contact-detail {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px; font-size: .9rem;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      background: rgba(0,102,255,.1); border: 1px solid var(--border);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      color: var(--blue); flex-shrink: 0;
+    }
+    .contact-detail-icon svg { width:18px;height:18px; }
+    .contact-detail-text strong { color: var(--white); display:block; font-size:.82rem; margin-bottom:2px; }
+    .contact-detail-text span { color: var(--muted); font-size:.88rem; }
+
+    .contact-form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+    .form-row { margin-bottom: 18px; }
+    .form-row label {
+      display: block; font-size: .8rem; font-weight: 600;
+      color: var(--muted); margin-bottom: 7px; letter-spacing: .04em;
+    }
+    .form-row input, .form-row textarea {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: .9rem;
+      padding: 12px 16px;
+      transition: border-color .25s, box-shadow .25s;
+      outline: none;
+    }
+    .form-row input:focus, .form-row textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,102,255,.12);
+    }
+    .form-row textarea { height: 110px; resize: vertical; }
+    .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(160,174,192,.4); }
+    .form-submit { width: 100%; margin-top: 4px; font-size:.95rem; padding:14px; }
+
+    @media(max-width:768px){ .contact-grid{grid-template-columns:1fr; gap:36px;} }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 56px 0 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { font-size: 1.15rem; display: block; margin-bottom: 12px; }
+    .footer-brand p { font-size: .85rem; max-width: 280px; }
+    .footer-col h4 {
+      font-size: .82rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: .87rem; color: var(--muted); transition: color .2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      font-size: .82rem; color: var(--muted); flex-wrap: wrap;
+    }
+    @media(max-width:768px){
+      .footer-grid{grid-template-columns:1fr 1fr; gap:32px;}
+      .footer-brand{grid-column:1/-1;}
+    }
+    @media(max-width:480px){
+      .footer-grid{grid-template-columns:1fr; gap:20px;}
+      .footer-bottom{flex-direction:column;text-align:center; gap:12px;}
+    }
+
+    /* ─── FADE-IN ──────────────────────────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-d1 { transition-delay: .1s; }
+    .fade-in-d2 { transition-delay: .2s; }
+    .fade-in-d3 { transition-delay: .3s; }
+    .fade-in-d4 { transition-delay: .4s; }
+    .fade-in-d5 { transition-delay: .5s; }
+
+    /* ─── TOAST ────────────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+      background: var(--card-bg); border: 1px solid var(--border);
+      backdrop-filter: blur(16px); border-radius: 12px;
+      padding: 14px 22px; font-size: .9rem; font-weight: 500;
+      color: var(--white);
+      transform: translateY(80px); opacity: 0;
+      transition: all .4s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { border-color: rgba(0,200,100,.3); color: #4afa9a; }
+
+    /* ─── MOBILE RESPONSIVE ────────────────────────────────────── */
+    @media(max-width:768px) {
+      .section { padding: 60px 0; }
+      #hero { padding: 100px 0 60px; }
+      .contact-form-card { padding: 24px; }
+    }
+    @media(max-width:480px) {
+      .section { padding: 40px 0; }
+      #hero { padding: 80px 0 40px; }
+      .stats-grid { grid-template-columns: 1fr; gap: 12px; }
+      .service-header { padding: 18px 16px 14px; gap: 10px; }
+      .service-expand-inner { padding: 0 16px 16px; padding-top: 16px; }
+      .faq-question { padding: 16px 14px; gap: 12px; font-size: .9rem; }
+      .faq-answer-inner { padding: 0 14px 16px; }
+      .contact-form-card { padding: 16px; }
+      .contact-grid { gap: 24px; }
+      .mini-cards { margin: 12px 0; gap: 8px; }
+      .mini-card { padding: 10px 12px; font-size: .75rem; }
+      .toast { bottom: 16px; right: 16px; left: 16px; padding: 12px 16px; font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────────────────── NAVBAR ─────────────────────────── -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">ai<span>for</span>business24</a>
+
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">O nas</a></li>
+      <li><a href="#services" data-i18n="nav_services">Usługi</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="lang-btn" id="langToggle">EN</button>
+      <a href="#contact" class="btn btn-primary" data-i18n="nav_cta">Darmowa konsultacja</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" data-i18n="nav_about">O nas</a>
+  <a href="#services" data-i18n="nav_services">Usługi</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact" data-i18n="nav_contact">Kontakt</a>
+  <a href="#contact" class="btn btn-primary" data-i18n="nav_cta" style="font-size:1rem">Darmowa konsultacja</a>
+  <button id="mobileLang" style="font-size:1rem;color:var(--blue)">Przełącz język / Switch Language</button>
+</div>
+
+<!-- ─────────────────────────── HERO ────────────────────────────── -->
+<section id="hero">
+  <canvas id="particles"></canvas>
+  <div class="container hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">AI for Business 24</div>
+    <h1 class="hero-title" data-i18n="hero_title">AI, które realnie zmienia&nbsp;Twój biznes&nbsp;— nie jutro, a&nbsp;dziś.</h1>
+    <p class="hero-sub" data-i18n="hero_sub">Automatyzujemy, projektujemy i wdrażamy rozwiązania AI, które realnie zwiększają efektywność Twojej firmy — od pierwszego dnia.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary" data-i18n="hero_cta1">Umów bezpłatną konsultację</a>
+      <a href="#services" class="btn btn-secondary" data-i18n="hero_cta2">Zobacz usługi</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric-badge fade-in fade-in-d1"><span class="dot"></span><span data-i18n="m1">24/7 Active</span></div>
+      <div class="metric-badge fade-in fade-in-d2"><span class="dot"></span><span data-i18n="m2">5× Szybciej</span></div>
+      <div class="metric-badge fade-in fade-in-d3"><span class="dot"></span><span data-i18n="m3">100% Zautomatyzowane</span></div>
+      <div class="metric-badge fade-in fade-in-d4"><span class="dot"></span><span data-i18n="m4">AI bez limitów</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── VIDEO CASE STUDY ────────────────── -->
+<section id="case-video" class="section">
+  <div class="container">
+    <div class="services-header fade-in">
+      <div class="label">Case study</div>
+      <h2>Zobacz jak robimy to u naszych klientów</h2>
+    </div>
+    <div class="fade-in fade-in-d1" style="max-width:860px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,100,255,.2);aspect-ratio:16/9;">
+      <iframe
+        src="https://www.youtube.com/embed/QwCXiOfHg9w"
+        title="Zobacz jak robimy to u naszych klientów"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="width:100%;height:100%;display:block;"
+      ></iframe>
+    </div>
+    <div class="fade-in fade-in-d2" style="text-align:center;margin-top:48px;">
+      <button onclick="openQuiz()" style="
+        display:inline-flex;align-items:center;gap:10px;
+        padding:18px 40px;
+        background:linear-gradient(135deg,#0066FF,#0044BB);
+        color:#fff;border:none;border-radius:14px;
+        font-size:1.05rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+        cursor:pointer;letter-spacing:.02em;
+        box-shadow:0 4px 32px rgba(0,102,255,.45);
+        transition:transform .2s,box-shadow .2s;
+      "
+      onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 48px rgba(0,102,255,.6)'"
+      onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 32px rgba(0,102,255,.45)'"
+      >
+        Bezpłatna konsultacja
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── QUIZ MODAL ───────────────────────── -->
+<div id="quiz-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
+  <div id="quiz-box" style="
+    background:#060D1F;border:1px solid rgba(0,102,255,.25);border-radius:24px;
+    width:100%;max-width:580px;max-height:90vh;overflow-y:auto;
+    box-shadow:0 0 80px rgba(0,102,255,.2),0 32px 64px rgba(0,0,0,.6);
+    position:relative;
+  ">
+    <!-- close -->
+    <button onclick="closeQuiz()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.06);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;">×</button>
+
+    <!-- progress bar -->
+    <div style="height:3px;background:rgba(255,255,255,.06);border-radius:24px 24px 0 0;overflow:hidden;">
+      <div id="quiz-progress" style="height:100%;background:linear-gradient(90deg,#0066FF,#00AAFF);transition:width .4s ease;width:0%;"></div>
+    </div>
+
+    <div style="padding:40px 36px 36px;">
+      <!-- step indicator -->
+      <div id="quiz-step-label" style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:24px;"></div>
+
+      <!-- steps -->
+      <div id="quiz-steps">
+
+        <!-- STEP 1 -->
+        <div class="qstep" id="qs1">
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Co Cię interesuje?</h3>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">Wybierz jedno lub więcej</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" id="s1-grid">
+            <button class="qbtn" onclick="toggleQ(this,'s1')">🤖 Agenci AI</button>
+            <button class="qbtn" onclick="toggleQ(this,'s1')">⚡ Automatyzacje</button>
+            <button class="qbtn" onclick="toggleQ(this,'s1')">📱 Aplikacje AI</button>
+            <button class="qbtn" onclick="toggleQ(this,'s1')">📞 Recepcjonistka AI</button>
+            <button class="qbtn" onclick="toggleQ(this,'s1')" style="grid-column:1/-1;">🤷 Nie wiem jeszcze — pomóżcie mi wybrać</button>
+          </div>
+          <button class="qnext" onclick="goStep(2)" style="margin-top:28px;" disabled id="s1-next">Dalej →</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="qstep" id="qs2" style="display:none;">
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Jak duża jest Twoja firma?</h3>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">To pomoże nam dopasować rozwiązanie</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s2',3)">👤 Jednoosobowa / startup</button>
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s2',3)">👥 2–20 osób</button>
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s2',3)">🏢 21–100 osób</button>
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s2',3)">🏗️ 100+ osób</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="qstep" id="qs3" style="display:none;">
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Kiedy chcesz zacząć?</h3>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">Bez zobowiązań — tylko orientacyjnie</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s3',4)">🚀 Jak najszybciej</button>
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s3',4)">📅 W ciągu 1–2 miesięcy</button>
+            <button class="qbtn qbtn-single" onclick="pickQ(this,'s3',4)">🔭 Planuję na przyszłość — chcę się dowiedzieć więcej</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: kontakt -->
+        <div class="qstep" id="qs4" style="display:none;">
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Prawie gotowe!</h3>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">Zostaw swoje dane — oddzwonimy i omówimy szczegóły</p>
+          <form id="quizForm" style="display:flex;flex-direction:column;gap:14px;" onsubmit="submitQuiz(event)">
+            <input type="hidden" name="_subject" value="Nowy lead — Quiz aiforbusiness24">
+            <input type="hidden" id="q-interests" name="zainteresowania">
+            <input type="hidden" id="q-size" name="wielkosc_firmy">
+            <input type="hidden" id="q-timing" name="kiedy_zaczac">
+            <div class="cc-field">
+              <input type="text" name="name" id="q-name" placeholder=" " required autocomplete="name">
+              <label for="q-name">Imię *</label>
+            </div>
+            <div class="cc-field">
+              <input type="text" name="branza" id="q-branza" placeholder=" " required>
+              <label for="q-branza">Branża *</label>
+            </div>
+            <div class="cc-field">
+              <input type="email" name="email" id="q-email" placeholder=" " required autocomplete="email">
+              <label for="q-email">Email *</label>
+            </div>
+            <div class="cc-field">
+              <input type="tel" name="phone" id="q-phone" placeholder=" " required autocomplete="tel">
+              <label for="q-phone">Telefon *</label>
+            </div>
+            <input type="hidden" id="q-pora" name="pora_dnia">
+            <div style="margin-top:4px;">
+              <p style="font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Kiedy najlepiej zadzwonić? *</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="pora-grid">
+                <button type="button" class="qbtn" onclick="pickPora(this,'Rano (8–11)')">🌅 Rano (8–11)</button>
+                <button type="button" class="qbtn" onclick="pickPora(this,'Południe (11–14)')">☀️ Południe (11–14)</button>
+                <button type="button" class="qbtn" onclick="pickPora(this,'Popołudnie (14–17)')">🌤️ Popołudnie (14–17)</button>
+                <button type="button" class="qbtn" onclick="pickPora(this,'Wieczór (17–20)')">🌙 Wieczór (17–20)</button>
+              </div>
+            </div>
+            <button type="submit" id="quiz-submit-btn" style="
+              width:100%;padding:16px;margin-top:6px;
+              background:linear-gradient(135deg,#0066FF,#0044BB);
+              color:#fff;border:none;border-radius:12px;
+              font-size:1rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+              cursor:pointer;box-shadow:0 4px 24px rgba(0,102,255,.4);
+              transition:opacity .2s,transform .2s;
+            ">Umów bezpłatną konsultację →</button>
+          </form>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="qstep" id="qs5" style="display:none;text-align:center;padding:20px 0;">
+          <div style="font-size:3.5rem;margin-bottom:20px;">🎉</div>
+          <h3 style="font-size:1.6rem;margin-bottom:12px;color:#fff;">Wysłane!</h3>
+          <p style="color:var(--muted);">Skontaktujemy się z Tobą w ciągu 24 godzin.<br>Do zobaczenia!</p>
+          <button onclick="closeQuiz()" style="margin-top:32px;padding:12px 32px;background:rgba(0,102,255,.15);border:1px solid rgba(0,102,255,.3);border-radius:10px;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Zamknij</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .qstep { animation: qfade .3s ease; }
+  @keyframes qfade { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+  .qbtn {
+    width:100%;padding:14px 18px;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;color:#fff;font-size:.95rem;font-family:'Inter',sans-serif;
+    cursor:pointer;text-align:left;transition:background .15s,border-color .15s,transform .15s;
+  }
+  .qbtn:hover { background:rgba(0,102,255,.1);border-color:rgba(0,102,255,.4);transform:translateX(3px); }
+  .qbtn.selected { background:rgba(0,102,255,.18);border-color:rgba(0,102,255,.7);color:#fff; }
+
+  .qnext {
+    width:100%;padding:14px;
+    background:linear-gradient(135deg,#0066FF,#0044BB);
+    color:#fff;border:none;border-radius:12px;
+    font-size:.95rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+    cursor:pointer;transition:opacity .2s;
+  }
+  .qnext:disabled { opacity:.35;cursor:not-allowed; }
+
+  #quiz-overlay.open { display:flex !important; }
+</style>
+
+<script>
+  const quizData = { s1: [], s2: '', s3: '' };
+
+  function openQuiz() {
+    const o = document.getElementById('quiz-overlay');
+    o.style.display = 'flex';
+    setTimeout(() => o.classList.add('open'), 10);
+    goStep(1);
+  }
+  function closeQuiz() {
+    const o = document.getElementById('quiz-overlay');
+    o.classList.remove('open');
+    setTimeout(() => { o.style.display = 'none'; }, 200);
+  }
+  document.getElementById('quiz-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeQuiz();
+  });
+
+  function goStep(n) {
+    document.querySelectorAll('.qstep').forEach(s => s.style.display = 'none');
+    document.getElementById('qs' + n).style.display = 'block';
+    const total = 4;
+    document.getElementById('quiz-progress').style.width = ((n - 1) / total * 100) + '%';
+    const labels = ['', 'Krok 1 z 4 — Zainteresowania', 'Krok 2 z 4 — Twoja firma', 'Krok 3 z 4 — Termin', 'Krok 4 z 4 — Kontakt', ''];
+    document.getElementById('quiz-step-label').textContent = labels[n] || '';
+  }
+
+  function toggleQ(btn, group) {
+    btn.classList.toggle('selected');
+    quizData[group] = [...document.querySelectorAll('#s1-grid .selected')].map(b => b.textContent.trim());
+    document.getElementById('s1-next').disabled = quizData.s1.length === 0;
+  }
+
+  function pickQ(btn, group, nextStep) {
+    btn.closest('.qstep').querySelectorAll('.qbtn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    quizData[group] = btn.textContent.trim();
+    setTimeout(() => goStep(nextStep), 280);
+  }
+
+  function pickPora(btn, val) {
+    document.querySelectorAll('#pora-grid .qbtn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('q-pora').value = val;
+  }
+
+  async function submitQuiz(e) {
+    e.preventDefault();
+    if (!document.getElementById('q-pora').value) {
+      document.getElementById('pora-grid').style.outline = '2px solid #FF4444';
+      return;
+    }
+    document.getElementById('quiz-progress').style.width = '100%';
+    document.getElementById('q-interests').value = quizData.s1.join(', ');
+    document.getElementById('q-size').value = quizData.s2;
+    document.getElementById('q-timing').value = quizData.s3;
+    const btn = document.getElementById('quiz-submit-btn');
+    btn.textContent = 'Wysyłanie...'; btn.disabled = true;
+    const form = document.getElementById('quizForm');
+    const payload = {};
+    new FormData(form).forEach((v, k) => payload[k] = v);
+    try {
+      await fetch('https://n8naiforbusiness.com/webhook/aiforbusiness24-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch(_) {}
+    document.getElementById('quiz-progress').style.width = '100%';
+    goStep(5);
+  }
+</script>
+
+<style>
+  .cc-field { position:relative; }
+  .cc-field input, .cc-field textarea {
+    width:100%; padding:16px 14px 6px;
+    background:rgba(255,255,255,.05); border:1px solid rgba(0,102,255,.2);
+    border-radius:10px; color:#fff; font-size:.95rem; font-family:'Inter',sans-serif;
+    outline:none; transition:border-color .2s,box-shadow .2s; appearance:none;
+  }
+  .cc-field label {
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    font-size:.9rem; color:var(--muted); pointer-events:none;
+    transition:top .2s,font-size .2s,color .2s,transform .2s;
+  }
+  .cc-field textarea ~ label { top:20px; transform:none; }
+  .cc-field input:focus, .cc-field textarea:focus {
+    border-color:rgba(0,102,255,.6);
+    box-shadow:0 0 0 3px rgba(0,102,255,.12);
+  }
+  .cc-field input:focus ~ label,
+  .cc-field input:not(:placeholder-shown) ~ label {
+    top:8px; transform:none; font-size:.7rem; color:var(--blue);
+  }
+  .cc-field textarea:focus ~ label,
+  .cc-field textarea:not(:placeholder-shown) ~ label {
+    top:6px; font-size:.7rem; color:var(--blue);
+  }
+</style>
+
+<!-- ─────────────────────────── ABOUT ───────────────────────────── -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <div class="label" data-i18n="about_label">O nas</div>
+        <h2 data-i18n="about_title">Transformujemy firmy siłą sztucznej inteligencji</h2>
+        <p data-i18n="about_p1">aiforbusiness24 to agencja specjalizująca się we wdrażaniu praktycznych rozwiązań AI dla firm każdej wielkości. Naszą misją jest sprawienie, by technologia AI była dostępna, realna i opłacalna — nie tylko dla korporacji, ale dla każdego biznesu.</p>
+        <p data-i18n="about_p2">Łączymy głęboką wiedzę techniczną z rozumieniem procesów biznesowych. Nie tworzymy technologii dla samej technologii — tworzymy narzędzia, które realnie zwiększają Twoje zyski i oszczędzają czas.</p>
+        <a href="#contact" class="btn btn-primary" style="margin-top:16px" data-i18n="about_cta">Poznaj nas bliżej</a>
+      </div>
+      <div class="stats-grid fade-in fade-in-d2">
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="stat1_num">70%</div>
+          <div class="stat-label" data-i18n="stat1">Oszczędność czasu</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="stat2_num">E2E</div>
+          <div class="stat-label" data-i18n="stat2">Automatyzacja procesów end-to-end</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" data-i18n="stat3_num">24/7</div>
+          <div class="stat-label" data-i18n="stat3">Działanie bez przerw</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── SERVICES ────────────────────────── -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="services-header fade-in">
+      <div class="label" data-i18n="serv_label">Usługi</div>
+      <h2 data-i18n="serv_title">Co możemy zrobić dla Twojej firmy</h2>
+      <p data-i18n="serv_sub">Kompleksowe usługi AI — od automatyzacji po dedykowane aplikacje i doradztwo strategiczne.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- ── KARTA A: AI Recepcjonistki ── -->
+      <div class="service-card fade-in fade-in-d1">
+        <div class="service-header">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 12 19.79 19.79 0 01.88 3.4 2 2 0 012.86 1.22h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.05-1.05a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="sA_title">AI Recepcjonistki</h3>
+          <p class="service-short" data-i18n="sA_short">Głosowi asystenci obsługujący telefony 24/7, rezerwacje i integracja CRM</p>
+        </div>
+        <button class="service-toggle-btn" data-i18n-learn="learn_more">
+          <span data-i18n="learn_more">Dowiedz się więcej</span>
+          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="service-expand">
+          <div class="service-expand-inner">
+            <p class="expand-title" data-i18n="sA_h">Twoja firma nigdy nie przegapi telefonu od klienta.</p>
+            <p data-i18n="sA_p1">AI Recepcjonistka to głosowy asystent, który odbiera połączenia 24/7, prowadzi naturalne rozmowy i wykonuje konkretne działania — tak jak prawdziwy pracownik. Może umawiać wizyty, odpowiadać na pytania, zbierać dane kontaktowe czy przekierowywać sprawy do odpowiednich osób.</p>
+            <p data-i18n="sA_p2">System integruje się z Twoim CRM, kalendarzem i innymi narzędziami, dzięki czemu wszystkie informacje są automatycznie zapisywane i uporządkowane. Klient otrzymuje natychmiastową obsługę, a Twój zespół oszczędza czas.</p>
+            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
+            <ul class="expand-list">
+              <li data-i18n="sA_b1">Brak nieodebranych połączeń</li>
+              <li data-i18n="sA_b2">Dostępność 24/7 bez zwiększania zespołu</li>
+              <li data-i18n="sA_b3">Automatyczne umawianie spotkań</li>
+              <li data-i18n="sA_b4">Lepsze doświadczenie klienta</li>
+            </ul>
+            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
+              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KARTA B: Automatyzacje ── -->
+      <div class="service-card fade-in fade-in-d2">
+        <div class="service-header">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>
+            </svg>
+          </div>
+          <h3 data-i18n="sB_title">Automatyzacje</h3>
+          <p class="service-short" data-i18n="sB_short">Procesy biznesowe bez ludzkiej interwencji — od leadów po raporty</p>
+        </div>
+        <button class="service-toggle-btn">
+          <span data-i18n="learn_more">Dowiedz się więcej</span>
+          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="service-expand">
+          <div class="service-expand-inner">
+            <p class="expand-title" data-i18n="sB_h">Eliminuj powtarzalną pracę i przyspiesz rozwój firmy.</p>
+            <p data-i18n="sB_p1">Projektujemy i wdrażamy automatyzacje, które przejmują codzienne, czasochłonne zadania — od pozyskiwania i obsługi leadów, przez przetwarzanie danych, aż po generowanie raportów i wysyłkę powiadomień.</p>
+            <p data-i18n="sB_p2">Łączymy Twoje systemy w jeden spójny ekosystem, dzięki czemu dane przepływają automatycznie między narzędziami bez potrzeby ręcznej ingerencji. To oznacza mniej błędów, większą efektywność i więcej czasu na działania strategiczne.</p>
+            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
+            <ul class="expand-list">
+              <li data-i18n="sB_b1">Redukcja kosztów operacyjnych</li>
+              <li data-i18n="sB_b2">Szybsze procesy biznesowe</li>
+              <li data-i18n="sB_b3">Mniej błędów ludzkich</li>
+              <li data-i18n="sB_b4">Skalowalność bez zwiększania zespołu</li>
+            </ul>
+            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
+              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KARTA C: Agenci AI ── -->
+      <div class="service-card featured fade-in fade-in-d3">
+        <div class="service-header">
+          <span class="featured-badge">★ Wyróżnione</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/><circle cx="18" cy="9" r="2.5"/><path d="M20.5 15c1.38.5 2.5 1.5 2.5 3"/>
+            </svg>
+          </div>
+          <h3 data-i18n="sC_title">Agenci AI</h3>
+          <p class="service-short" data-i18n="sC_short">Inteligentne systemy wykonujące złożone zadania: research, oferty, content</p>
+        </div>
+        <button class="service-toggle-btn">
+          <span data-i18n="learn_more">Dowiedz się więcej</span>
+          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="service-expand">
+          <div class="service-expand-inner">
+            <p class="expand-title" data-i18n="sC_h">Zautomatyzuj złożone zadania, które do tej pory wymagały pracy człowieka.</p>
+            <p data-i18n="sC_p1">Agenci AI to inteligentne systemy, które potrafią analizować informacje, podejmować decyzje i wykonywać wieloetapowe zadania. Mogą przygotowywać oferty, prowadzić analizę informacji, analizować dane czy tworzyć treści — działając według ustalonych celów i logiki biznesowej.</p>
+            <p data-i18n="sC_p2">To nie są proste chatboty — to cyfrowi „pracownicy", którzy wspierają Twój zespół w codziennych działaniach i zwiększają jego możliwości.</p>
+            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
+            <ul class="expand-list">
+              <li data-i18n="sC_b1">Automatyzacja złożonych procesów</li>
+              <li data-i18n="sC_b2">Szybsze przygotowywanie ofert i analiz</li>
+              <li data-i18n="sC_b3">Wsparcie zespołu bez zwiększania zatrudnienia</li>
+              <li data-i18n="sC_b4">Większa produktywność</li>
+            </ul>
+            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
+              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KARTA D: Aplikacje AI ── -->
+      <div class="service-card featured fade-in fade-in-d4">
+        <div class="service-header">
+          <span class="featured-badge">★ Wyróżnione</span>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 data-i18n="sD_title">Aplikacje AI</h3>
+          <p class="service-short" data-i18n="sD_short">Dedykowane aplikacje i narzędzia SaaS dopasowane do Twojego biznesu</p>
+        </div>
+        <button class="service-toggle-btn">
+          <span data-i18n="learn_more">Dowiedz się więcej</span>
+          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="service-expand">
+          <div class="service-expand-inner">
+            <p class="expand-title" data-i18n="sD_h">Dedykowane rozwiązania dopasowane do Twojego biznesu.</p>
+            <p data-i18n="sD_p1">Tworzymy aplikacje AI od podstaw — zaprojektowane pod konkretne potrzeby Twojej firmy. Każde rozwiązanie jest dopasowane do Twoich procesów, danych i celów biznesowych.</p>
+            <p data-i18n="sD_p2">Dzięki temu zamiast korzystać z ogólnych narzędzi, otrzymujesz system, który dokładnie odpowiada na Twoje wyzwania i daje realną przewagę konkurencyjną.</p>
+            <p class="expand-title" data-i18n="sD_apps_title">Przykładowe produkty:</p>
+            <div class="mini-cards">
+              <div class="mini-card"><strong data-i18n="sD_a1_t">Generator ofert</strong><span data-i18n="sD_a1_d">Automatyczne tworzenie spersonalizowanych propozycji w PDF</span></div>
+              <div class="mini-card"><strong data-i18n="sD_a2_t">Analizator dokumentów</strong><span data-i18n="sD_a2_d">Ekstrakcja i kategoryzacja danych z umów, faktur, raportów</span></div>
+              <div class="mini-card"><strong data-i18n="sD_a3_t">Asystent branżowy</strong><span data-i18n="sD_a3_d">Chatbot z wiedzą ekspercką dla konkretnej branży</span></div>
+              <div class="mini-card"><strong data-i18n="sD_a4_t">Dashboard analityczny</strong><span data-i18n="sD_a4_d">Wizualizacja KPI i metryk biznesowych z wielu źródeł</span></div>
+              <div class="mini-card" style="grid-column:1/-1"><strong data-i18n="sD_a5_t">Content planner</strong><span data-i18n="sD_a5_d">Planowanie i generowanie contentu social media</span></div>
+            </div>
+            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
+            <ul class="expand-list">
+              <li data-i18n="sD_b1">Rozwiązania „szyte na miarę"</li>
+              <li data-i18n="sD_b2">Pełna integracja z istniejącymi systemami</li>
+              <li data-i18n="sD_b3">Przewaga technologiczna nad konkurencją</li>
+              <li data-i18n="sD_b4">Realny wpływ na wyniki biznesowe</li>
+            </ul>
+            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
+              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KARTA E: Consulting AI ── -->
+      <div class="service-card fade-in fade-in-d5">
+        <div class="service-header">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="sE_title">Consulting AI</h3>
+          <p class="service-short" data-i18n="sE_short">Wysokomarżowe doradztwo strategiczne i analiza procesów biznesowych</p>
+        </div>
+        <button class="service-toggle-btn">
+          <span data-i18n="learn_more">Dowiedz się więcej</span>
+          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="service-expand">
+          <div class="service-expand-inner">
+            <p class="expand-title" data-i18n="sE_h">Strategiczne doradztwo AI dla liderów biznesu.</p>
+            <p data-i18n="sE_p1">AI Consulting to usługa dedykowana firmom, które chcą świadomie i strategicznie wdrażać sztuczną inteligencję. Analizujemy Twoje procesy, identyfikujemy obszary o największym potencjale automatyzacji i tworzymy spersonalizowany plan transformacji cyfrowej.</p>
+            <p data-i18n="sE_p2">Współpraca przebiega w kilku etapach: audyt procesów, mapa możliwości AI, priorytetyzacja wdrożeń i wsparcie podczas implementacji. Dostarczamy konkretne rekomendacje — nie ogólniki. Nasze doradztwo przekłada się bezpośrednio na decyzje, które generują oszczędności i przychody.</p>
+            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
+            <ul class="expand-list">
+              <li data-i18n="sE_b1">Jasna strategia AI dopasowana do Twojej branży</li>
+              <li data-i18n="sE_b2">Identyfikacja szybkich wygranych i długoterminowych szans</li>
+              <li data-i18n="sE_b3">Unikanie kosztownych błędów przy wdrożeniach</li>
+              <li data-i18n="sE_b4">Przewaga konkurencyjna oparta na danych</li>
+            </ul>
+            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
+              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── FAQ ─────────────────────────────── -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="faq-header fade-in">
+      <div class="label">FAQ</div>
+      <h2 data-i18n="faq_title">Najczęściej zadawane pytania</h2>
+      <p data-i18n="faq_sub">Masz pytania? Mamy odpowiedzi.</p>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          <span data-i18n="faq1_q">Czy AI jest odpowiednie dla mojej firmy, niezależnie od jej wielkości?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-i18n="faq1_a">Tak. Pracujemy zarówno z małymi firmami, jak i dużymi przedsiębiorstwami. Kluczowe jest to, że dostosowujemy rozwiązania do skali i budżetu klienta — nie ma jednego rozmiaru dla wszystkich. Często małe firmy osiągają największy zwrot z inwestycji, bo AI eliminuje wąskie gardła, które hamują ich wzrost.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in fade-in-d1">
+        <div class="faq-question">
+          <span data-i18n="faq2_q">Jak długo trwa wdrożenie automatyzacji lub agenta AI?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-i18n="faq2_a">Proste automatyzacje i integracje wdrażamy w ciągu 1–2 tygodni. Bardziej zaawansowane systemy (agenci AI, aplikacje AI na miarę) wymagają zazwyczaj 3–6 tygodni. Zaczynamy od dokładnego audytu Twoich procesów, co pozwala nam precyzyjnie oszacować czas i zasoby już na etapie konsultacji.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in fade-in-d2">
+        <div class="faq-question">
+          <span data-i18n="faq3_q">Czy potrzebuję wiedzy technicznej, żeby korzystać z Waszych rozwiązań?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-i18n="faq3_a">Absolutnie nie. Naszym zadaniem jest zajęcie się całą warstwą techniczną — Ty skupiasz się na biznesie. Dostarczamy gotowe do użycia rozwiązania z prostymi interfejsami, szkoleniami i dokumentacją. Jesteśmy też dostępni po wdrożeniu, gdy pojawiają się pytania.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in fade-in-d3">
+        <div class="faq-question">
+          <span data-i18n="faq4_q">Jakie są koszty wdrożenia AI?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-i18n="faq4_a">Koszt zależy od zakresu rozwiązania, stopnia automatyzacji oraz integracji z Twoimi systemami. Każde wdrożenie jest dopasowane do konkretnego biznesu, dlatego przed wyceną analizujemy Twoje potrzeby i cele. Zawsze zaczynamy od bezpłatnej konsultacji, podczas której pokazujemy możliwe rozwiązania i proponujemy optymalne podejście dopasowane do Twojej sytuacji.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in fade-in-d4">
+        <div class="faq-question">
+          <span data-i18n="faq5_q">Czy moje dane i dane klientów są bezpieczne?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-i18n="faq5_a">Bezpieczeństwo danych to nasz priorytet. Wszystkie wdrożenia są zgodne z RODO, stosujemy szyfrowanie end-to-end, a dane klientów nigdy nie są wykorzystywane do trenowania modeli zewnętrznych. Możemy również wdrożyć rozwiązania on-premise, jeśli wymagają tego Twoje regulacje wewnętrzne lub branżowe.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in fade-in-d5">
+        <div class="faq-question">
+          <span data-i18n="faq6_q">Co się dzieje po wdrożeniu — czy oferujecie wsparcie?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p data-i18n="faq6_a">Tak. Oferujemy pakiety wsparcia posprzedażowego obejmujące monitoring systemów, aktualizacje, optymalizację wydajności i pomoc techniczną. Pracujemy z klientami długoterminowo — większość z nich traktuje nas jako stałego partnera technologicznego, który pomaga rozwijać i skalować ich ekosystem AI wraz z rozwojem firmy.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── CONTACT ─────────────────────────── -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-header fade-in">
+      <div class="label" data-i18n="contact_label">Kontakt</div>
+      <h2 data-i18n="contact_title">Zacznijmy współpracę</h2>
+      <p data-i18n="contact_sub">Napisz do nas — bezpłatna konsultacja, bez zobowiązań.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <h3 data-i18n="contact_info_title">Porozmawiajmy o AI dla Twojej firmy</h3>
+        <p data-i18n="contact_info_p">Wypełnij formularz lub napisz bezpośrednio — odpowiemy w ciągu 24 godzin i umówimy bezpłatną rozmowę wstępną.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong data-i18n="contact_email_label">Email</strong>
+            <span>kontakt@aiforbusiness24.com</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong data-i18n="contact_hours_label">Czas odpowiedzi</strong>
+            <span data-i18n="contact_hours_val">do 24 godzin</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong data-i18n="contact_location_label">Bezpłatna konsultacja</strong>
+            <span data-i18n="contact_location_val">Pierwsza rozmowa bez zobowiązań</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card fade-in fade-in-d2">
+        <form id="contactForm" action="https://formspree.io/f/mzdkzjnn" method="POST" novalidate>
+          <div class="form-row">
+            <label data-i18n="form_name">Imię i nazwisko</label>
+            <input type="text" name="name" data-i18n-placeholder="form_name_ph" placeholder="Jan Kowalski" required />
+          </div>
+          <div class="form-row">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="jan@firma.pl" required />
+          </div>
+          <div class="form-row">
+            <label data-i18n="form_company">Firma</label>
+            <input type="text" name="company" data-i18n-placeholder="form_company_ph" placeholder="Nazwa firmy" />
+          </div>
+          <div class="form-row">
+            <label data-i18n="form_msg">Wiadomość</label>
+            <textarea name="message" data-i18n-placeholder="form_msg_ph" placeholder="Powiedz nam o swojej firmie i wyzwaniu..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit" data-i18n="form_send">Wyślij wiadomość →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── FOOTER ─────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo">ai<span>for</span>business24</span>
+        <p data-i18n="footer_tagline">Transformujemy firmy siłą sztucznej inteligencji — praktycznie, szybko, skutecznie.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col1">Usługi</h4>
+        <ul>
+          <li><a href="#services" data-i18n="sA_title">AI Recepcjonistki</a></li>
+          <li><a href="#services" data-i18n="sB_title">Automatyzacje</a></li>
+          <li><a href="#services" data-i18n="sC_title">Agenci AI</a></li>
+          <li><a href="#services" data-i18n="sD_title">Aplikacje AI</a></li>
+          <li><a href="#services" data-i18n="sE_title">Consulting AI</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col2">Firma</h4>
+        <ul>
+          <li><a href="#about" data-i18n="nav_about">O nas</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_col3">Kontakt</h4>
+        <ul>
+          <li><a href="mailto:kontakt@aiforbusiness24.com">kontakt@aiforbusiness24.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copy">© 2025 aiforbusiness24. Wszelkie prawa zastrzeżone.</span>
+      <span style="color:rgba(160,174,192,.4);font-size:.78rem" data-i18n="footer_made">Zbudowane z pasją do AI</span>
+    </div>
+  </div>
+</footer>
+
+<!-- toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ─────────────────────────── JS ───────────────────────────────── -->
+<script>
+/* ── i18n ─────────────────────────────────────────────────── */
+const T = {
+  pl: {
+    nav_about: 'O nas', nav_services: 'Usługi', nav_contact: 'Kontakt', nav_cta: 'Darmowa konsultacja',
+    hero_badge: 'AI for Business 24',
+    hero_title: 'AI, które realnie zmienia\u00A0Twój biznes\u00A0— nie jutro, a\u00A0dziś.',
+    hero_sub: 'Automatyzujemy, projektujemy i wdrażamy rozwiązania AI, które realnie zwiększają efektywność Twojej firmy — od pierwszego dnia.',
+    hero_cta1: 'Umów bezpłatną konsultację', hero_cta2: 'Zobacz usługi',
+    m1:'24/7 Active', m2:'5× Szybciej', m3:'100% Zautomatyzowane', m4:'AI bez limitów',
+    about_label:'O nas', about_title:'Transformujemy firmy siłą sztucznej inteligencji',
+    about_p1:'aiforbusiness24 to agencja specjalizująca się we wdrażaniu praktycznych rozwiązań AI dla firm każdej wielkości. Naszą misją jest sprawienie, by technologia AI była dostępna, realna i opłacalna — nie tylko dla korporacji, ale dla każdego biznesu.',
+    about_p2:'Łączymy głęboką wiedzę techniczną z rozumieniem procesów biznesowych. Nie tworzymy technologii dla samej technologii — tworzymy narzędzia, które realnie zwiększają Twoje zyski i oszczędzają czas.',
+    about_cta:'Poznaj nas bliżej',
+    stat1_num:'70%', stat1:'Oszczędność czasu', stat2_num:'E2E', stat2:'Automatyzacja procesów end-to-end', stat3_num:'24/7', stat3:'Działanie bez przerw',
+    serv_label:'Usługi', serv_title:'Co możemy zrobić dla Twojej firmy',
+    serv_sub:'Kompleksowe usługi AI — od automatyzacji po dedykowane aplikacje i doradztwo strategiczne.',
+    learn_more:'Dowiedz się więcej', collapse:'Zwiń',
+    sA_title:'AI Recepcjonistki', sA_short:'Głosowi asystenci obsługujący telefony 24/7, rezerwacje i integracja CRM',
+    sA_h:'Twoja firma nigdy nie przegapi telefonu od klienta.',
+    sA_p1:'AI Recepcjonistka to głosowy asystent, który odbiera połączenia 24/7, prowadzi naturalne rozmowy i wykonuje konkretne działania — tak jak prawdziwy pracownik. Może umawiać wizyty, odpowiadać na pytania, zbierać dane kontaktowe czy przekierowywać sprawy do odpowiednich osób.',
+    sA_p2:'System integruje się z Twoim CRM, kalendarzem i innymi narzędziami, dzięki czemu wszystkie informacje są automatycznie zapisywane i uporządkowane. Klient otrzymuje natychmiastową obsługę, a Twój zespół oszczędza czas.',
+    sA_b1:'Brak nieodebranych połączeń', sA_b2:'Dostępność 24/7 bez zwiększania zespołu',
+    sA_b3:'Automatyczne umawianie spotkań', sA_b4:'Lepsze doświadczenie klienta',
+    sB_title:'Automatyzacje', sB_short:'Procesy biznesowe bez ludzkiej interwencji — od leadów po raporty',
+    sB_h:'Eliminuj powtarzalną pracę i przyspiesz rozwój firmy.',
+    sB_p1:'Projektujemy i wdrażamy automatyzacje, które przejmują codzienne, czasochłonne zadania — od pozyskiwania i obsługi leadów, przez przetwarzanie danych, aż po generowanie raportów i wysyłkę powiadomień.',
+    sB_p2:'Łączymy Twoje systemy w jeden spójny ekosystem, dzięki czemu dane przepływają automatycznie między narzędziami bez potrzeby ręcznej ingerencji. To oznacza mniej błędów, większą efektywność i więcej czasu na działania strategiczne.',
+    sB_b1:'Redukcja kosztów operacyjnych', sB_b2:'Szybsze procesy biznesowe',
+    sB_b3:'Mniej błędów ludzkich', sB_b4:'Skalowalność bez zwiększania zespołu',
+    sC_title:'Agenci AI', sC_short:'Inteligentne systemy wykonujące złożone zadania: research, oferty, content',
+    sC_h:'Zautomatyzuj złożone zadania, które do tej pory wymagały pracy człowieka.',
+    sC_p1:'Agenci AI to inteligentne systemy, które potrafią analizować informacje, podejmować decyzje i wykonywać wieloetapowe zadania. Mogą przygotowywać oferty, prowadzić analizę informacji, analizować dane czy tworzyć treści — działając według ustalonych celów i logiki biznesowej.',
+    sC_p2:'To nie są proste chatboty — to cyfrowi „pracownicy", którzy wspierają Twój zespół w codziennych działaniach i zwiększają jego możliwości.',
+    sC_b1:'Automatyzacja złożonych procesów', sC_b2:'Szybsze przygotowywanie ofert i analiz',
+    sC_b3:'Wsparcie zespołu bez zwiększania zatrudnienia', sC_b4:'Większa produktywność',
+    sD_title:'Aplikacje AI', sD_short:'Dedykowane aplikacje i narzędzia SaaS dopasowane do Twojego biznesu',
+    sD_h:'Dedykowane rozwiązania dopasowane do Twojego biznesu.',
+    sD_p1:'Tworzymy aplikacje AI od podstaw — zaprojektowane pod konkretne potrzeby Twojej firmy. Każde rozwiązanie jest dopasowane do Twoich procesów, danych i celów biznesowych.',
+    sD_p2:'Dzięki temu zamiast korzystać z ogólnych narzędzi, otrzymujesz system, który dokładnie odpowiada na Twoje wyzwania i daje realną przewagę konkurencyjną.',
+    sD_apps_title:'Przykładowe produkty:',
+    sD_a1_t:'Generator ofert', sD_a1_d:'Automatyczne tworzenie spersonalizowanych propozycji w PDF',
+    sD_a2_t:'Analizator dokumentów', sD_a2_d:'Ekstrakcja i kategoryzacja danych z umów, faktur, raportów',
+    sD_a3_t:'Asystent branżowy', sD_a3_d:'Chatbot z wiedzą ekspercką dla konkretnej branży',
+    sD_a4_t:'Dashboard analityczny', sD_a4_d:'Wizualizacja KPI i metryk biznesowych z wielu źródeł',
+    sD_a5_t:'Content planner', sD_a5_d:'Planowanie i generowanie contentu social media',
+    sD_b1:'Rozwiązania „szyte na miarę"', sD_b2:'Pełna integracja z istniejącymi systemami',
+    sD_b3:'Przewaga technologiczna nad konkurencją', sD_b4:'Realny wpływ na wyniki biznesowe',
+    sE_title:'Consulting AI', sE_short:'Wysokomarżowe doradztwo strategiczne i analiza procesów biznesowych',
+    sE_h:'Strategiczne doradztwo AI dla liderów biznesu.',
+    sE_p1:'AI Consulting to usługa dedykowana firmom, które chcą świadomie i strategicznie wdrażać sztuczną inteligencję. Analizujemy Twoje procesy, identyfikujemy obszary o największym potencjale automatyzacji i tworzymy spersonalizowany plan transformacji cyfrowej.',
+    sE_p2:'Współpraca przebiega w kilku etapach: audyt procesów, mapa możliwości AI, priorytetyzacja wdrożeń i wsparcie podczas implementacji. Dostarczamy konkretne rekomendacje — nie ogólniki. Nasze doradztwo przekłada się bezpośrednio na decyzje, które generują oszczędności i przychody.',
+    sE_b1:'Jasna strategia AI dopasowana do Twojej branży', sE_b2:'Identyfikacja szybkich wygranych i długoterminowych szans',
+    sE_b3:'Unikanie kosztownych błędów przy wdrożeniach', sE_b4:'Przewaga konkurencyjna oparta na danych',
+    benefits:'Korzyści:',
+    expand_cta:'👉 Dowiedz się za darmo, jak to może działać w Twojej firmie',
+    faq_title:'Najczęściej zadawane pytania', faq_sub:'Masz pytania? Mamy odpowiedzi.',
+    faq1_q:'Czy AI jest odpowiednie dla mojej firmy, niezależnie od jej wielkości?',
+    faq1_a:'Tak. Pracujemy zarówno z małymi firmami, jak i dużymi przedsiębiorstwami. Kluczowe jest to, że dostosowujemy rozwiązania do skali i budżetu klienta — nie ma jednego rozmiaru dla wszystkich. Często małe firmy osiągają największy zwrot z inwestycji, bo AI eliminuje wąskie gardła, które hamują ich wzrost.',
+    faq2_q:'Jak długo trwa wdrożenie automatyzacji lub agenta AI?',
+    faq2_a:'Proste automatyzacje i integracje wdrażamy w ciągu 1–2 tygodni. Bardziej zaawansowane systemy (agenci AI, aplikacje AI na miarę) wymagają zazwyczaj 3–6 tygodni. Zaczynamy od dokładnego audytu Twoich procesów, co pozwala nam precyzyjnie oszacować czas i zasoby już na etapie konsultacji.',
+    faq3_q:'Czy potrzebuję wiedzy technicznej, żeby korzystać z Waszych rozwiązań?',
+    faq3_a:'Absolutnie nie. Naszym zadaniem jest zajęcie się całą warstwą techniczną — Ty skupiasz się na biznesie. Dostarczamy gotowe do użycia rozwiązania z prostymi interfejsami, szkoleniami i dokumentacją. Jesteśmy też dostępni po wdrożeniu, gdy pojawiają się pytania.',
+    faq4_q:'Jakie są koszty wdrożenia AI?',
+    faq4_a:'Koszt zależy od zakresu rozwiązania, stopnia automatyzacji oraz integracji z Twoimi systemami. Każde wdrożenie jest dopasowane do konkretnego biznesu, dlatego przed wyceną analizujemy Twoje potrzeby i cele. Zawsze zaczynamy od bezpłatnej konsultacji, podczas której pokazujemy możliwe rozwiązania i proponujemy optymalne podejście dopasowane do Twojej sytuacji.',
+    faq5_q:'Czy moje dane i dane klientów są bezpieczne?',
+    faq5_a:'Bezpieczeństwo danych to nasz priorytet. Wszystkie wdrożenia są zgodne z RODO, stosujemy szyfrowanie end-to-end, a dane klientów nigdy nie są wykorzystywane do trenowania modeli zewnętrznych. Możemy również wdrożyć rozwiązania on-premise, jeśli wymagają tego Twoje regulacje wewnętrzne lub branżowe.',
+    faq6_q:'Co się dzieje po wdrożeniu — czy oferujecie wsparcie?',
+    faq6_a:'Tak. Oferujemy pakiety wsparcia posprzedażowego obejmujące monitoring systemów, aktualizacje, optymalizację wydajności i pomoc techniczną. Pracujemy z klientami długoterminowo — większość z nich traktuje nas jako stałego partnera technologicznego, który pomaga rozwijać i skalować ich ekosystem AI wraz z rozwojem firmy.',
+    contact_label:'Kontakt', contact_title:'Zacznijmy współpracę',
+    contact_sub:'Napisz do nas — bezpłatna konsultacja, bez zobowiązań.',
+    contact_info_title:'Porozmawiajmy o AI dla Twojej firmy',
+    contact_info_p:'Wypełnij formularz lub napisz bezpośrednio — odpowiemy w ciągu 24 godzin i umówimy bezpłatną rozmowę wstępną.',
+    contact_email_label:'Email', contact_hours_label:'Czas odpowiedzi', contact_hours_val:'do 24 godzin',
+    contact_location_label:'Bezpłatna konsultacja', contact_location_val:'Pierwsza rozmowa bez zobowiązań',
+    form_name:'Imię i nazwisko', form_name_ph:'Jan Kowalski',
+    form_company:'Firma', form_company_ph:'Nazwa firmy',
+    form_msg:'Wiadomość', form_msg_ph:'Powiedz nam o swojej firmie i wyzwaniu...',
+    form_send:'Wyślij wiadomość →',
+    footer_tagline:'Transformujemy firmy siłą sztucznej inteligencji — praktycznie, szybko, skutecznie.',
+    footer_col1:'Usługi', footer_col2:'Firma', footer_col3:'Kontakt',
+    footer_copy:'© 2025 aiforbusiness24. Wszelkie prawa zastrzeżone.',
+    footer_made:'Zbudowane z pasją do AI',
+    toast_success:'Wiadomość wysłana! Odezwiemy się wkrótce.',
+  },
+  en: {
+    nav_about:'About', nav_services:'Services', nav_contact:'Contact', nav_cta:'Free consultation',
+    hero_badge:'AI for Business 24',
+    hero_title:'AI that truly transforms\u00A0your business\u00A0— not tomorrow, but\u00A0today.',
+    hero_sub:'We automate, design and deploy AI solutions that genuinely boost your business efficiency — from day one.',
+    hero_cta1:'Book a free consultation', hero_cta2:'View services',
+    m1:'24/7 Active', m2:'5× Faster', m3:'100% Automated', m4:'AI without limits',
+    about_label:'About us', about_title:'We transform businesses with the power of AI',
+    about_p1:'aiforbusiness24 is an agency specialising in the practical deployment of AI solutions for businesses of all sizes. Our mission is to make AI technology accessible, real and profitable — not just for corporations, but for every business.',
+    about_p2:'We combine deep technical expertise with an understanding of business processes. We don\'t build technology for its own sake — we build tools that genuinely increase your revenue and save your time.',
+    about_cta:'Get to know us',
+    stat1_num:'70%', stat1:'Time savings', stat2_num:'E2E', stat2:'End-to-end process automation', stat3_num:'24/7', stat3:'Non-stop operation',
+    serv_label:'Services', serv_title:'What we can do for your business',
+    serv_sub:'Comprehensive AI services — from automation to bespoke applications and strategic consulting.',
+    learn_more:'Learn more', collapse:'Collapse',
+    sA_title:'AI Receptionists', sA_short:'Voice assistants handling calls 24/7, bookings & CRM integration',
+    sA_h:'Your business will never miss a customer call again.',
+    sA_p1:'An AI Receptionist is a voice assistant that answers calls 24/7, conducts natural conversations and takes specific actions — just like a real employee. It can schedule appointments, answer questions, collect contact details or escalate matters to the right people.',
+    sA_p2:'The system integrates with your CRM, calendar and other tools, so all information is automatically saved and organised. Customers receive instant service, and your team saves time.',
+    sA_b1:'No missed calls', sA_b2:'24/7 availability without growing your team',
+    sA_b3:'Automated appointment scheduling', sA_b4:'Better customer experience',
+    sB_title:'Automations', sB_short:'Business processes without human intervention — from leads to reports',
+    sB_h:'Eliminate repetitive work and accelerate your business growth.',
+    sB_p1:'We design and implement automations that take over everyday, time-consuming tasks — from lead generation and management, through data processing, to report generation and notification sending.',
+    sB_p2:'We connect your systems into one cohesive ecosystem, so data flows automatically between tools without manual intervention. This means fewer errors, greater efficiency and more time for strategic activities.',
+    sB_b1:'Reduction in operational costs', sB_b2:'Faster business processes',
+    sB_b3:'Fewer human errors', sB_b4:'Scalability without growing your team',
+    sC_title:'AI Agents', sC_short:'Intelligent systems for complex tasks: research, proposals, content',
+    sC_h:'Automate complex tasks that previously required human effort.',
+    sC_p1:'AI Agents are intelligent systems that can analyse information, make decisions and execute multi-step tasks. They can prepare proposals, conduct research, analyse data or create content — operating according to defined goals and business logic.',
+    sC_p2:'These are not simple chatbots — they are digital "employees" who support your team in everyday activities and multiply its capabilities.',
+    sC_b1:'Automation of complex processes', sC_b2:'Faster proposal and analysis preparation',
+    sC_b3:'Team support without additional hiring', sC_b4:'Greater productivity',
+    sD_title:'AI Apps', sD_short:'Custom applications and SaaS tools tailored to your business',
+    sD_h:'Bespoke solutions tailored to your business.',
+    sD_p1:'We build AI applications from scratch — designed for the specific needs of your company. Every solution is tailored to your processes, data and business goals.',
+    sD_p2:'Instead of using generic tools, you get a system that precisely addresses your challenges and delivers a real competitive advantage.',
+    sD_apps_title:'Example products:',
+    sD_a1_t:'Proposal Generator', sD_a1_d:'Automatic creation of personalised proposals in PDF',
+    sD_a2_t:'Document Analyser', sD_a2_d:'Extraction and categorisation of data from contracts, invoices, reports',
+    sD_a3_t:'Industry Assistant', sD_a3_d:'Chatbot with expert knowledge for a specific industry',
+    sD_a4_t:'Analytics Dashboard', sD_a4_d:'KPI and business metrics visualisation from multiple sources',
+    sD_a5_t:'Content Planner', sD_a5_d:'Planning and generating social media content',
+    sD_b1:'Tailor-made solutions', sD_b2:'Full integration with existing systems',
+    sD_b3:'Technological advantage over competitors', sD_b4:'Real impact on business results',
+    sE_title:'AI Consulting', sE_short:'Strategic advisory and business process analysis',
+    sE_h:'Strategic AI advisory for business leaders.',
+    sE_p1:'AI Consulting is a service dedicated to companies that want to deploy artificial intelligence consciously and strategically. We analyse your processes, identify areas with the greatest automation potential, and create a personalised digital transformation plan.',
+    sE_p2:'Collaboration proceeds in several stages: process audit, AI opportunity mapping, implementation prioritisation, and support during rollout. We deliver specific recommendations — not generalities. Our advisory directly informs decisions that generate savings and revenue.',
+    sE_b1:'Clear AI strategy tailored to your industry', sE_b2:'Identification of quick wins and long-term opportunities',
+    sE_b3:'Avoiding costly mistakes in deployments', sE_b4:'Data-driven competitive advantage',
+    benefits:'Benefits:',
+    expand_cta:'👉 Find out for free how this can work in your business',
+    faq_title:'Frequently Asked Questions', faq_sub:'Have questions? We have answers.',
+    faq1_q:'Is AI suitable for my business, regardless of its size?',
+    faq1_a:'Yes. We work with both small companies and large enterprises. The key is that we tailor solutions to the client\'s scale and budget — there\'s no one-size-fits-all. Often small businesses achieve the greatest ROI because AI eliminates the bottlenecks holding back their growth.',
+    faq2_q:'How long does it take to deploy an automation or AI agent?',
+    faq2_a:'Simple automations and integrations are deployed within 1–2 weeks. More advanced systems (AI agents, bespoke AI applications) typically require 3–6 weeks. We start with a thorough audit of your processes, allowing us to accurately estimate time and resources at the consultation stage.',
+    faq3_q:'Do I need technical knowledge to use your solutions?',
+    faq3_a:'Absolutely not. Our job is to handle the entire technical layer — you focus on business. We deliver ready-to-use solutions with simple interfaces, training and documentation. We\'re also available after deployment when questions arise.',
+    faq4_q:'What are the costs of AI implementation?',
+    faq4_a:'The cost depends on the scope of the solution, the level of automation, and the integrations with your systems. Every deployment is tailored to a specific business, so before quoting we analyse your needs and goals. We always start with a free consultation, during which we present possible solutions and propose the optimal approach suited to your situation.',
+    faq5_q:'Are my data and my customers\' data secure?',
+    faq5_a:'Data security is our priority. All deployments comply with GDPR, we use end-to-end encryption, and customer data is never used to train external models. We can also deploy on-premise solutions if required by your internal or industry regulations.',
+    faq6_q:'What happens after deployment — do you offer support?',
+    faq6_a:'Yes. We offer post-sale support packages covering system monitoring, updates, performance optimisation and technical assistance. We work with clients long-term — most of them treat us as a permanent technology partner who helps grow and scale their AI ecosystem alongside business development.',
+    contact_label:'Contact', contact_title:"Let's work together",
+    contact_sub:'Write to us — free consultation, no obligations.',
+    contact_info_title:'Let\'s talk about AI for your business',
+    contact_info_p:'Fill in the form or write directly — we\'ll respond within 24 hours and arrange a free introductory call.',
+    contact_email_label:'Email', contact_hours_label:'Response time', contact_hours_val:'within 24 hours',
+    contact_location_label:'Free consultation', contact_location_val:'First call with no obligations',
+    form_name:'Full name', form_name_ph:'John Smith',
+    form_company:'Company', form_company_ph:'Company name',
+    form_msg:'Message', form_msg_ph:'Tell us about your business and challenge...',
+    form_send:'Send message →',
+    footer_tagline:'Transforming businesses with the power of AI — practically, quickly, effectively.',
+    footer_col1:'Services', footer_col2:'Company', footer_col3:'Contact',
+    footer_copy:'© 2025 aiforbusiness24. All rights reserved.',
+    footer_made:'Built with a passion for AI',
+    toast_success:'Message sent! We\'ll be in touch soon.',
+  }
+};
+
+let lang = 'pl';
+
+function applyLang(l) {
+  lang = l;
+  const dict = T[l];
+  document.documentElement.lang = l;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (dict[k] !== undefined) el.textContent = dict[k];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-i18n-placeholder');
+    if (dict[k] !== undefined) el.placeholder = dict[k];
+  });
+
+  // update toggle btn label
+  document.getElementById('langToggle').textContent = l === 'pl' ? 'EN' : 'PL';
+
+  // update open service cards' buttons
+  document.querySelectorAll('.service-card.open .service-toggle-btn span[data-i18n]').forEach(el => {
+    el.textContent = dict['collapse'];
+  });
+  document.querySelectorAll('.service-card:not(.open) .service-toggle-btn span[data-i18n]').forEach(el => {
+    el.textContent = dict['learn_more'];
+  });
+}
+
+function toggleLang() {
+  applyLang(lang === 'pl' ? 'en' : 'pl');
+}
+
+document.getElementById('langToggle').addEventListener('click', toggleLang);
+document.getElementById('mobileLang').addEventListener('click', () => { toggleLang(); closeMobile(); });
+
+/* ── Navbar scroll ──────────────────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ── Hamburger ──────────────────────────────────────────── */
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+function closeMobile() { ham.classList.remove('open'); mob.classList.remove('open'); document.body.style.overflow = ''; }
+ham.addEventListener('click', () => {
+  const opening = !mob.classList.contains('open');
+  ham.classList.toggle('open'); mob.classList.toggle('open');
+  document.body.style.overflow = opening ? 'hidden' : '';
+});
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
+
+/* ── Service cards expand ───────────────────────────────── */
+document.querySelectorAll('.service-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.service-card');
+    const isOpen = card.classList.contains('open');
+    const dict = T[lang];
+    card.classList.toggle('open');
+    const span = btn.querySelector('span[data-i18n]');
+    if (span) span.textContent = isOpen ? dict['learn_more'] : dict['collapse'];
+  });
+});
+
+/* ── FAQ accordion ──────────────────────────────────────── */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* ── Intersection Observer (fade-in) ────────────────────── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+/* ── Contact form ───────────────────────────────────────── */
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = form.querySelector('.form-submit');
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/mzdkzjnn', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+    const toast = document.getElementById('toast');
+    if (res.ok) {
+      toast.textContent = T[lang]['toast_success'];
+      toast.className = 'toast success show';
+      form.reset();
+    } else {
+      toast.textContent = 'Błąd wysyłki — spróbuj ponownie.';
+      toast.className = 'toast show';
+    }
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  } catch {
+    alert('Błąd połączenia — spróbuj ponownie.');
+  }
+  btn.disabled = false;
+  btn.textContent = T[lang]['form_send'];
+});
+
+/* ── Particle canvas ────────────────────────────────────── */
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  const NUM = 70;
+  for (let i = 0; i < NUM; i++) {
+    particles.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.8 + 0.4,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+      alpha: Math.random() * 0.5 + 0.15
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,102,255,${p.alpha})`;
+      ctx.fill();
+    });
+
+    // draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,102,255,${0.07 * (1 - dist/120)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Smooth scroll for nav links ────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
