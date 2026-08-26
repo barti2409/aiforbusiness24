@@ -16,7 +16,8 @@ const ICONS = {
   users: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
   scan: '<path d="M3 7V5a2 2 0 012-2h2"/><path d="M17 3h2a2 2 0 012 2v2"/><path d="M21 17v2a2 2 0 01-2 2h-2"/><path d="M7 21H5a2 2 0 01-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/>',
   spark: '<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5 10.1 11.9 4.5 10l5.6-1.4z"/><path d="M18.5 16l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>',
-  radar: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="12" x2="19" y2="6.5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/>'
+  radar: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="12" x2="19" y2="6.5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/>',
+  brain: '<path d="M12 4.5a3 3 0 00-5.9.7A2.8 2.8 0 004 9.3a2.9 2.9 0 00.6 4.4A3 3 0 009 18.6a3 3 0 003 1.4z"/><path d="M12 4.5a3 3 0 015.9.7A2.8 2.8 0 0120 9.3a2.9 2.9 0 01-.6 4.4A3 3 0 0115 18.6a3 3 0 01-3 1.4z"/><line x1="12" y1="4.5" x2="12" y2="20"/>'
 };
 
 const AGENTS = {
@@ -179,6 +180,27 @@ const AGENTS = {
       label: 'Efekt',
       value: 'Wiesz, na co konkurencja wydaje budżet — i gdzie zostawiła Ci miejsce',
       sub: 'Też działa u nas na produkcji, na oficjalnym API Meta. Dane pochodzą z publicznej biblioteki reklam, nie z kont reklamowych konkurencji.'
+    }
+  },
+
+  'cyfrowy-ekspert': {
+    name: 'Cyfrowy ekspert',
+    cat: 'Wiedza',
+    icon: 'brain',
+    proof: true,
+    lede: 'Odpowiada na pytania Twoich odbiorców Twoimi słowami — wyłącznie na podstawie Twoich nagrań, i pokazuje, z której minuty pochodzi każda odpowiedź.',
+    steps: [
+      { t: 'Przyjmuje pytanie', d: 'Zadane normalnym językiem, nie hasłem do wyszukiwarki', ms: 900 },
+      { t: 'Rozumie kontekst rozmowy', d: '„A ile tego brać?” — wie, czego dotyczy „tego”', ms: 1000 },
+      { t: 'Przeszukuje Twoje nagrania', d: 'Kursy, webinary, YouTube — cała biblioteka naraz', ms: 1100 },
+      { t: 'Sprawdza, czy ma pokrycie', d: 'Brak materiału → mówi, że nie wie. Nie dopowiada', ms: 1000 },
+      { t: 'Odpowiada Twoim językiem', d: 'Twoje sformułowania i Twoje granice wypowiedzi', ms: 1100 },
+      { t: 'Podaje źródło', d: 'Nazwa nagrania i minuta, w której to powiedziałeś', ms: 900 }
+    ],
+    result: {
+      label: 'Efekt',
+      value: 'Odpowiedź Twoimi słowami, z minutą nagrania, z której pochodzi',
+      sub: 'Zbudowany i uruchomiony dla eksperta z branży zdrowotnej — na jego własnych materiałach, około dwudziestu godzin nagrań.'
     }
   }
 };
