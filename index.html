@@ -12,17 +12,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #050A14;
-      --bg2:       #080F1E;
-      --blue:      #0066FF;
-      --blue-dark: #003399;
-      --blue-dim:  #0044BB;
-      --blue-glow: rgba(0,102,255,0.18);
-      --blue-glow2:rgba(0,102,255,0.06);
-      --white:     #FFFFFF;
-      --muted:     #A0AEC0;
-      --card-bg:   rgba(8,18,40,0.72);
-      --border:    rgba(0,102,255,0.18);
+      --bg:        #FFFFFF;
+      --bg2:       #FAFAFA;
+      --blue:      #0A0A0A;
+      --blue-dark: #262626;
+      --blue-dim:  #404040;
+      --blue-glow: rgba(0,0,0,0.06);
+      --blue-glow2:rgba(0,0,0,0.025);
+      --white:     #0A0A0A;
+      --muted:     #525252;
+      --card-bg:   #FFFFFF;
+      --border:    rgba(0,0,0,0.08);
       --radius:    16px;
       --radius-sm: 10px;
     }
@@ -62,8 +62,8 @@
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--blue);
-      background: rgba(0,102,255,.1);
-      border: 1px solid rgba(0,102,255,.25);
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.1);
       padding: 5px 14px;
       border-radius: 99px;
       margin-bottom: 20px;
@@ -82,22 +82,22 @@
     .btn-primary {
       background: var(--blue);
       color: #fff;
-      box-shadow: 0 0 24px rgba(0,102,255,.4);
+      box-shadow: 0 8px 24px rgba(0,0,0,.14);
     }
     .btn-primary:hover {
-      background: #1a7aff;
-      box-shadow: 0 0 36px rgba(0,102,255,.65);
+      background: #262626;
+      box-shadow: 0 12px 36px rgba(0,0,0,.14);
       transform: translateY(-2px);
     }
     .btn-secondary {
       background: transparent;
       color: var(--white);
-      border: 1px solid rgba(255,255,255,.2);
+      border: 1px solid rgba(0,0,0,.2);
     }
     .btn-secondary:hover {
       border-color: var(--blue);
       color: var(--blue);
-      background: rgba(0,102,255,.08);
+      background: rgba(0,0,0,0.032);
       transform: translateY(-2px);
     }
     .btn-ghost {
@@ -109,7 +109,7 @@
     .btn-ghost:hover {
       background: var(--blue);
       color: #fff;
-      box-shadow: 0 0 20px rgba(0,102,255,.45);
+      box-shadow: 0 6px 20px rgba(0,0,0,.14);
     }
 
     /* ─── NAVBAR ───────────────────────────────────────────────── */
@@ -119,7 +119,7 @@
       transition: background .35s, backdrop-filter .35s, border-bottom .35s;
     }
     #navbar.scrolled {
-      background: rgba(5,10,20,.75);
+      background: rgba(255,255,255,.75);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
@@ -145,8 +145,8 @@
     .nav-right { display: flex; align-items: center; gap: 14px; }
 
     .lang-btn {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.12);
       color: var(--muted); font-size: .82rem; font-weight: 600;
       padding: 7px 14px; border-radius: 8px;
       cursor: pointer; transition: all .2s;
@@ -170,7 +170,7 @@
 
     .mobile-menu {
       display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(5,10,20,.97);
+      background: rgba(255,255,255,.97);
       backdrop-filter: blur(20px);
       flex-direction: column; align-items: center; justify-content: center;
       gap: 36px;
@@ -204,15 +204,15 @@
       content: '';
       position: absolute; inset: 0; z-index: 1;
       background-image:
-        linear-gradient(rgba(0,102,255,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,102,255,.07) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.028) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
     }
     #hero::after {
       content: '';
       position: absolute; inset: 0; z-index: 1;
-      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(0,60,180,.22) 0%, transparent 70%);
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(0,0,0,.035) 0%, transparent 70%);
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -220,8 +220,8 @@
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,102,255,.1);
-      border: 1px solid rgba(0,102,255,.3);
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.12);
       padding: 8px 18px; border-radius: 99px;
       font-size: .78rem; font-weight: 600; letter-spacing: .1em;
       color: var(--blue); text-transform: uppercase; margin-bottom: 28px;
@@ -229,14 +229,14 @@
     .hero-badge::before {
       content: ''; width: 6px; height: 6px;
       background: var(--blue); border-radius: 50%;
-      box-shadow: 0 0 8px var(--blue);
+      box-shadow: none;
       animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
     .hero-title {
       margin-bottom: 24px;
-      background: linear-gradient(135deg, #fff 0%, #c8d8ff 50%, #7aa8ff 100%);
+      background: linear-gradient(135deg, #0a0a0a 0%, #404040 55%, #8a8a8a 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -264,7 +264,7 @@
     .metric-badge:nth-child(2) { animation-delay: -.8s; }
     .metric-badge:nth-child(3) { animation-delay: -1.6s; }
     .metric-badge:nth-child(4) { animation-delay: -2.4s; }
-    .metric-badge .dot { width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue); }
+    .metric-badge .dot { width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow: none; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
     /* ─── CANVAS PARTICLES ─────────────────────────────────────── */
@@ -325,22 +325,22 @@
       cursor: default;
     }
     .service-card:hover {
-      border-color: rgba(0,102,255,.5);
-      box-shadow: 0 0 40px var(--blue-glow), 0 8px 32px rgba(0,0,0,.4);
+      border-color: rgba(0,0,0,0.2);
+      box-shadow: 0 0 40px var(--blue-glow), 0 8px 32px rgba(0,0,0,.08);
       transform: translateY(-4px);
     }
     .service-card.featured {
-      border-color: rgba(0,102,255,.45);
+      border-color: rgba(0,0,0,0.18);
       box-shadow: 0 0 32px var(--blue-glow);
     }
     .service-card.featured:hover {
-      box-shadow: 0 0 56px var(--blue-glow), 0 8px 32px rgba(0,0,0,.4);
+      box-shadow: 0 0 56px var(--blue-glow), 0 8px 32px rgba(0,0,0,.08);
     }
     .featured-badge {
       display: inline-flex; align-items: center; gap: 5px;
       font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--blue); background: rgba(0,102,255,.12);
-      border: 1px solid rgba(0,102,255,.3);
+      color: var(--blue); background: rgba(0,0,0,0.048);
+      border: 1px solid rgba(0,0,0,0.12);
       padding: 3px 9px; border-radius: 20px;
       align-self: flex-start;
     }
@@ -350,8 +350,8 @@
     }
     .service-icon {
       width: 48px; height: 48px;
-      background: rgba(0,102,255,.12);
-      border: 1px solid rgba(0,102,255,.25);
+      background: rgba(0,0,0,0.048);
+      border: 1px solid rgba(0,0,0,0.1);
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       color: var(--blue);
@@ -411,8 +411,8 @@
     /* mini product cards inside AI Apps */
     .mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
     .mini-card {
-      background: rgba(0,102,255,.06);
-      border: 1px solid rgba(0,102,255,.15);
+      background: rgba(0,0,0,0.024);
+      border: 1px solid rgba(0,0,0,0.06);
       border-radius: 10px; padding: 12px 14px;
       font-size: .8rem;
     }
@@ -435,7 +435,7 @@
       overflow: hidden;
       transition: border-color .3s;
     }
-    .faq-item.open { border-color: rgba(0,102,255,.45); }
+    .faq-item.open { border-color: rgba(0,0,0,0.18); }
     .faq-question {
       display: flex; justify-content: space-between; align-items: center;
       padding: 20px 24px; cursor: pointer;
@@ -472,7 +472,7 @@
     }
     .contact-detail-icon {
       width: 40px; height: 40px;
-      background: rgba(0,102,255,.1); border: 1px solid var(--border);
+      background: rgba(0,0,0,0.04); border: 1px solid var(--border);
       border-radius: 10px; display: flex; align-items: center; justify-content: center;
       color: var(--blue); flex-shrink: 0;
     }
@@ -494,8 +494,8 @@
     }
     .form-row input, .form-row textarea {
       width: 100%;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(0,0,0,.04);
+      border: 1px solid rgba(0,0,0,.1);
       border-radius: 8px; color: var(--white);
       font-family: 'Inter', sans-serif; font-size: .9rem;
       padding: 12px 16px;
@@ -504,10 +504,10 @@
     }
     .form-row input:focus, .form-row textarea:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(0,102,255,.12);
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.048);
     }
     .form-row textarea { height: 110px; resize: vertical; }
-    .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(160,174,192,.4); }
+    .form-row input::placeholder, .form-row textarea::placeholder { color: #a3a3a3; }
     .form-submit { width: 100%; margin-top: 4px; font-size:.95rem; padding:14px; }
 
     @media(max-width:768px){ .contact-grid{grid-template-columns:1fr; gap:36px;} }
@@ -568,7 +568,7 @@
       pointer-events: none;
     }
     .toast.show { transform: translateY(0); opacity: 1; }
-    .toast.success { border-color: rgba(0,200,100,.3); color: #4afa9a; }
+    .toast.success { border-color: rgba(21,128,61,.3); color: #15803d; }
 
     /* ─── MOBILE RESPONSIVE ────────────────────────────────────── */
     @media(max-width:768px) {
@@ -590,6 +590,10 @@
       .mini-card { padding: 10px 12px; font-size: .75rem; }
       .toast { bottom: 16px; right: 16px; left: 16px; padding: 12px 16px; font-size: .8rem; }
     }
+  
+    /* Styl jak Styleprint: Inter w nagłówkach, przyciski-pigułki */
+    h1,h2,h3,h4,.post-title{font-family:'Inter',sans-serif!important;letter-spacing:-0.03em}
+    .btn,.post-cta-btn,.nav-cta{border-radius:99px!important}
   </style>
 </head>
 <body>
@@ -660,7 +664,7 @@
       <div class="label">Case study</div>
       <h2>Zobacz jak robimy to u naszych klientów</h2>
     </div>
-    <div class="fade-in fade-in-d1" style="max-width:860px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,100,255,.2);aspect-ratio:16/9;">
+    <div class="fade-in fade-in-d1" style="max-width:860px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,0.08);aspect-ratio:16/9;">
       <iframe
         src="https://www.youtube.com/embed/QwCXiOfHg9w"
         title="Zobacz jak robimy to u naszych klientów"
@@ -674,15 +678,15 @@
       <button onclick="openQuiz()" style="
         display:inline-flex;align-items:center;gap:10px;
         padding:18px 40px;
-        background:linear-gradient(135deg,#0066FF,#0044BB);
+        background:linear-gradient(135deg,#0a0a0a,#262626);
         color:#fff;border:none;border-radius:14px;
         font-size:1.05rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
         cursor:pointer;letter-spacing:.02em;
-        box-shadow:0 4px 32px rgba(0,102,255,.45);
+        box-shadow:0 4px 32px rgba(0,0,0,0.18);
         transition:transform .2s,box-shadow .2s;
       "
-      onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 48px rgba(0,102,255,.6)'"
-      onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 32px rgba(0,102,255,.45)'"
+      onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 48px rgba(0,0,0,0.24)'"
+      onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 32px rgba(0,0,0,0.18)'"
       >
         Bezpłatna konsultacja
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -692,19 +696,19 @@
 </section>
 
 <!-- ─────────────────────────── QUIZ MODAL ───────────────────────── -->
-<div id="quiz-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
+<div id="quiz-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
   <div id="quiz-box" style="
-    background:#060D1F;border:1px solid rgba(0,102,255,.25);border-radius:24px;
+    background:#ffffff;border:1px solid rgba(0,0,0,0.1);border-radius:24px;
     width:100%;max-width:580px;max-height:90vh;overflow-y:auto;
-    box-shadow:0 0 80px rgba(0,102,255,.2),0 32px 64px rgba(0,0,0,.6);
+    box-shadow: 0 26px 80px rgba(0,0,0,.14),0 32px 64px rgba(0,0,0,.14);
     position:relative;
   ">
     <!-- close -->
-    <button onclick="closeQuiz()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.06);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;">×</button>
+    <button onclick="closeQuiz()" style="position:absolute;top:16px;right:16px;background:rgba(0,0,0,.06);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;">×</button>
 
     <!-- progress bar -->
-    <div style="height:3px;background:rgba(255,255,255,.06);border-radius:24px 24px 0 0;overflow:hidden;">
-      <div id="quiz-progress" style="height:100%;background:linear-gradient(90deg,#0066FF,#00AAFF);transition:width .4s ease;width:0%;"></div>
+    <div style="height:3px;background:rgba(0,0,0,.06);border-radius:24px 24px 0 0;overflow:hidden;">
+      <div id="quiz-progress" style="height:100%;background:linear-gradient(90deg,#0a0a0a,#737373);transition:width .4s ease;width:0%;"></div>
     </div>
 
     <div style="padding:40px 36px 36px;">
@@ -716,7 +720,7 @@
 
         <!-- STEP 1 -->
         <div class="qstep" id="qs1">
-          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Co Cię interesuje?</h3>
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#0a0a0a;">Co Cię interesuje?</h3>
           <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">Wybierz jedno lub więcej</p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" id="s1-grid">
             <button class="qbtn" onclick="toggleQ(this,'s1')">🤖 Agenci AI</button>
@@ -730,7 +734,7 @@
 
         <!-- STEP 2 -->
         <div class="qstep" id="qs2" style="display:none;">
-          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Jak duża jest Twoja firma?</h3>
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#0a0a0a;">Jak duża jest Twoja firma?</h3>
           <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">To pomoże nam dopasować rozwiązanie</p>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <button class="qbtn qbtn-single" onclick="pickQ(this,'s2',3)">👤 Jednoosobowa / startup</button>
@@ -742,7 +746,7 @@
 
         <!-- STEP 3 -->
         <div class="qstep" id="qs3" style="display:none;">
-          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Kiedy chcesz zacząć?</h3>
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#0a0a0a;">Kiedy chcesz zacząć?</h3>
           <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">Bez zobowiązań — tylko orientacyjnie</p>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <button class="qbtn qbtn-single" onclick="pickQ(this,'s3',4)">🚀 Jak najszybciej</button>
@@ -753,7 +757,7 @@
 
         <!-- STEP 4: kontakt -->
         <div class="qstep" id="qs4" style="display:none;">
-          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#fff;">Prawie gotowe!</h3>
+          <h3 style="font-size:1.5rem;margin-bottom:8px;color:#0a0a0a;">Prawie gotowe!</h3>
           <p style="font-size:.9rem;color:var(--muted);margin-bottom:28px;">Zostaw swoje dane — oddzwonimy i omówimy szczegóły</p>
           <form id="quizForm" style="display:flex;flex-direction:column;gap:14px;" onsubmit="submitQuiz(event)">
             <input type="hidden" name="_subject" value="Nowy lead — Quiz aiforbusiness24">
@@ -788,10 +792,10 @@
             </div>
             <button type="submit" id="quiz-submit-btn" style="
               width:100%;padding:16px;margin-top:6px;
-              background:linear-gradient(135deg,#0066FF,#0044BB);
+              background:linear-gradient(135deg,#0a0a0a,#262626);
               color:#fff;border:none;border-radius:12px;
               font-size:1rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
-              cursor:pointer;box-shadow:0 4px 24px rgba(0,102,255,.4);
+              cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,0.16);
               transition:opacity .2s,transform .2s;
             ">Umów bezpłatną konsultację →</button>
           </form>
@@ -800,9 +804,9 @@
         <!-- SUCCESS -->
         <div class="qstep" id="qs5" style="display:none;text-align:center;padding:20px 0;">
           <div style="font-size:3.5rem;margin-bottom:20px;">🎉</div>
-          <h3 style="font-size:1.6rem;margin-bottom:12px;color:#fff;">Wysłane!</h3>
+          <h3 style="font-size:1.6rem;margin-bottom:12px;color:#0a0a0a;">Wysłane!</h3>
           <p style="color:var(--muted);">Skontaktujemy się z Tobą w ciągu 24 godzin.<br>Do zobaczenia!</p>
-          <button onclick="closeQuiz()" style="margin-top:32px;padding:12px 32px;background:rgba(0,102,255,.15);border:1px solid rgba(0,102,255,.3);border-radius:10px;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Zamknij</button>
+          <button onclick="closeQuiz()" style="margin-top:32px;padding:12px 32px;background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.12);border-radius:10px;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Zamknij</button>
         </div>
 
       </div>
@@ -816,16 +820,16 @@
 
   .qbtn {
     width:100%;padding:14px 18px;
-    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.1);
     border-radius:12px;color:#fff;font-size:.95rem;font-family:'Inter',sans-serif;
     cursor:pointer;text-align:left;transition:background .15s,border-color .15s,transform .15s;
   }
-  .qbtn:hover { background:rgba(0,102,255,.1);border-color:rgba(0,102,255,.4);transform:translateX(3px); }
-  .qbtn.selected { background:rgba(0,102,255,.18);border-color:rgba(0,102,255,.7);color:#fff; }
+  .qbtn:hover { background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.16);transform:translateX(3px); }
+  .qbtn.selected { background:rgba(0,0,0,0.072);border-color:rgba(0,0,0,0.28);color:#fff; }
 
   .qnext {
     width:100%;padding:14px;
-    background:linear-gradient(135deg,#0066FF,#0044BB);
+    background:linear-gradient(135deg,#0a0a0a,#262626);
     color:#fff;border:none;border-radius:12px;
     font-size:.95rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
     cursor:pointer;transition:opacity .2s;
@@ -912,7 +916,7 @@
   .cc-field { position:relative; }
   .cc-field input, .cc-field textarea {
     width:100%; padding:16px 14px 6px;
-    background:rgba(255,255,255,.05); border:1px solid rgba(0,102,255,.2);
+    background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,0.08);
     border-radius:10px; color:#fff; font-size:.95rem; font-family:'Inter',sans-serif;
     outline:none; transition:border-color .2s,box-shadow .2s; appearance:none;
   }
@@ -923,8 +927,8 @@
   }
   .cc-field textarea ~ label { top:20px; transform:none; }
   .cc-field input:focus, .cc-field textarea:focus {
-    border-color:rgba(0,102,255,.6);
-    box-shadow:0 0 0 3px rgba(0,102,255,.12);
+    border-color:rgba(0,0,0,0.24);
+    box-shadow:0 0 0 3px rgba(0,0,0,0.048);
   }
   .cc-field input:focus ~ label,
   .cc-field input:not(:placeholder-shown) ~ label {
@@ -1202,8 +1206,8 @@
     font-family:'Inter',sans-serif;font-weight:400;font-size:.82rem;color:var(--muted);
   }
   .agent-chip:hover{
-    border-color:rgba(0,102,255,.45);transform:translateY(-2px);
-    box-shadow:0 8px 28px rgba(0,102,255,.14);
+    border-color:rgba(0,0,0,0.18);transform:translateY(-2px);
+    box-shadow:0 8px 28px rgba(0,0,0,0.056);
   }
 </style>
 
@@ -1394,7 +1398,7 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer_copy">© 2026 AI for Business 24, LLC · 131 Continental Dr, Suite 305, Newark, DE 19713, USA. Wszelkie prawa zastrzeżone.</span>
-      <span style="color:rgba(160,174,192,.4);font-size:.78rem" data-i18n="footer_made">Zbudowane z pasją do AI</span>
+      <span style="color:#a3a3a3;font-size:.78rem" data-i18n="footer_made">Zbudowane z pasją do AI</span>
     </div>
   </div>
 </footer>
@@ -1725,7 +1729,7 @@ form.addEventListener('submit', async e => {
       if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,102,255,${p.alpha})`;
+      ctx.fillStyle = `rgba(0,0,0,${0.5*p.alpha})`;
       ctx.fill();
     });
 
@@ -1739,7 +1743,7 @@ form.addEventListener('submit', async e => {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,102,255,${0.07 * (1 - dist/120)})`;
+          ctx.strokeStyle = `rgba(0,0,0,${0.5*0.07 * (1 - dist/120)})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }

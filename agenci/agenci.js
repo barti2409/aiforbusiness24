@@ -314,13 +314,13 @@ function graphSvg(agent) {
        aria-label="Schemat przebiegu: ${esc(agent.steps.map(s => s.t).join(' → '))}">
     <defs>
       <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
-        <circle cx="1.6" cy="1.6" r="1.6" fill="rgba(255,255,255,.055)"/>
+        <circle cx="1.6" cy="1.6" r="1.6" fill="rgba(0,0,0,.055)"/>
       </pattern>
       <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
-        <path d="M0,1 L9,5 L0,9 z" fill="rgba(255,255,255,.16)"/>
+        <path d="M0,1 L9,5 L0,9 z" fill="rgba(0,0,0,.16)"/>
       </marker>
       <marker id="arwOn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
-        <path d="M0,1 L9,5 L0,9 z" fill="#0066FF"/>
+        <path d="M0,1 L9,5 L0,9 z" fill="#0a0a0a"/>
       </marker>
       <filter id="gl" x="-60%" y="-60%" width="220%" height="220%">
         <feGaussianBlur stdDeviation="7" result="b"/>

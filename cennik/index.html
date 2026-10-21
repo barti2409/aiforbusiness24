@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/agenci/agenci.css?v=2">
+  <link rel="stylesheet" href="/agenci/agenci.css?v=10">
   <style>
     /* Cennik — dopełnienie wspólnych stylów z /agenci/agenci.css */
     .grupa { padding: 30px 0 10px; }
@@ -30,7 +30,7 @@
     .cena:hover { border-color: var(--border-blue); transform: translateY(-3px); }
     .cena .ikona {
       width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 18px;
-      background: rgba(0,102,255,.12); border: 1px solid var(--border-blue); color: var(--blue);
+      background: rgba(0,0,0,0.048); border: 1px solid var(--border-blue); color: var(--blue);
     }
     .cena .ikona svg { width: 22px; height: 22px; }
     .cena h3 { font-size: 1.15rem; margin-bottom: 6px; }
@@ -43,7 +43,7 @@
     /* Rolki — trzy warianty obok siebie */
     .rolki { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .rolka { position: relative; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; text-align: center; }
-    .rolka.wyrozniona { border-color: var(--blue); background: linear-gradient(180deg, rgba(0,102,255,.16), rgba(8,18,40,.72) 60%); box-shadow: 0 0 40px rgba(0,102,255,.18); }
+    .rolka.wyrozniona { border-color: var(--blue); background: linear-gradient(180deg, rgba(0,0,0,0.064), #ffffff 60%); box-shadow: 0 13px 40px rgba(0,0,0,.14); }
     .rolka .znaczek {
       position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
       background: var(--blue); color: #fff; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
@@ -66,7 +66,7 @@
     .ai .cena .opis { margin-bottom: 0; }
     .wycena-pasek {
       margin-top: 22px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
-      background: linear-gradient(135deg, rgba(0,102,255,.14), rgba(0,102,255,.03));
+      background: linear-gradient(135deg, rgba(0,0,0,0.056), rgba(0,0,0,0.012));
       border: 1px solid var(--border-blue); border-radius: var(--radius); padding: 22px 26px;
     }
     .wycena-pasek p { color: var(--white); font-weight: 500; }
