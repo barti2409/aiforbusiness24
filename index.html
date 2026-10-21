@@ -3,697 +3,688 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>aiforbusiness24 — AI dla Twojego Biznesu</title>
+  <title>AI for Business 24 — agenci AI i automatyzacje dla firm</title>
+  <meta name="description" content="Wdrażamy agentów AI i automatyzacje, które odbierają telefony, odpisują klientom, przygotowują oferty i pilnują płatności — 24/7. Bezpłatna konsultacja." />
+  <link rel="canonical" href="https://aiforbusiness24.com/" />
+  <meta property="og:title" content="AI for Business 24 — agenci AI i automatyzacje dla firm" />
+  <meta property="og:description" content="Agenci AI, którzy wykonują pracę w Twojej firmie: telefony, zapytania, oferty, faktury i płatności. Zobacz, jak to działa." />
+  <meta property="og:url" content="https://aiforbusiness24.com/" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AI for Business 24",
+    "legalName": "AI for Business 24, LLC",
+    "url": "https://aiforbusiness24.com/",
+    "email": "bartek@aiforbusiness24.com",
+    "address": { "@type": "PostalAddress", "streetAddress": "131 Continental Dr, Suite 305", "addressLocality": "Newark", "addressRegion": "DE", "postalCode": "19713", "addressCountry": "US" },
+    "description": "Wdrożenia agentów AI, automatyzacji i aplikacji AI dla firm."
+  }
+  </script>
   <style>
-    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    /* ─────────────────────────────────────────────────────────────
+       Landing AI for Business 24 (21.10.2026) — biało-czarny, jak Styleprint.
+       Każda animacja pokazuje, jak pracuje AI: kanał zdarzeń agentów,
+       rozmowa z agentem, przepływ automatyzacji. Bez wymyślonych opinii.
+       ───────────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:        #FFFFFF;
-      --bg2:       #FAFAFA;
-      --blue:      #0A0A0A;
-      --blue-dark: #262626;
-      --blue-dim:  #404040;
-      --blue-glow: rgba(0,0,0,0.06);
-      --blue-glow2:rgba(0,0,0,0.025);
-      --white:     #0A0A0A;
-      --muted:     #525252;
-      --card-bg:   #FFFFFF;
-      --border:    rgba(0,0,0,0.08);
-      --radius:    16px;
-      --radius-sm: 10px;
+      --ink: #0A0A0A; --ink2: #262626; --muted: #525252; --soft: #737373; --faint: #A3A3A3;
+      --line: rgba(0,0,0,.08); --bg2: #FAFAFA; --ok: #16A34A;
+      /* nazwy używane przez quiz */
+      --blue: #0A0A0A; --white: #0A0A0A;
+      --shell: 1160px;
     }
-
     html { scroll-behavior: smooth; }
+    body { background: #fff; color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+    .shell { max-width: var(--shell); margin: 0 auto; padding: 0 24px; }
+    h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.04; }
+    .eyebrow { display: flex; align-items: center; gap: 8px; font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+    .eyebrow svg { width: 12px; height: 12px; color: var(--ink); }
+    .h2 { font-size: clamp(2.2rem, 5vw, 3.3rem); font-weight: 700; margin-top: 12px; }
+    .h2 .szary { color: var(--faint); }
+    .lead { font-size: 1.1rem; color: var(--muted); margin-top: 16px; max-width: 620px; }
+    section { scroll-margin-top: 70px; }
 
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', 'Space Grotesk', sans-serif;
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 26px; border-radius: 99px; font-weight: 600; font-size: .95rem; border: 0; cursor: pointer; font-family: inherit; transition: transform .2s, background .2s, box-shadow .2s; white-space: nowrap; }
+    .btn:hover { transform: scale(1.03); }
+    .btn-ink { background: var(--ink); color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    .btn-line { border: 1px solid rgba(0,0,0,.15); color: var(--ink); background: #fff; }
+    .btn-line:hover { background: rgba(0,0,0,.04); }
+    .btn-white { background: #fff; color: var(--ink); }
 
-    /* ─── SCROLLBAR ────────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--blue-dark); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+    /* ── Animacje wspólne ── */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+    .rv.on { opacity: 1; transform: none; }
+    @keyframes plywaj { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+    @keyframes migotaj { 0%,100% { opacity: 0; transform: scale(.4) rotate(0) } 50% { opacity: 1; transform: scale(1) rotate(45deg) } }
+    @keyframes blysk { from { background-position: 200% 0 } to { background-position: -200% 0 } }
+    @keyframes tasma { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    @keyframes kursor { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+    @keyframes fala { 0% { transform: scale(.9); opacity: .6 } 100% { transform: scale(2.2); opacity: 0 } }
+    @keyframes wjedz { from { opacity: 0; transform: translateY(-12px) scale(.98) } to { opacity: 1; transform: none } }
+    .shine { background: linear-gradient(110deg, var(--ink) 35%, #8a8a8a 50%, var(--ink) 65%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: blysk 6s linear infinite; }
+    .iskra { position: absolute; pointer-events: none; color: rgba(0,0,0,.14); animation: migotaj 4s ease-in-out infinite; }
+    .kropka-live { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; }
+    .kropka-live::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--ok); animation: fala 2s ease-out infinite; }
+    .kursor { display: inline-block; width: 2px; height: 1em; background: currentColor; margin-left: 2px; transform: translateY(2px); animation: kursor 1s steps(1) infinite; }
 
-    /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
-    h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
-    h1 { font-size: clamp(2rem, 5vw, 3.6rem); }
-    h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
-    h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
-    p  { color: var(--muted); }
+    /* ── Nawigacja ── */
+    .nav { position: fixed; inset: 0 0 auto; z-index: 100; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+    .nav.scroll { background: rgba(255,255,255,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-color: var(--line); }
+    .nav .shell { display: flex; align-items: center; gap: 28px; height: 70px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; letter-spacing: -.02em; }
+    .logo-znak { width: 30px; height: 30px; border-radius: 9px; background: var(--ink); color: #fff; display: grid; place-items: center; }
+    .logo-znak svg { width: 16px; height: 16px; }
+    .logo span.szary { color: var(--faint); font-weight: 600; }
+    .nav-linki { display: flex; gap: 24px; font-size: .9rem; color: var(--muted); }
+    .nav-linki a:hover { color: var(--ink); }
+    .nav-prawo { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .nav .btn { height: 40px; padding: 0 18px; font-size: .88rem; }
+    .burger { display: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: #fff; cursor: pointer; place-items: center; }
+    .burger span, .burger span::before, .burger span::after { display: block; width: 16px; height: 1.6px; background: var(--ink); position: relative; transition: transform .25s; }
+    .burger span::before, .burger span::after { content: ''; position: absolute; left: 0; }
+    .burger span::before { top: -5px; } .burger span::after { top: 5px; }
+    .nav.otwarte .burger span { background: transparent; }
+    .nav.otwarte .burger span::before { transform: translateY(5px) rotate(45deg); }
+    .nav.otwarte .burger span::after { transform: translateY(-5px) rotate(-45deg); }
+    .menu-mob { display: none; }
 
-    a { text-decoration: none; color: inherit; }
+    /* ── Hero ── */
+    .hero { position: relative; padding: 150px 0 100px; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 50% at 75% 30%, rgba(0,0,0,.06), transparent 70%); }
+    .hero .shell { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+    .odznaka { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); background: #fff; border-radius: 99px; padding: 6px 14px; font-size: .8rem; font-weight: 500; color: var(--muted); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    .hero h1 { font-size: clamp(2.7rem, 5.4vw, 4.4rem); font-weight: 800; margin-top: 24px; }
+    .hero .lead { font-size: 1.15rem; max-width: 540px; }
+    .hero-cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .hero-drobne { margin-top: 18px; font-size: .8rem; color: var(--faint); }
 
-    .section { padding: 100px 0; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    /* Panel z kanałem zdarzeń agentów */
+    .panel-wrap { position: relative; max-width: 470px; margin-left: auto; width: 100%; }
+    .panel { background: #fff; border: 1px solid var(--line); border-radius: 26px; box-shadow: 0 40px 120px rgba(0,0,0,.16); overflow: hidden; }
+    .panel-gora { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--bg2); }
+    .panel-gora i { width: 10px; height: 10px; border-radius: 50%; background: #E5E5E5; }
+    .panel-gora b { margin-left: 8px; font-size: .82rem; font-weight: 600; }
+    .panel-gora .live { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: .74rem; font-weight: 600; color: var(--ok); }
+    .feed { position: relative; height: 372px; padding: 14px; overflow: hidden; }
+    .feed::after { content: ''; position: absolute; inset: auto 0 0; height: 70px; background: linear-gradient(transparent, #fff); pointer-events: none; }
+    .zdarzenie { display: flex; gap: 12px; padding: 13px; border-radius: 16px; border: 1px solid var(--line); background: #fff; margin-bottom: 10px; animation: wjedz .6s cubic-bezier(.2,.7,.2,1) both; }
+    .zdarzenie:first-child { box-shadow: 0 10px 30px rgba(0,0,0,.07); }
+    .zd-ikona { width: 38px; height: 38px; border-radius: 12px; background: var(--ink); color: #fff; display: grid; place-items: center; flex: none; }
+    .zd-ikona svg { width: 18px; height: 18px; }
+    .zd-tresc { min-width: 0; flex: 1; }
+    .zd-agent { display: flex; justify-content: space-between; gap: 8px; font-size: .72rem; font-weight: 600; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
+    .zd-akcja { font-size: .9rem; font-weight: 500; margin-top: 2px; line-height: 1.4; }
+    .zd-akcja .ok { color: var(--ok); font-weight: 600; }
+    .chip { position: absolute; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; border-radius: 16px; padding: 10px 14px; font-size: .78rem; font-weight: 600; box-shadow: 0 12px 40px rgba(0,0,0,.12); animation: plywaj 6s ease-in-out infinite; white-space: nowrap; }
+    .chip small { display: block; font-weight: 400; color: var(--soft); }
+    .chip.c1 { left: -46px; top: -52px; }
+    .chip.c2 { right: -48px; top: 58%; animation-duration: 7s; animation-delay: -2s; }
+    .chip.c3 { left: -44px; bottom: -22px; background: var(--ink); color: #fff; border-color: var(--ink); animation-duration: 8s; animation-delay: -4s; }
 
-    .label {
-      display: inline-block;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--blue);
-      background: rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.1);
-      padding: 5px 14px;
-      border-radius: 99px;
-      margin-bottom: 20px;
-    }
+    /* ── Taśma zadań ── */
+    .tasma-sekcja { border-block: 1px solid var(--line); background: var(--bg2); padding: 40px 0; }
+    .tasma-sekcja .eyebrow { justify-content: center; margin-bottom: 22px; }
+    .tasma-okno { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .tasma { display: flex; gap: 12px; width: max-content; animation: tasma 50s linear infinite; }
+    .tasma.wstecz { animation-direction: reverse; animation-duration: 60s; margin-top: 12px; }
+    .zadanie { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 10px 18px 10px 10px; font-size: .92rem; font-weight: 500; white-space: nowrap; box-shadow: 0 6px 20px rgba(0,0,0,.04); }
+    .zadanie span { width: 30px; height: 30px; border-radius: 50%; background: var(--bg2); border: 1px solid var(--line); display: grid; place-items: center; font-size: .95rem; }
 
-    /* ─── BUTTONS ──────────────────────────────────────────────── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 28px; border-radius: 10px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .9rem; font-weight: 600;
-      cursor: pointer; border: none;
-      transition: all .25s ease;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(0,0,0,.14);
-    }
-    .btn-primary:hover {
-      background: #262626;
-      box-shadow: 0 12px 36px rgba(0,0,0,.14);
-      transform: translateY(-2px);
-    }
-    .btn-secondary {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(0,0,0,.2);
-    }
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: rgba(0,0,0,0.032);
-      transform: translateY(-2px);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--blue);
-      border: 1px solid var(--blue);
-      font-size: .82rem; padding: 9px 20px;
-    }
-    .btn-ghost:hover {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 6px 20px rgba(0,0,0,.14);
-    }
+    /* ── Na czym to polega ── */
+    .sekcja { padding: 120px 0; }
+    .sekcja.szara { background: var(--bg2); }
+    .kroki { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+    .krok { border: 1px solid var(--line); border-radius: 26px; padding: 26px; background: #fff; }
+    .krok-wizual { height: 214px; border-radius: 18px; background: var(--bg2); display: grid; place-items: center; padding: 18px; }
+    .krok-nr { margin-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--faint); }
+    .krok h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.02em; margin-top: 4px; }
+    .krok p { color: var(--muted); font-size: .95rem; margin-top: 8px; }
+    /* krok 1: zadania skreślane po kolei */
+    .lista-zadan { width: 92%; display: grid; gap: 7px; }
+    .lista-zadan div { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 7px 11px; font-size: .82rem; white-space: nowrap; font-weight: 500; position: relative; transition: color .4s; }
+    .lista-zadan div::after { content: ''; position: absolute; left: 38px; right: 12px; top: 50%; height: 1.6px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.6,.1,.2,1); }
+    .lista-zadan i { width: 18px; height: 18px; border-radius: 6px; border: 1.6px solid #D4D4D4; flex: none; display: grid; place-items: center; font-style: normal; font-size: .7rem; color: #fff; transition: background .3s, border-color .3s; }
+    .lista-zadan div.zrobione { color: var(--faint); }
+    .lista-zadan div.zrobione::after { transform: scaleX(1); background: var(--faint); }
+    .lista-zadan div.zrobione i { background: var(--ok); border-color: var(--ok); }
+    /* krok 2: agent się uczy */
+    .uczy { width: 88%; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    .uczy small { font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+    .uczy div { margin-top: 6px; font-weight: 600; min-height: 46px; line-height: 1.4; }
+    .uczy-zrodla { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .uczy-zrodla span { font-size: .7rem; border: 1px solid var(--line); border-radius: 99px; padding: 3px 9px; color: var(--muted); }
+    /* krok 3: zadanie wykonane */
+    .wykonane { width: 84%; }
+    .wykonane-gora { display: flex; justify-content: space-between; font-size: .82rem; font-weight: 600; }
+    .wykonane-gora .ok { color: var(--ok); opacity: 0; transition: opacity .3s; }
+    .wykonane.koniec .wykonane-gora .ok { opacity: 1; }
+    .pasek { margin-top: 10px; height: 8px; border-radius: 99px; background: rgba(0,0,0,.07); overflow: hidden; }
+    .pasek div { height: 100%; width: 100%; background: var(--ink); border-radius: 99px; transform: scaleX(0); transform-origin: left; }
+    .wykonane.biegnie .pasek div { transition: transform 2.4s cubic-bezier(.6,.1,.2,1); transform: scaleX(1); }
+    .powiadomienie { margin-top: 14px; display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-size: .8rem; opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s; }
+    .wykonane.koniec .powiadomienie { opacity: 1; transform: none; }
+    .powiadomienie b { display: block; font-size: .8rem; }
+    .powiadomienie span { color: var(--soft); }
 
-    /* ─── NAVBAR ───────────────────────────────────────────────── */
-    #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 16px 0;
-      transition: background .35s, backdrop-filter .35s, border-bottom .35s;
-    }
-    #navbar.scrolled {
-      background: rgba(255,255,255,.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    }
-    .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700; font-size: 1.25rem;
-      color: var(--white);
-      letter-spacing: -.02em;
-    }
-    .nav-logo span { color: var(--blue); }
+    /* ── Agent w akcji ── */
+    .demo-zakladki { display: inline-flex; gap: 4px; background: #F0F0F0; border-radius: 99px; padding: 5px; margin-top: 34px; flex-wrap: wrap; }
+    .demo-zakladki button { border: 0; background: none; padding: 10px 18px; border-radius: 99px; font: 600 .9rem 'Inter', sans-serif; color: var(--muted); cursor: pointer; transition: background .25s, color .25s, box-shadow .25s; }
+    .demo-zakladki button.on { background: #fff; color: var(--ink); box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+    .demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; margin-top: 26px; }
+    .rozmowa, .w-tle { border: 1px solid var(--line); border-radius: 26px; background: #fff; overflow: hidden; }
+    .rozmowa { display: flex; flex-direction: column; }
+    .rozmowa-gora, .w-tle-gora { display: flex; align-items: center; gap: 10px; padding: 16px 20px; border-bottom: 1px solid var(--line); font-size: .85rem; font-weight: 600; }
+    .rozmowa-gora small, .w-tle-gora small { font-weight: 400; color: var(--soft); display: block; font-size: .76rem; }
+    .rozmowa-gora .zd-ikona { width: 34px; height: 34px; border-radius: 10px; }
+    .dymki { flex: 1; height: 440px; padding: 20px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; justify-content: flex-end; background: var(--bg2); }
+    .dymek { max-width: 82%; padding: 11px 15px; border-radius: 18px; font-size: .92rem; line-height: 1.45; animation: wjedz .45s cubic-bezier(.2,.7,.2,1) both; }
+    .dymek.klient { align-self: flex-start; background: #fff; border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+    .dymek.agent { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 6px; }
+    .dymek.system { align-self: center; max-width: 92%; background: #fff; border: 1px dashed rgba(0,0,0,.18); font-size: .82rem; color: var(--muted); border-radius: 12px; }
+    .dymek small { display: block; font-size: .68rem; opacity: .55; margin-bottom: 2px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+    .pisze { align-self: flex-end; display: flex; gap: 4px; padding: 13px 16px; background: var(--ink); border-radius: 18px; border-bottom-right-radius: 6px; }
+    .pisze.klient { align-self: flex-start; background: #fff; border: 1px solid var(--line); border-bottom-left-radius: 6px; border-bottom-right-radius: 18px; }
+    .pisze i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.7); animation: plywaj 1s ease-in-out infinite; }
+    .pisze.klient i { background: var(--faint); }
+    .pisze i:nth-child(2) { animation-delay: .15s; } .pisze i:nth-child(3) { animation-delay: .3s; }
+    .kroki-tla { padding: 14px 20px 20px; display: grid; gap: 4px; }
+    .krok-tla { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--line); opacity: .35; transition: opacity .4s; }
+    .krok-tla:last-child { border-bottom: 0; }
+    .krok-tla.on { opacity: 1; }
+    .krok-tla i { width: 24px; height: 24px; border-radius: 50%; border: 1.6px solid #D4D4D4; flex: none; display: grid; place-items: center; font-style: normal; font-size: .72rem; color: #fff; transition: background .3s, border-color .3s; margin-top: 1px; }
+    .krok-tla.on i { background: var(--ok); border-color: var(--ok); }
+    .krok-tla b { display: block; font-size: .92rem; font-weight: 600; }
+    .krok-tla span { font-size: .82rem; color: var(--soft); }
+    .w-tle-wynik { margin: 0 20px 20px; padding: 14px 16px; border-radius: 16px; background: var(--ink); color: #fff; font-size: .88rem; opacity: 0; transform: translateY(8px); transition: opacity .5s, transform .5s; }
+    .w-tle-wynik.on { opacity: 1; transform: none; }
+    .w-tle-wynik small { display: block; color: rgba(255,255,255,.55); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; margin-bottom: 3px; }
 
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-      font-size: .88rem; font-weight: 500;
-    }
-    .nav-links a { color: var(--muted); transition: color .2s; }
-    .nav-links a:hover { color: var(--white); }
+    /* ── Automatyzacja: przepływ ── */
+    .przeplyw { position: relative; margin-top: 60px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .przeplyw-linia { position: absolute; left: 10%; right: 10%; top: 44px; height: 2px; background: repeating-linear-gradient(90deg, #D4D4D4 0 6px, transparent 6px 12px); }
+    .przeplyw-kulka { position: absolute; top: -5px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 6px rgba(0,0,0,.08); animation: kulka 6s linear infinite; }
+    @keyframes kulka { 0% { left: 0; opacity: 1 } 100% { left: calc(100% - 12px); opacity: 1 } }
+    .wezel { position: relative; text-align: center; }
+    .wezel-ikona { width: 88px; height: 88px; margin: 0 auto; border-radius: 26px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.05); animation: zapal 6s infinite; animation-delay: calc(var(--k) * 1.5s - .25s); }
+    .wezel-ikona svg { width: 30px; height: 30px; }
+    @keyframes zapal { 0%, 20%, 100% { background: #fff; color: var(--ink); transform: none } 4%, 14% { background: var(--ink); color: #fff; transform: scale(1.06) } }
+    .wezel b { display: block; margin-top: 16px; font-size: .98rem; }
+    .wezel span { display: block; font-size: .84rem; color: var(--soft); margin-top: 2px; }
+    .przeplyw-podpis { margin-top: 36px; text-align: center; font-size: .85rem; color: var(--faint); }
+    .porownanie { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
+    .porownanie > div { border-radius: 22px; padding: 24px 26px; border: 1px solid var(--line); background: #fff; }
+    .porownanie > div.po { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .porownanie h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; }
+    .porownanie ul { list-style: none; margin-top: 12px; display: grid; gap: 8px; font-size: .92rem; color: var(--muted); }
+    .porownanie .po ul { color: rgba(255,255,255,.7); }
+    .porownanie li { display: flex; gap: 10px; }
+    .porownanie li::before { content: '–'; color: var(--faint); }
+    .porownanie .po li::before { content: '✓'; color: #4ADE80; }
 
-    .nav-right { display: flex; align-items: center; gap: 14px; }
+    /* ── Usługi (ciemne bento) ── */
+    .ciemna { background: var(--ink); color: #fff; }
+    .ciemna .eyebrow { color: rgba(255,255,255,.4); }
+    .ciemna .eyebrow svg { color: #fff; }
+    .ciemna .h2 .szary { color: rgba(255,255,255,.4); }
+    .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+    .kafel { border-radius: 26px; padding: 28px; background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); transition: background .25s; display: flex; flex-direction: column; }
+    .kafel:hover { background: rgba(255,255,255,.07); }
+    .kafel.duzy { grid-column: span 2; }
+    .kafel.duzy { position: relative; padding-right: 300px; }
+    .glos { position: absolute; right: 28px; top: 28px; bottom: 28px; width: 240px; border-radius: 20px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); padding: 18px; display: flex; flex-direction: column; }
+    .glos-gora { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: rgba(255,255,255,.7); font-variant-numeric: tabular-nums; }
+    .glos-fala { flex: 1; display: flex; align-items: center; gap: 4px; margin-top: 12px; }
+    .glos-fala i { flex: 1; height: var(--h); border-radius: 99px; background: #fff; opacity: .85; transform-origin: center; animation: glos 1.1s ease-in-out infinite alternate; animation-delay: calc(var(--d) * -1); }
+    @keyframes glos { from { transform: scaleY(.25) } to { transform: scaleY(1) } }
+    .kafel.pelny { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .kafel-ikona { width: 44px; height: 44px; border-radius: 13px; background: #fff; color: var(--ink); display: grid; place-items: center; transition: transform .25s; flex: none; }
+    .kafel:hover .kafel-ikona { transform: scale(1.1); }
+    .kafel-ikona svg { width: 21px; height: 21px; }
+    .kafel h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.02em; margin-top: 22px; }
+    .kafel p { color: rgba(255,255,255,.6); font-size: .95rem; margin-top: 8px; max-width: 520px; }
+    .kafel .wiecej { margin-top: auto; padding-top: 18px; font-size: .88rem; font-weight: 600; color: #fff; }
+    .kafel.pelny h3 { margin-top: 0; }
+    .kafel.pelny .btn { margin-left: auto; }
 
-    .lang-btn {
-      background: rgba(0,0,0,.06);
-      border: 1px solid rgba(0,0,0,.12);
-      color: var(--muted); font-size: .82rem; font-weight: 600;
-      padding: 7px 14px; border-radius: 8px;
-      cursor: pointer; transition: all .2s;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .lang-btn:hover { color: var(--white); border-color: var(--blue); }
+    /* ── Film + katalog agentów ── */
+    .film { max-width: 900px; margin: 48px auto 0; border-radius: 26px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 40px 100px rgba(0,0,0,.14); background: var(--bg2); }
+    .film iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .agenci { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 48px; }
+    .agent { border: 1px solid var(--line); border-radius: 18px; padding: 18px 18px 16px; background: #fff; transition: transform .25s, box-shadow .25s, border-color .25s; display: block; }
+    .agent:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,.08); border-color: rgba(0,0,0,.14); }
+    .agent b { display: block; font-size: .98rem; letter-spacing: -.01em; }
+    .agent span { display: block; font-size: .84rem; color: var(--soft); margin-top: 3px; }
+    .agent em { display: block; font-style: normal; font-size: .78rem; font-weight: 600; margin-top: 14px; }
 
-    /* hamburger */
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px; background: none; border: none;
-    }
-    .hamburger span {
-      width: 24px; height: 2px;
-      background: var(--white); border-radius: 2px;
-      transition: all .3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* ── FAQ ── */
+    .faq { max-width: 780px; margin: 48px auto 0; }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; font-weight: 600; font-size: 1.05rem; letter-spacing: -.01em; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; font-size: 1.4rem; line-height: 1; font-weight: 400; transition: transform .25s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { color: var(--muted); padding: 0 0 22px; max-width: 680px; }
 
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(255,255,255,.97);
-      backdrop-filter: blur(20px);
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 36px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a, .mobile-menu button {
-      font-size: 1.5rem; font-weight: 600;
-      font-family: 'Space Grotesk', sans-serif;
-      color: var(--white); background: none; border: none; cursor: pointer;
-      transition: color .2s;
-    }
-    .mobile-menu a:hover, .mobile-menu button:hover { color: var(--blue); }
+    /* ── Kontakt ── */
+    .kontakt { padding: 0 0 110px; }
+    .kontakt-blok { position: relative; overflow: hidden; border-radius: 38px; background: var(--ink); color: #fff; padding: 72px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .kontakt-blok::before { content: ''; position: absolute; inset: 0; background: radial-gradient(50% 60% at 20% 0%, rgba(255,255,255,.18), transparent 70%); pointer-events: none; }
+    .kontakt-blok .iskra { color: rgba(255,255,255,.35); }
+    .kontakt-blok h2 { position: relative; font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 700; }
+    .kontakt-blok > div > p { position: relative; color: rgba(255,255,255,.6); margin-top: 16px; max-width: 440px; }
+    .kontakt-dane { position: relative; display: grid; gap: 10px; margin-top: 28px; font-size: .92rem; }
+    .kontakt-dane div { display: flex; gap: 10px; align-items: center; color: rgba(255,255,255,.75); }
+    .kontakt-dane div::before { content: '✓'; color: #4ADE80; }
+    .kontakt-dane a { color: #fff; font-weight: 600; }
+    .formularz { position: relative; background: #fff; color: var(--ink); border-radius: 26px; padding: 30px; display: grid; gap: 14px; }
+    .formularz label { font-size: .8rem; font-weight: 600; color: var(--muted); display: grid; gap: 6px; }
+    .formularz input, .formularz textarea { font: inherit; font-size: .95rem; color: var(--ink); border: 1px solid rgba(0,0,0,.12); border-radius: 12px; padding: 12px 14px; background: var(--bg2); outline: none; transition: border-color .2s, box-shadow .2s, background .2s; }
+    .formularz textarea { min-height: 110px; resize: vertical; }
+    .formularz input:focus, .formularz textarea:focus { border-color: var(--ink); background: #fff; box-shadow: 0 0 0 4px rgba(0,0,0,.06); }
+    .formularz .btn { width: 100%; margin-top: 4px; }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 30px); opacity: 0; background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 99px; font-size: .9rem; font-weight: 500; z-index: 9999; transition: opacity .3s, transform .3s; box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-    @media(max-width:768px) {
-      .nav-links, .nav-right { display: none; }
-      .hamburger { display: flex; }
-    }
+    /* ── Stopka ── */
+    footer { border-top: 1px solid var(--line); padding: 40px 0; font-size: .82rem; color: var(--faint); }
+    footer .shell { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+    footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    footer a:hover { color: var(--ink); }
+    footer .adres { width: 100%; font-size: .76rem; }
 
-    /* ─── HERO ─────────────────────────────────────────────────── */
-    #hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; padding: 140px 0 80px;
-      text-align: center;
+    /* ── Responsywność ── */
+    @media (max-width: 1020px) {
+      .nav-linki { display: none; }
+      .burger { display: grid; }
+      .nav-prawo .btn { display: none; }
+      .menu-mob { display: grid; gap: 4px; position: fixed; inset: 70px 0 auto; background: #fff; border-bottom: 1px solid var(--line); padding: 12px 24px 24px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+      .nav.otwarte .menu-mob { opacity: 1; transform: none; pointer-events: auto; }
+      .nav.otwarte { background: #fff; border-color: var(--line); }
+      .menu-mob a { padding: 12px 0; font-weight: 600; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+      .menu-mob .btn { margin-top: 14px; border: 0; color: #fff; }
+      .hero .shell { grid-template-columns: 1fr; gap: 56px; }
+      .panel-wrap { margin: 0 auto; }
+      .kroki, .bento { grid-template-columns: 1fr 1fr; }
+      .kafel.duzy { grid-column: span 2; }
+    .kafel.duzy { position: relative; padding-right: 300px; }
+    .glos { position: absolute; right: 28px; top: 28px; bottom: 28px; width: 240px; border-radius: 20px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); padding: 18px; display: flex; flex-direction: column; }
+    .glos-gora { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: rgba(255,255,255,.7); font-variant-numeric: tabular-nums; }
+    .glos-fala { flex: 1; display: flex; align-items: center; gap: 4px; margin-top: 12px; }
+    .glos-fala i { flex: 1; height: var(--h); border-radius: 99px; background: #fff; opacity: .85; transform-origin: center; animation: glos 1.1s ease-in-out infinite alternate; animation-delay: calc(var(--d) * -1); }
+    @keyframes glos { from { transform: scaleY(.25) } to { transform: scaleY(1) } }
+      .demo { grid-template-columns: 1fr; }
+      .agenci { grid-template-columns: repeat(2, 1fr); }
+      .kontakt-blok { grid-template-columns: 1fr; padding: 56px 32px; gap: 36px; }
     }
-    .hero-canvas {
-      position: absolute; inset: 0; z-index: 0;
+    @media (max-width: 720px) {
+      .shell { padding: 0 16px; }
+      .hero { padding: 116px 0 70px; }
+      .sekcja { padding: 84px 0; }
+      .kroki, .bento, .porownanie { grid-template-columns: 1fr; }
+      .kafel.duzy { grid-column: auto; padding-right: 28px; }
+      .glos { position: static; width: auto; height: 120px; margin-top: 20px; }
+      .chip.c1 { left: -6px; top: -30px; }
+      .chip.c2 { display: none; }
+      .chip.c3 { left: auto; right: -6px; bottom: -22px; }
+      .feed { height: 340px; }
+      .przeplyw { grid-template-columns: 1fr; gap: 26px; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .przeplyw-linia { left: 43px; right: auto; top: 40px; bottom: 40px; width: 2px; height: auto; background: repeating-linear-gradient(180deg, #D4D4D4 0 6px, transparent 6px 12px); }
+      .przeplyw-kulka { left: -5px; top: 0; animation-name: kulka-pion; }
+      @keyframes kulka-pion { 0% { top: 0 } 100% { top: calc(100% - 12px) } }
+      .wezel { display: flex; align-items: center; gap: 18px; text-align: left; }
+      .wezel-ikona { width: 88px; height: 88px; margin: 0; flex: none; }
+      .wezel b { margin-top: 0; }
+      .demo-zakladki { display: flex; width: 100%; }
+      .demo-zakladki button { flex: 1; padding: 10px 8px; font-size: .82rem; }
+      .dymki { flex: none; height: 430px; padding: 16px; }
+      .agenci { grid-template-columns: 1fr; }
+      .kontakt-blok { padding: 44px 20px; border-radius: 28px; }
+      .formularz { padding: 22px; }
+      .kafel.pelny .btn { margin-left: 0; }
     }
-    /* grid overlay */
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0; z-index: 1;
-      background-image:
-        linear-gradient(rgba(0,0,0,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.028) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .rv { opacity: 1; transform: none; transition: none; }
+      .shine, .iskra, .chip, .tasma, .kropka-live::after, .kursor, .przeplyw-kulka, .wezel-ikona, .pisze i, .glos-fala i { animation: none !important; }
+      .iskra { opacity: .5; }
     }
-    #hero::after {
-      content: '';
-      position: absolute; inset: 0; z-index: 1;
-      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(0,0,0,.035) 0%, transparent 70%);
-    }
-    .hero-content {
-      position: relative; z-index: 2;
-      max-width: 860px; margin: 0 auto;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.12);
-      padding: 8px 18px; border-radius: 99px;
-      font-size: .78rem; font-weight: 600; letter-spacing: .1em;
-      color: var(--blue); text-transform: uppercase; margin-bottom: 28px;
-    }
-    .hero-badge::before {
-      content: ''; width: 6px; height: 6px;
-      background: var(--blue); border-radius: 50%;
-      box-shadow: none;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-    .hero-title {
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, #0a0a0a 0%, #404040 55%, #8a8a8a 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--muted); max-width: 600px; margin: 0 auto 40px;
-    }
-    .hero-btns {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-    }
-    .hero-metrics {
-      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-      margin-top: 64px;
-    }
-    .metric-badge {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      padding: 12px 22px; border-radius: 12px;
-      font-size: .82rem; font-weight: 600;
-      color: var(--white);
-      display: flex; align-items: center; gap: 8px;
-      animation: float 4s ease-in-out infinite;
-    }
-    .metric-badge:nth-child(2) { animation-delay: -.8s; }
-    .metric-badge:nth-child(3) { animation-delay: -1.6s; }
-    .metric-badge:nth-child(4) { animation-delay: -2.4s; }
-    .metric-badge .dot { width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow: none; }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-
-    /* ─── CANVAS PARTICLES ─────────────────────────────────────── */
-    canvas#particles { position:absolute;inset:0;width:100%;height:100%; }
-
-    /* ─── ABOUT ────────────────────────────────────────────────── */
-    #about { background: var(--bg2); }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    }
-    .about-text h2 { margin-bottom: 20px; }
-    .about-text p { margin-bottom: 16px; }
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
-    }
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius);
-      padding: 28px 20px; text-align: center;
-      transition: border-color .3s, box-shadow .3s;
-    }
-    .stat-card:hover {
-      border-color: var(--blue);
-      box-shadow: 0 0 28px var(--blue-glow);
-    }
-    .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem; font-weight: 700;
-      color: var(--blue); line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-label { font-size: .82rem; color: var(--muted); font-weight: 500; }
-
-    @media(max-width:768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .stats-grid { grid-template-columns: repeat(3,1fr); gap: 16px; }
-      .about-text { text-align: center; display: flex; flex-direction: column; align-items: center; }
-    }
-
-    /* ─── SERVICES ─────────────────────────────────────────────── */
-    #services { background: var(--bg); }
-    .services-header { text-align: center; margin-bottom: 60px; }
-    .services-header p { max-width: 560px; margin: 12px auto 0; }
-
-    .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px,100%), 1fr)); gap: 24px;
-    }
-
-    .service-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(14px);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color .3s, box-shadow .3s, transform .3s;
-      cursor: default;
-    }
-    .service-card:hover {
-      border-color: rgba(0,0,0,0.2);
-      box-shadow: 0 0 40px var(--blue-glow), 0 8px 32px rgba(0,0,0,.08);
-      transform: translateY(-4px);
-    }
-    .service-card.featured {
-      border-color: rgba(0,0,0,0.18);
-      box-shadow: 0 0 32px var(--blue-glow);
-    }
-    .service-card.featured:hover {
-      box-shadow: 0 0 56px var(--blue-glow), 0 8px 32px rgba(0,0,0,.08);
-    }
-    .featured-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--blue); background: rgba(0,0,0,0.048);
-      border: 1px solid rgba(0,0,0,0.12);
-      padding: 3px 9px; border-radius: 20px;
-      align-self: flex-start;
-    }
-    .service-header {
-      padding: 28px 28px 20px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
-    .service-icon {
-      width: 48px; height: 48px;
-      background: rgba(0,0,0,0.048);
-      border: 1px solid rgba(0,0,0,0.1);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue);
-    }
-    .service-icon svg { width:24px; height:24px; }
-    .service-short { font-size: .88rem; margin-top: 4px; }
-    .service-toggle-btn {
-      display: flex; align-items: center; gap: 8px;
-      background: none; border: none; color: var(--blue);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .82rem; font-weight: 600;
-      cursor: pointer; padding: 0 28px 24px;
-      transition: gap .2s;
-    }
-    .service-toggle-btn:hover { gap: 12px; }
-    .toggle-arrow {
-      width: 16px; height: 16px;
-      transition: transform .35s cubic-bezier(.4,0,.2,1);
-      flex-shrink: 0;
-    }
-    .service-card.open .toggle-arrow { transform: rotate(180deg); }
-
-    .service-expand {
-      max-height: 0; overflow: hidden;
-      transition: max-height .5s cubic-bezier(.4,0,.2,1), opacity .4s;
-      opacity: 0;
-    }
-    .service-card.open .service-expand { max-height: 1200px; opacity: 1; }
-
-    .service-expand-inner {
-      padding: 0 28px 28px;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-    }
-    .service-expand-inner p { font-size: .9rem; margin-bottom: 14px; }
-    .expand-title { color: var(--white); font-weight: 600; margin-bottom: 8px; font-size:.95rem; }
-    .expand-list {
-      list-style: none; padding: 0; margin-bottom: 18px;
-    }
-    .expand-list li {
-      font-size: .88rem; color: var(--muted);
-      padding: 5px 0;
-      display: flex; align-items: flex-start; gap: 10px;
-    }
-    .expand-list li::before {
-      content: '';
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--blue); flex-shrink: 0; margin-top: 7px;
-    }
-    .expand-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .86rem; font-weight: 600; color: var(--blue);
-      margin-top: 8px; transition: gap .2s;
-    }
-    .expand-cta:hover { gap: 10px; }
-
-    /* mini product cards inside AI Apps */
-    .mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
-    .mini-card {
-      background: rgba(0,0,0,0.024);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 10px; padding: 12px 14px;
-      font-size: .8rem;
-    }
-    .mini-card strong { color: var(--white); display: block; margin-bottom: 3px; font-size:.82rem; }
-    .mini-card span { color: var(--muted); }
-
-    @media(max-width:600px){ .mini-cards{grid-template-columns:1fr;} }
-
-    /* ─── FAQ ──────────────────────────────────────────────────── */
-    #faq { background: var(--bg2); }
-    .faq-header { text-align: center; margin-bottom: 54px; }
-    .faq-header p { max-width: 520px; margin: 12px auto 0; }
-    .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-
-    .faq-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      transition: border-color .3s;
-    }
-    .faq-item.open { border-color: rgba(0,0,0,0.18); }
-    .faq-question {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 24px; cursor: pointer;
-      font-weight: 600; font-size: .95rem; color: var(--white);
-      gap: 16px;
-    }
-    .faq-question:hover { color: var(--blue); }
-    .faq-icon {
-      width: 20px; height: 20px; flex-shrink: 0; color: var(--blue);
-      transition: transform .35s;
-    }
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
-    .faq-answer {
-      max-height: 0; overflow: hidden;
-      transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .35s;
-      opacity: 0;
-    }
-    .faq-item.open .faq-answer { max-height: 400px; opacity: 1; }
-    .faq-answer-inner { padding: 0 24px 20px; font-size: .9rem; }
-
-    /* ─── CONTACT ──────────────────────────────────────────────── */
-    #contact { background: var(--bg); }
-    .contact-header { text-align: center; margin-bottom: 54px; }
-    .contact-header p { max-width: 500px; margin: 12px auto 0; }
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px;
-      max-width: 900px; margin: 0 auto; align-items: start;
-    }
-    .contact-info h3 { margin-bottom: 14px; }
-    .contact-info p { margin-bottom: 24px; }
-    .contact-detail {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px; font-size: .9rem;
-    }
-    .contact-detail-icon {
-      width: 40px; height: 40px;
-      background: rgba(0,0,0,0.04); border: 1px solid var(--border);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      color: var(--blue); flex-shrink: 0;
-    }
-    .contact-detail-icon svg { width:18px;height:18px; }
-    .contact-detail-text strong { color: var(--white); display:block; font-size:.82rem; margin-bottom:2px; }
-    .contact-detail-text span { color: var(--muted); font-size:.88rem; }
-
-    .contact-form-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 36px;
-    }
-    .form-row { margin-bottom: 18px; }
-    .form-row label {
-      display: block; font-size: .8rem; font-weight: 600;
-      color: var(--muted); margin-bottom: 7px; letter-spacing: .04em;
-    }
-    .form-row input, .form-row textarea {
-      width: 100%;
-      background: rgba(0,0,0,.04);
-      border: 1px solid rgba(0,0,0,.1);
-      border-radius: 8px; color: var(--white);
-      font-family: 'Inter', sans-serif; font-size: .9rem;
-      padding: 12px 16px;
-      transition: border-color .25s, box-shadow .25s;
-      outline: none;
-    }
-    .form-row input:focus, .form-row textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.048);
-    }
-    .form-row textarea { height: 110px; resize: vertical; }
-    .form-row input::placeholder, .form-row textarea::placeholder { color: #a3a3a3; }
-    .form-submit { width: 100%; margin-top: 4px; font-size:.95rem; padding:14px; }
-
-    @media(max-width:768px){ .contact-grid{grid-template-columns:1fr; gap:36px;} }
-
-    /* ─── FOOTER ───────────────────────────────────────────────── */
-    footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 56px 0 32px;
-    }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-      margin-bottom: 48px;
-    }
-    .footer-brand .nav-logo { font-size: 1.15rem; display: block; margin-bottom: 12px; }
-    .footer-brand p { font-size: .85rem; max-width: 280px; }
-    .footer-col h4 {
-      font-size: .82rem; font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--white);
-      margin-bottom: 16px;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul a { font-size: .87rem; color: var(--muted); transition: color .2s; }
-    .footer-col ul a:hover { color: var(--white); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 28px;
-      display: flex; justify-content: space-between; align-items: center; gap: 16px;
-      font-size: .82rem; color: var(--muted); flex-wrap: wrap;
-    }
-    @media(max-width:768px){
-      .footer-grid{grid-template-columns:1fr 1fr; gap:32px;}
-      .footer-brand{grid-column:1/-1;}
-    }
-    @media(max-width:480px){
-      .footer-grid{grid-template-columns:1fr; gap:20px;}
-      .footer-bottom{flex-direction:column;text-align:center; gap:12px;}
-    }
-
-    /* ─── FADE-IN ──────────────────────────────────────────────── */
-    .fade-in { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .fade-in-d1 { transition-delay: .1s; }
-    .fade-in-d2 { transition-delay: .2s; }
-    .fade-in-d3 { transition-delay: .3s; }
-    .fade-in-d4 { transition-delay: .4s; }
-    .fade-in-d5 { transition-delay: .5s; }
-
-    /* ─── TOAST ────────────────────────────────────────────────── */
-    .toast {
-      position: fixed; bottom: 32px; right: 32px; z-index: 9999;
-      background: var(--card-bg); border: 1px solid var(--border);
-      backdrop-filter: blur(16px); border-radius: 12px;
-      padding: 14px 22px; font-size: .9rem; font-weight: 500;
-      color: var(--white);
-      transform: translateY(80px); opacity: 0;
-      transition: all .4s cubic-bezier(.4,0,.2,1);
-      pointer-events: none;
-    }
-    .toast.show { transform: translateY(0); opacity: 1; }
-    .toast.success { border-color: rgba(21,128,61,.3); color: #15803d; }
-
-    /* ─── MOBILE RESPONSIVE ────────────────────────────────────── */
-    @media(max-width:768px) {
-      .section { padding: 60px 0; }
-      #hero { padding: 100px 0 60px; }
-      .contact-form-card { padding: 24px; }
-    }
-    @media(max-width:480px) {
-      .section { padding: 40px 0; }
-      #hero { padding: 80px 0 40px; }
-      .stats-grid { grid-template-columns: 1fr; gap: 12px; }
-      .service-header { padding: 18px 16px 14px; gap: 10px; }
-      .service-expand-inner { padding: 0 16px 16px; padding-top: 16px; }
-      .faq-question { padding: 16px 14px; gap: 12px; font-size: .9rem; }
-      .faq-answer-inner { padding: 0 14px 16px; }
-      .contact-form-card { padding: 16px; }
-      .contact-grid { gap: 24px; }
-      .mini-cards { margin: 12px 0; gap: 8px; }
-      .mini-card { padding: 10px 12px; font-size: .75rem; }
-      .toast { bottom: 16px; right: 16px; left: 16px; padding: 12px 16px; font-size: .8rem; }
-    }
-  
-    /* Styl jak Styleprint: Inter w nagłówkach, przyciski-pigułki */
-    h1,h2,h3,h4,.post-title{font-family:'Inter',sans-serif!important;letter-spacing:-0.03em}
-    .btn,.post-cta-btn,.nav-cta{border-radius:99px!important}
   </style>
 </head>
 <body>
 
-<!-- ─────────────────────────── NAVBAR ─────────────────────────── -->
-<nav id="navbar">
-  <div class="container nav-inner">
-    <a href="#" class="nav-logo">ai<span>for</span>business24</a>
-
-    <ul class="nav-links">
-      <li><a href="#about" data-i18n="nav_about">O nas</a></li>
-      <li><a href="#services" data-i18n="nav_services">Usługi</a></li>
-      <li><a href="/agenci/" data-i18n="nav_agents">Agenci AI</a></li>
-      <li><a href="/cennik/">Cennik</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="/blog/">Blog</a></li>
-      <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
-    </ul>
-
-    <div class="nav-right">
-      <button class="lang-btn" id="langToggle">EN</button>
-      <a href="#contact" class="btn btn-primary" data-i18n="nav_cta">Darmowa konsultacja</a>
+<!-- ───────────── Nawigacja ───────────── -->
+<header class="nav" id="nav">
+  <div class="shell">
+    <a href="/" class="logo" aria-label="AI for Business 24 — strona główna">
+      <span class="logo-znak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg></span>
+      <span>ai<span class="szary">for</span>business24</span>
+    </a>
+    <nav class="nav-linki" aria-label="Główne menu">
+      <a href="#jak">Jak to działa</a>
+      <a href="#demo">Agent w akcji</a>
+      <a href="#services">Usługi</a>
+      <a href="/agenci/">Agenci AI</a>
+      <a href="/cennik/">Cennik</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <div class="nav-prawo">
+      <a href="#contact" class="btn btn-ink">Bezpłatna konsultacja</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
     </div>
-
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
-</nav>
+  <div class="menu-mob" id="menu-mob">
+    <a href="#jak">Jak to działa</a>
+    <a href="#demo">Agent w akcji</a>
+    <a href="#services">Usługi</a>
+    <a href="/agenci/">Agenci AI</a>
+    <a href="/cennik/">Cennik</a>
+    <a href="/blog/">Blog</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="btn btn-ink">Bezpłatna konsultacja</a>
+  </div>
+</header>
 
-<!-- mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#about" data-i18n="nav_about">O nas</a>
-  <a href="#services" data-i18n="nav_services">Usługi</a>
-  <a href="/agenci/" data-i18n="nav_agents">Agenci AI</a>
-  <a href="/cennik/">Cennik</a>
-  <a href="#faq">FAQ</a>
-  <a href="/blog/">Blog</a>
-  <a href="#contact" data-i18n="nav_contact">Kontakt</a>
-  <a href="#contact" class="btn btn-primary" data-i18n="nav_cta" style="font-size:1rem">Darmowa konsultacja</a>
-  <button id="mobileLang" style="font-size:1rem;color:var(--blue)">Przełącz język / Switch Language</button>
-</div>
+<main>
 
-<!-- ─────────────────────────── HERO ────────────────────────────── -->
-<section id="hero">
-  <canvas id="particles"></canvas>
-  <div class="container hero-content">
-    <div class="hero-badge" data-i18n="hero_badge">AI for Business 24</div>
-    <h1 class="hero-title" data-i18n="hero_title">AI, które realnie zmienia&nbsp;Twój biznes&nbsp;— nie jutro, a&nbsp;dziś.</h1>
-    <p class="hero-sub" data-i18n="hero_sub">Automatyzujemy, projektujemy i wdrażamy rozwiązania AI, które realnie zwiększają efektywność Twojej firmy — od pierwszego dnia.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn btn-primary" data-i18n="hero_cta1">Umów bezpłatną konsultację</a>
-      <a href="#services" class="btn btn-secondary" data-i18n="hero_cta2">Zobacz usługi</a>
+<!-- ───────────── Hero ───────────── -->
+<section class="hero">
+  <svg class="iskra" style="left:6%;top:24%;width:26px;animation-delay:0s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+  <svg class="iskra" style="left:44%;top:14%;width:18px;animation-delay:1.2s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+  <svg class="iskra" style="left:93%;top:22%;width:28px;animation-delay:2.1s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+  <svg class="iskra" style="left:52%;top:84%;width:20px;animation-delay:.6s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+  <svg class="iskra" style="left:14%;top:86%;width:16px;animation-delay:2.8s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+
+  <div class="shell">
+    <div class="rv">
+      <span class="odznaka"><span class="kropka-live"></span>Agenci AI, którzy pracują za Ciebie 24/7</span>
+      <h1>Firma, która<br>pracuje, gdy<br><span class="shine">Ty śpisz.</span></h1>
+      <p class="lead">Wdrażamy agentów AI i automatyzacje, które odbierają telefony, odpisują klientom, przygotowują oferty i pilnują płatności. Ty dostajesz gotowy efekt — bez przepisywania, bez nieodebranych połączeń.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-ink">Umów bezpłatną konsultację</a>
+        <a href="#jak" class="btn btn-line">Zobacz, jak to działa</a>
+      </div>
+      <p class="hero-drobne">Pierwsza rozmowa za darmo · odpowiadamy w ciągu 24 h · proste wdrożenia w 1–2 tygodnie</p>
     </div>
-    <div class="hero-metrics">
-      <div class="metric-badge fade-in fade-in-d1"><span class="dot"></span><span data-i18n="m1">24/7 Active</span></div>
-      <div class="metric-badge fade-in fade-in-d2"><span class="dot"></span><span data-i18n="m2">5× Szybciej</span></div>
-      <div class="metric-badge fade-in fade-in-d3"><span class="dot"></span><span data-i18n="m3">100% Zautomatyzowane</span></div>
-      <div class="metric-badge fade-in fade-in-d4"><span class="dot"></span><span data-i18n="m4">AI bez limitów</span></div>
+
+    <div class="panel-wrap rv" style="transition-delay:.15s">
+      <div class="panel" aria-label="Przykładowy podgląd: co agenci robią w firmie">
+        <div class="panel-gora"><i></i><i></i><i></i><b>Twoi agenci · dziś</b><span class="live"><span class="kropka-live"></span>na żywo</span></div>
+        <div class="feed" id="feed"></div>
+      </div>
+      <div class="chip c1"><span>📞</span><div>Telefon odebrany o 23:14<small>salon był już zamknięty</small></div></div>
+      <div class="chip c2"><span>📄</span><div>Oferta wysłana<small>3 minuty po zapytaniu</small></div></div>
+      <div class="chip c3"><span class="kropka-live"></span>Zadanie wykonane — bez Ciebie</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Taśma zadań ───────────── -->
+<section class="tasma-sekcja" aria-label="Przykładowe zadania agentów AI">
+  <p class="eyebrow">Co agenci AI mogą robić w Twojej firmie</p>
+  <div class="tasma-okno">
+    <div class="tasma" id="tasma1"></div>
+    <div class="tasma wstecz" id="tasma2"></div>
+  </div>
+</section>
+
+<!-- ───────────── Na czym to polega ───────────── -->
+<section class="sekcja" id="jak">
+  <span id="about" style="position:relative;top:-70px"></span>
+  <div class="shell">
+    <div class="rv" style="max-width:700px">
+      <p class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>Na czym to polega</p>
+      <h2 class="h2">AI przejmuje powtarzalną pracę.<br><span class="szary">Ty zajmujesz się firmą.</span></h2>
+      <p class="lead">Agent AI to program, który rozumie wiadomości, rozmowy i dokumenty jak człowiek — i sam wykonuje kolejne kroki: odpisuje, zapisuje, umawia, przypomina. Uczymy go Twojej firmy i podłączamy do narzędzi, których już używasz.</p>
+    </div>
+    <div class="kroki">
+      <div class="krok rv">
+        <div class="krok-wizual">
+          <div class="lista-zadan" id="lista-zadan">
+            <div><i>✓</i>Telefony po godzinach</div>
+            <div><i>✓</i>Te same pytania klientów</div>
+            <div><i>✓</i>Przepisywanie faktur</div>
+            <div><i>✓</i>Przypomnienia o płatnościach</div>
+          </div>
+        </div>
+        <div class="krok-nr">01</div>
+        <h3>Pokazujesz, co zabiera Ci czas</h3>
+        <p>Na bezpłatnej rozmowie wybieramy zadania, które powtarzasz codziennie i które da się oddać AI.</p>
+      </div>
+      <div class="krok rv" style="transition-delay:.12s">
+        <div class="krok-wizual">
+          <div class="uczy">
+            <small>Agent uczy się Twojej firmy</small>
+            <div id="uczy"></div>
+            <div class="uczy-zrodla"><span>strona www</span><span>cennik</span><span>kalendarz</span><span>CRM</span></div>
+          </div>
+        </div>
+        <div class="krok-nr">02</div>
+        <h3>Budujemy i uczymy agenta</h3>
+        <p>Agent poznaje Twoją ofertę, ceny i sposób rozmowy z klientami, a my łączymy go z Twoją pocztą, kalendarzem czy CRM.</p>
+      </div>
+      <div class="krok rv" style="transition-delay:.24s">
+        <div class="krok-wizual">
+          <div class="wykonane" id="wykonane">
+            <div class="wykonane-gora"><span id="wyk-zadanie">Umawiam wizytę klientki</span><span class="ok">✓</span></div>
+            <div class="pasek"><div></div></div>
+            <div class="powiadomienie"><span class="kropka-live"></span><div><b>Gotowe</b><span id="wyk-info">Czwartek 10:00 · SMS wysłany</span></div></div>
+          </div>
+        </div>
+        <div class="krok-nr">03</div>
+        <h3>Agent pracuje 24/7</h3>
+        <p>Działa bez przerw i urlopów. Ty dostajesz powiadomienia o efektach — i decydujesz tylko tam, gdzie to naprawdę potrzebne.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────────────── VIDEO CASE STUDY ────────────────── -->
-<section id="case-video" class="section">
-  <div class="container">
-    <div class="services-header fade-in">
-      <div class="label">Case study</div>
-      <h2>Zobacz jak robimy to u naszych klientów</h2>
+<!-- ───────────── Agent w akcji ───────────── -->
+<section class="sekcja szara" id="demo">
+  <div class="shell">
+    <div class="rv" style="max-width:700px">
+      <p class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>Agent w akcji</p>
+      <h2 class="h2">Zobacz, jak pracuje agent.<br><span class="szary">Rozmowa po lewej, robota po prawej.</span></h2>
+      <p class="lead">Klient widzi zwykłą, uprzejmą rozmowę. W tym samym czasie agent wykonuje za Ciebie kolejne kroki w Twoich systemach.</p>
+      <div class="demo-zakladki" role="tablist" aria-label="Przykłady">
+        <button role="tab" data-s="0" class="on">📞 Telefon do salonu</button>
+        <button role="tab" data-s="1">✉️ Zapytanie ze strony</button>
+        <button role="tab" data-s="2">🧾 Faktura w mailu</button>
+      </div>
     </div>
-    <div class="fade-in fade-in-d1" style="max-width:860px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,0.08);aspect-ratio:16/9;">
-      <iframe
-        src="https://www.youtube.com/embed/QwCXiOfHg9w"
-        title="Zobacz jak robimy to u naszych klientów"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        style="width:100%;height:100%;display:block;"
-      ></iframe>
-    </div>
-    <div class="fade-in fade-in-d2" style="text-align:center;margin-top:48px;">
-      <button onclick="openQuiz()" style="
-        display:inline-flex;align-items:center;gap:10px;
-        padding:18px 40px;
-        background:linear-gradient(135deg,#0a0a0a,#262626);
-        color:#fff;border:none;border-radius:14px;
-        font-size:1.05rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
-        cursor:pointer;letter-spacing:.02em;
-        box-shadow:0 4px 32px rgba(0,0,0,0.18);
-        transition:transform .2s,box-shadow .2s;
-      "
-      onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 48px rgba(0,0,0,0.24)'"
-      onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 32px rgba(0,0,0,0.18)'"
-      >
-        Bezpłatna konsultacja
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+    <div class="demo rv">
+      <div class="rozmowa">
+        <div class="rozmowa-gora"><span class="zd-ikona" id="demo-ikona"></span><div><span id="demo-tytul"></span><small id="demo-podtytul"></small></div></div>
+        <div class="dymki" id="dymki" aria-live="polite"></div>
+      </div>
+      <div class="w-tle">
+        <div class="w-tle-gora"><span class="kropka-live"></span><div>Co agent robi w tle<small>Twoje systemy aktualizują się same</small></div></div>
+        <div class="kroki-tla" id="kroki-tla"></div>
+        <div class="w-tle-wynik" id="wynik"></div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ───────────── Automatyzacje ───────────── -->
+<section class="sekcja" id="automatyzacje">
+  <div class="shell">
+    <div class="rv" style="max-width:720px">
+      <p class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>Automatyzacje</p>
+      <h2 class="h2">Praca, która sama<br><span class="szary">przechodzi dalej.</span></h2>
+      <p class="lead">Automatyzacja łączy narzędzia, których już używasz — sklep, pocztę, arkusz, CRM, fakturownię — w jeden ciąg. Dane przechodzą z miejsca na miejsce same, a AI dokłada myślenie tam, gdzie zwykły program by się pogubił.</p>
+    </div>
+    <div class="przeplyw rv">
+      <div class="przeplyw-linia"><span class="przeplyw-kulka"></span></div>
+      <div class="wezel" style="--k:0"><div class="wezel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></div><div><b>Nowe zamówienie</b><span>w sklepie internetowym</span></div></div>
+      <div class="wezel" style="--k:1"><div class="wezel-ikona"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg></div><div><b>AI sprawdza dane</b><span>adres, NIP, uwagi klienta</span></div></div>
+      <div class="wezel" style="--k:2"><div class="wezel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div><b>Faktura</b><span>wystawiona automatycznie</span></div></div>
+      <div class="wezel" style="--k:3"><div class="wezel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6"/></svg></div><div><b>Mail do klienta</b><span>z fakturą i numerem paczki</span></div></div>
+      <div class="wezel" style="--k:4"><div class="wezel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div><div><b>Raport dla Ciebie</b><span>sprzedaż dnia w jednym miejscu</span></div></div>
+    </div>
+    <p class="przeplyw-podpis rv">Przykład: obsługa zamówienia w sklepie internetowym — od kliknięcia „Kupuję” do raportu, bez ręcznej pracy.</p>
+    <div class="porownanie rv">
+      <div>
+        <h3>Bez automatyzacji</h3>
+        <ul><li>Przepisujesz dane z maila do arkusza</li><li>Ręcznie wystawiasz każdą fakturę</li><li>Klient czeka na odpowiedź do rana</li><li>Raport składasz z kilku miejsc</li></ul>
+      </div>
+      <div class="po">
+        <h3>Z automatyzacją</h3>
+        <ul><li>Dane same trafiają tam, gdzie trzeba</li><li>Faktura wychodzi w chwili zamówienia</li><li>Klient dostaje odpowiedź od razu</li><li>Raport czeka na Ciebie każdego ranka</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Usługi ───────────── -->
+<section class="sekcja ciemna" id="services">
+  <div class="shell">
+    <div class="rv" style="max-width:700px">
+      <p class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>Co wdrażamy</p>
+      <h2 class="h2">Konkretne narzędzia.<br><span class="szary">Nie prezentacje o AI.</span></h2>
+    </div>
+    <div class="bento">
+      <div class="kafel duzy rv">
+        <div class="kafel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></div>
+        <h3>AI Recepcjonistki</h3>
+        <p>Głosowy asystent, który odbiera telefony 24/7, rozmawia naturalnie, umawia wizyty w kalendarzu, odpowiada na pytania i zapisuje wszystko w CRM. Żaden klient nie trafia już na pocztę głosową.</p>
+        <a href="/agenci/recepcjonistka-ai/" class="wiecej">Zobacz, jak działa →</a>
+        <div class="glos" aria-hidden="true"><div class="glos-gora"><span class="kropka-live"></span>Rozmowa trwa · 00:47</div><div class="glos-fala"><i style="--d:0.00s;--h:30%"></i><i style="--d:0.13s;--h:55%"></i><i style="--d:0.26s;--h:80%"></i><i style="--d:0.39s;--h:45%"></i><i style="--d:0.52s;--h:95%"></i><i style="--d:0.65s;--h:60%"></i><i style="--d:0.78s;--h:35%"></i><i style="--d:0.91s;--h:70%"></i><i style="--d:1.04s;--h:100%"></i><i style="--d:0.07s;--h:50%"></i><i style="--d:0.20s;--h:40%"></i><i style="--d:0.33s;--h:85%"></i><i style="--d:0.46s;--h:65%"></i><i style="--d:0.59s;--h:30%"></i><i style="--d:0.72s;--h:55%"></i><i style="--d:0.85s;--h:75%"></i><i style="--d:0.98s;--h:45%"></i><i style="--d:0.01s;--h:90%"></i><i style="--d:0.14s;--h:60%"></i><i style="--d:0.27s;--h:35%"></i></div></div>
+      </div>
+      <div class="kafel rv" style="transition-delay:.1s">
+        <div class="kafel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <h3>Automatyzacje</h3>
+        <p>Łączymy Twoje narzędzia w jeden ciąg — od leadów, przez dokumenty, po raporty.</p>
+        <a href="#automatyzacje" class="wiecej">Przykład przepływu →</a>
+      </div>
+      <div class="kafel rv">
+        <div class="kafel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg></div>
+        <h3>Agenci AI</h3>
+        <p>Cyfrowi pracownicy do ofert, analiz, treści i obsługi klientów — działają według Twoich zasad.</p>
+        <a href="/agenci/" class="wiecej">Katalog agentów →</a>
+      </div>
+      <div class="kafel rv" style="transition-delay:.1s">
+        <div class="kafel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+        <h3>Aplikacje AI</h3>
+        <p>Panele, systemy i narzędzia SaaS z AI zbudowane pod Twoją firmę.</p>
+      </div>
+      <div class="kafel rv" style="transition-delay:.2s">
+        <div class="kafel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Consulting AI</h3>
+        <p>Audyt procesów i plan: co oddać AI najpierw, żeby najszybciej się zwróciło.</p>
+      </div>
+      <div class="kafel pelny rv">
+        <div class="kafel-ikona"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        <div>
+          <h3>Treści marketingowe</h3>
+          <p>Grafiki, karuzele, PDF-y, montaż rolek i filmów na YouTube — ze stałym cennikiem.</p>
+        </div>
+        <a href="/cennik/" class="btn btn-white">Zobacz cennik</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Case study + katalog agentów ───────────── -->
+<section class="sekcja" id="case-video">
+  <div class="shell">
+    <div class="rv" style="text-align:center;max-width:700px;margin:0 auto">
+      <p class="eyebrow" style="justify-content:center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>Case study</p>
+      <h2 class="h2">Zobacz, jak robimy to<br>u naszych klientów.</h2>
+    </div>
+    <div class="film rv">
+      <iframe src="https://www.youtube.com/embed/QwCXiOfHg9w" title="Zobacz, jak robimy to u naszych klientów" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="rv" style="text-align:center;margin-top:36px">
+      <button class="btn btn-ink" onclick="openQuiz()">Sprawdź, co AI zrobi w Twojej firmie →</button>
+    </div>
+
+    <div class="rv" style="max-width:700px;margin-top:120px" id="agenci-teaser">
+      <p class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>Katalog agentów</p>
+      <h2 class="h2">Poznaj agentów,<br><span class="szary">których wdrażamy najczęściej.</span></h2>
+      <p class="lead">Przy każdym pokazujemy krok po kroku, jak pracuje — i mówimy wprost, czego nie robi.</p>
+    </div>
+    <div class="agenci rv">
+      <a href="/agenci/recepcjonistka-ai/" class="agent"><b>Recepcjonistka AI</b><span>Odbiera telefon 24/7</span><em>Zobacz →</em></a>
+      <a href="/agenci/agent-pierwszej-odpowiedzi/" class="agent"><b>Agent pierwszej odpowiedzi</b><span>Odpisuje w minutę</span><em>Zobacz →</em></a>
+      <a href="/agenci/agent-ofertowy/" class="agent"><b>Agent ofertowy</b><span>Wycena tego samego dnia</span><em>Zobacz →</em></a>
+      <a href="/agenci/agent-od-platnosci/" class="agent"><b>Agent od płatności</b><span>Pilnuje należności</span><em>Zobacz →</em></a>
+      <a href="/agenci/agent-od-dokumentow/" class="agent"><b>Agent od dokumentów</b><span>Faktury bez przepisywania</span><em>Zobacz →</em></a>
+      <a href="/agenci/agent-rekrutacyjny/" class="agent"><b>Agent rekrutacyjny</b><span>Przesiewa zgłoszenia</span><em>Zobacz →</em></a>
+      <a href="/agenci/agent-marketingowy/" class="agent"><b>Agent marketingowy</b><span>Posty i kreacje z faktami</span><em>Zobacz →</em></a>
+      <a href="/agenci/cyfrowy-ekspert/" class="agent"><b>Cyfrowy ekspert</b><span>Odpowiada wiedzą z Twoich nagrań</span><em>Zobacz →</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FAQ ───────────── -->
+<section class="sekcja szara" id="faq">
+  <div class="shell">
+    <div class="rv" style="text-align:center">
+      <p class="eyebrow" style="justify-content:center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>FAQ</p>
+      <h2 class="h2">Najczęstsze pytania</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>Czy AI jest odpowiednie dla mojej firmy, niezależnie od jej wielkości?</summary><p>Tak. Pracujemy zarówno z małymi firmami, jak i dużymi przedsiębiorstwami. Dostosowujemy rozwiązania do skali i budżetu — nie ma jednego rozmiaru dla wszystkich. Często to małe firmy osiągają największy zwrot, bo AI usuwa wąskie gardła, które hamują ich wzrost.</p></details>
+      <details><summary>Jak długo trwa wdrożenie automatyzacji lub agenta AI?</summary><p>Proste automatyzacje i integracje wdrażamy w 1–2 tygodnie. Bardziej zaawansowane systemy (agenci AI, aplikacje AI na miarę) zwykle wymagają 3–6 tygodni. Zaczynamy od przeglądu Twoich procesów, dzięki czemu już na konsultacji podajemy realny czas.</p></details>
+      <details><summary>Czy potrzebuję wiedzy technicznej?</summary><p>Nie. Całą techniczną część bierzemy na siebie — Ty skupiasz się na biznesie. Dostarczamy gotowe rozwiązania z prostą obsługą i jesteśmy dostępni po wdrożeniu.</p></details>
+      <details><summary>Ile kosztuje wdrożenie AI?</summary><p>Koszt zależy od zakresu, stopnia automatyzacji i integracji z Twoimi systemami, dlatego każde wdrożenie wyceniamy indywidualnie — po bezpłatnej konsultacji. Ceny treści marketingowych znajdziesz w <a href="/cennik/" style="text-decoration:underline">cenniku</a>.</p></details>
+      <details><summary>Czy moje dane i dane klientów są bezpieczne?</summary><p>Tak. Wdrożenia są zgodne z RODO, a dane klientów nie są wykorzystywane do trenowania zewnętrznych modeli. Jeśli wymagają tego Twoje regulacje, możemy wdrożyć rozwiązanie na Twojej infrastrukturze.</p></details>
+      <details><summary>Co się dzieje po wdrożeniu?</summary><p>Oferujemy wsparcie po wdrożeniu: monitoring, aktualizacje, ulepszenia i pomoc techniczną. Z wieloma klientami pracujemy długoterminowo i rozwijamy ich rozwiązania razem z firmą.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Kontakt ───────────── -->
+<section class="kontakt sekcja szara" id="contact" style="padding-top:0">
+  <div class="shell">
+    <div class="kontakt-blok rv">
+      <svg class="iskra" style="left:8%;top:14%;width:22px" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+      <svg class="iskra" style="left:44%;top:86%;width:18px;animation-delay:1.5s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg>
+      <div>
+        <h2>Pokaż nam jeden proces.<br><span style="color:rgba(255,255,255,.45)">Pokażemy, jak go oddać AI.</span></h2>
+        <p>Napisz, co zabiera Ci najwięcej czasu. Na bezpłatnej rozmowie pokażemy, które zadania może przejąć agent AI i ile to kosztuje.</p>
+        <div class="kontakt-dane">
+          <div>Odpowiadamy w ciągu 24 godzin</div>
+          <div>Pierwsza rozmowa bez zobowiązań</div>
+          <div><a href="mailto:bartek@aiforbusiness24.com">bartek@aiforbusiness24.com</a></div>
+        </div>
+      </div>
+      <form class="formularz" id="contactForm" action="https://formspree.io/f/mzdkzjnn" method="POST">
+        <label>Imię i nazwisko<input type="text" name="name" placeholder="Jan Kowalski" required autocomplete="name"></label>
+        <label>Email<input type="email" name="email" placeholder="jan@firma.pl" required autocomplete="email"></label>
+        <label>Firma<input type="text" name="company" placeholder="Nazwa firmy" autocomplete="organization"></label>
+        <label>Co chcesz usprawnić?<textarea name="message" placeholder="Np. nie nadążamy z odbieraniem telefonów i odpisywaniem na zapytania…" required></textarea></label>
+        <button type="submit" class="btn btn-ink">Wyślij wiadomość →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <a href="/" class="logo"><span class="logo-znak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg></span><span>ai<span class="szary">for</span>business24</span></a>
+    <nav aria-label="Stopka">
+      <a href="/agenci/">Agenci AI</a>
+      <a href="/cennik/">Cennik</a>
+      <a href="/blog/">Blog</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:bartek@aiforbusiness24.com">bartek@aiforbusiness24.com</a>
+    </nav>
+    <p class="adres">© 2026 AI for Business 24, LLC · 131 Continental Dr, Suite 305, Newark, DE 19713, USA. Wszelkie prawa zastrzeżone.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
 
 <!-- ─────────────────────────── QUIZ MODAL ───────────────────────── -->
 <div id="quiz-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;">
@@ -704,7 +695,7 @@
     position:relative;
   ">
     <!-- close -->
-    <button onclick="closeQuiz()" style="position:absolute;top:16px;right:16px;background:rgba(0,0,0,.06);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;">×</button>
+    <button onclick="closeQuiz()" style="position:absolute;top:16px;right:16px;background:rgba(0,0,0,.06);border:none;width:32px;height:32px;border-radius:50%;color:#0a0a0a;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;">×</button>
 
     <!-- progress bar -->
     <div style="height:3px;background:rgba(0,0,0,.06);border-radius:24px 24px 0 0;overflow:hidden;">
@@ -793,8 +784,8 @@
             <button type="submit" id="quiz-submit-btn" style="
               width:100%;padding:16px;margin-top:6px;
               background:linear-gradient(135deg,#0a0a0a,#262626);
-              color:#fff;border:none;border-radius:12px;
-              font-size:1rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+              color:#fff;border:none;border-radius:99px;
+              font-size:1rem;font-weight:700;font-family:'Inter',sans-serif;
               cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,0.16);
               transition:opacity .2s,transform .2s;
             ">Umów bezpłatną konsultację →</button>
@@ -806,7 +797,7 @@
           <div style="font-size:3.5rem;margin-bottom:20px;">🎉</div>
           <h3 style="font-size:1.6rem;margin-bottom:12px;color:#0a0a0a;">Wysłane!</h3>
           <p style="color:var(--muted);">Skontaktujemy się z Tobą w ciągu 24 godzin.<br>Do zobaczenia!</p>
-          <button onclick="closeQuiz()" style="margin-top:32px;padding:12px 32px;background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.12);border-radius:10px;color:#fff;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;">Zamknij</button>
+          <button onclick="closeQuiz()" style="margin-top:32px;padding:12px 32px;background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.12);border-radius:99px;color:#0a0a0a;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;">Zamknij</button>
         </div>
 
       </div>
@@ -821,17 +812,17 @@
   .qbtn {
     width:100%;padding:14px 18px;
     background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.1);
-    border-radius:12px;color:#fff;font-size:.95rem;font-family:'Inter',sans-serif;
+    border-radius:12px;color:#0a0a0a;font-size:.95rem;font-family:'Inter',sans-serif;
     cursor:pointer;text-align:left;transition:background .15s,border-color .15s,transform .15s;
   }
   .qbtn:hover { background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.16);transform:translateX(3px); }
-  .qbtn.selected { background:rgba(0,0,0,0.072);border-color:rgba(0,0,0,0.28);color:#fff; }
+  .qbtn.selected { background:#0a0a0a;border-color:#0a0a0a;color:#fff; }
 
   .qnext {
     width:100%;padding:14px;
     background:linear-gradient(135deg,#0a0a0a,#262626);
-    color:#fff;border:none;border-radius:12px;
-    font-size:.95rem;font-weight:700;font-family:'Space Grotesk',sans-serif;
+    color:#fff;border:none;border-radius:99px;
+    font-size:.95rem;font-weight:700;font-family:'Inter',sans-serif;
     cursor:pointer;transition:opacity .2s;
   }
   .qnext:disabled { opacity:.35;cursor:not-allowed; }
@@ -917,7 +908,7 @@
   .cc-field input, .cc-field textarea {
     width:100%; padding:16px 14px 6px;
     background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,0.08);
-    border-radius:10px; color:#fff; font-size:.95rem; font-family:'Inter',sans-serif;
+    border-radius:10px; color:#0a0a0a; font-size:.95rem; font-family:'Inter',sans-serif;
     outline:none; transition:border-color .2s,box-shadow .2s; appearance:none;
   }
   .cc-field label {
@@ -940,830 +931,218 @@
   }
 </style>
 
-<!-- ─────────────────────────── ABOUT ───────────────────────────── -->
-<section id="about" class="section">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text fade-in">
-        <div class="label" data-i18n="about_label">O nas</div>
-        <h2 data-i18n="about_title">Transformujemy firmy siłą sztucznej inteligencji</h2>
-        <p data-i18n="about_p1">aiforbusiness24 to agencja specjalizująca się we wdrażaniu praktycznych rozwiązań AI dla firm każdej wielkości. Naszą misją jest sprawienie, by technologia AI była dostępna, realna i opłacalna — nie tylko dla korporacji, ale dla każdego biznesu.</p>
-        <p data-i18n="about_p2">Łączymy głęboką wiedzę techniczną z rozumieniem procesów biznesowych. Nie tworzymy technologii dla samej technologii — tworzymy narzędzia, które realnie zwiększają Twoje zyski i oszczędzają czas.</p>
-        <a href="#contact" class="btn btn-primary" style="margin-top:16px" data-i18n="about_cta">Poznaj nas bliżej</a>
-      </div>
-      <div class="stats-grid fade-in fade-in-d2">
-        <div class="stat-card">
-          <div class="stat-num" data-i18n="stat1_num">70%</div>
-          <div class="stat-label" data-i18n="stat1">Oszczędność czasu</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num" data-i18n="stat2_num">E2E</div>
-          <div class="stat-label" data-i18n="stat2">Automatyzacja procesów end-to-end</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num" data-i18n="stat3_num">24/7</div>
-          <div class="stat-label" data-i18n="stat3">Działanie bez przerw</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ─────────────────────────── SERVICES ────────────────────────── -->
-<section id="services" class="section">
-  <div class="container">
-    <div class="services-header fade-in">
-      <div class="label" data-i18n="serv_label">Usługi</div>
-      <h2 data-i18n="serv_title">Co możemy zrobić dla Twojej firmy</h2>
-      <p data-i18n="serv_sub">Kompleksowe usługi AI — od automatyzacji po dedykowane aplikacje i doradztwo strategiczne.</p>
-    </div>
-    <div class="services-grid">
-
-      <!-- ── KARTA A: AI Recepcjonistki ── -->
-      <div class="service-card fade-in fade-in-d1">
-        <div class="service-header">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 12 19.79 19.79 0 01.88 3.4 2 2 0 012.86 1.22h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.05-1.05a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-          </div>
-          <h3 data-i18n="sA_title">AI Recepcjonistki</h3>
-          <p class="service-short" data-i18n="sA_short">Głosowi asystenci obsługujący telefony 24/7, rezerwacje i integracja CRM</p>
-        </div>
-        <button class="service-toggle-btn" data-i18n-learn="learn_more">
-          <span data-i18n="learn_more">Dowiedz się więcej</span>
-          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="service-expand">
-          <div class="service-expand-inner">
-            <p class="expand-title" data-i18n="sA_h">Twoja firma nigdy nie przegapi telefonu od klienta.</p>
-            <p data-i18n="sA_p1">AI Recepcjonistka to głosowy asystent, który odbiera połączenia 24/7, prowadzi naturalne rozmowy i wykonuje konkretne działania — tak jak prawdziwy pracownik. Może umawiać wizyty, odpowiadać na pytania, zbierać dane kontaktowe czy przekierowywać sprawy do odpowiednich osób.</p>
-            <p data-i18n="sA_p2">System integruje się z Twoim CRM, kalendarzem i innymi narzędziami, dzięki czemu wszystkie informacje są automatycznie zapisywane i uporządkowane. Klient otrzymuje natychmiastową obsługę, a Twój zespół oszczędza czas.</p>
-            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
-            <ul class="expand-list">
-              <li data-i18n="sA_b1">Brak nieodebranych połączeń</li>
-              <li data-i18n="sA_b2">Dostępność 24/7 bez zwiększania zespołu</li>
-              <li data-i18n="sA_b3">Automatyczne umawianie spotkań</li>
-              <li data-i18n="sA_b4">Lepsze doświadczenie klienta</li>
-            </ul>
-            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
-              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── KARTA B: Automatyzacje ── -->
-      <div class="service-card fade-in fade-in-d2">
-        <div class="service-header">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>
-            </svg>
-          </div>
-          <h3 data-i18n="sB_title">Automatyzacje</h3>
-          <p class="service-short" data-i18n="sB_short">Procesy biznesowe bez ludzkiej interwencji — od leadów po raporty</p>
-        </div>
-        <button class="service-toggle-btn">
-          <span data-i18n="learn_more">Dowiedz się więcej</span>
-          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="service-expand">
-          <div class="service-expand-inner">
-            <p class="expand-title" data-i18n="sB_h">Eliminuj powtarzalną pracę i przyspiesz rozwój firmy.</p>
-            <p data-i18n="sB_p1">Projektujemy i wdrażamy automatyzacje, które przejmują codzienne, czasochłonne zadania — od pozyskiwania i obsługi leadów, przez przetwarzanie danych, aż po generowanie raportów i wysyłkę powiadomień.</p>
-            <p data-i18n="sB_p2">Łączymy Twoje systemy w jeden spójny ekosystem, dzięki czemu dane przepływają automatycznie między narzędziami bez potrzeby ręcznej ingerencji. To oznacza mniej błędów, większą efektywność i więcej czasu na działania strategiczne.</p>
-            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
-            <ul class="expand-list">
-              <li data-i18n="sB_b1">Redukcja kosztów operacyjnych</li>
-              <li data-i18n="sB_b2">Szybsze procesy biznesowe</li>
-              <li data-i18n="sB_b3">Mniej błędów ludzkich</li>
-              <li data-i18n="sB_b4">Skalowalność bez zwiększania zespołu</li>
-            </ul>
-            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
-              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── KARTA C: Agenci AI ── -->
-      <div class="service-card featured fade-in fade-in-d3">
-        <div class="service-header">
-          <span class="featured-badge">★ Wyróżnione</span>
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/><circle cx="18" cy="9" r="2.5"/><path d="M20.5 15c1.38.5 2.5 1.5 2.5 3"/>
-            </svg>
-          </div>
-          <h3 data-i18n="sC_title">Agenci AI</h3>
-          <p class="service-short" data-i18n="sC_short">Inteligentne systemy wykonujące złożone zadania: research, oferty, content</p>
-        </div>
-        <button class="service-toggle-btn">
-          <span data-i18n="learn_more">Dowiedz się więcej</span>
-          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="service-expand">
-          <div class="service-expand-inner">
-            <p class="expand-title" data-i18n="sC_h">Zautomatyzuj złożone zadania, które do tej pory wymagały pracy człowieka.</p>
-            <p data-i18n="sC_p1">Agenci AI to inteligentne systemy, które potrafią analizować informacje, podejmować decyzje i wykonywać wieloetapowe zadania. Mogą przygotowywać oferty, prowadzić analizę informacji, analizować dane czy tworzyć treści — działając według ustalonych celów i logiki biznesowej.</p>
-            <p data-i18n="sC_p2">To nie są proste chatboty — to cyfrowi „pracownicy", którzy wspierają Twój zespół w codziennych działaniach i zwiększają jego możliwości.</p>
-            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
-            <ul class="expand-list">
-              <li data-i18n="sC_b1">Automatyzacja złożonych procesów</li>
-              <li data-i18n="sC_b2">Szybsze przygotowywanie ofert i analiz</li>
-              <li data-i18n="sC_b3">Wsparcie zespołu bez zwiększania zatrudnienia</li>
-              <li data-i18n="sC_b4">Większa produktywność</li>
-            </ul>
-            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
-              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── KARTA D: Aplikacje AI ── -->
-      <div class="service-card featured fade-in fade-in-d4">
-        <div class="service-header">
-          <span class="featured-badge">★ Wyróżnione</span>
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/>
-            </svg>
-          </div>
-          <h3 data-i18n="sD_title">Aplikacje AI</h3>
-          <p class="service-short" data-i18n="sD_short">Dedykowane aplikacje i narzędzia SaaS dopasowane do Twojego biznesu</p>
-        </div>
-        <button class="service-toggle-btn">
-          <span data-i18n="learn_more">Dowiedz się więcej</span>
-          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="service-expand">
-          <div class="service-expand-inner">
-            <p class="expand-title" data-i18n="sD_h">Dedykowane rozwiązania dopasowane do Twojego biznesu.</p>
-            <p data-i18n="sD_p1">Tworzymy aplikacje AI od podstaw — zaprojektowane pod konkretne potrzeby Twojej firmy. Każde rozwiązanie jest dopasowane do Twoich procesów, danych i celów biznesowych.</p>
-            <p data-i18n="sD_p2">Dzięki temu zamiast korzystać z ogólnych narzędzi, otrzymujesz system, który dokładnie odpowiada na Twoje wyzwania i daje realną przewagę konkurencyjną.</p>
-            <p class="expand-title" data-i18n="sD_apps_title">Przykładowe produkty:</p>
-            <div class="mini-cards">
-              <div class="mini-card"><strong data-i18n="sD_a1_t">Generator ofert</strong><span data-i18n="sD_a1_d">Automatyczne tworzenie spersonalizowanych propozycji w PDF</span></div>
-              <div class="mini-card"><strong data-i18n="sD_a2_t">Analizator dokumentów</strong><span data-i18n="sD_a2_d">Ekstrakcja i kategoryzacja danych z umów, faktur, raportów</span></div>
-              <div class="mini-card"><strong data-i18n="sD_a3_t">Asystent branżowy</strong><span data-i18n="sD_a3_d">Chatbot z wiedzą ekspercką dla konkretnej branży</span></div>
-              <div class="mini-card"><strong data-i18n="sD_a4_t">Dashboard analityczny</strong><span data-i18n="sD_a4_d">Wizualizacja KPI i metryk biznesowych z wielu źródeł</span></div>
-              <div class="mini-card" style="grid-column:1/-1"><strong data-i18n="sD_a5_t">Content planner</strong><span data-i18n="sD_a5_d">Planowanie i generowanie contentu social media</span></div>
-            </div>
-            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
-            <ul class="expand-list">
-              <li data-i18n="sD_b1">Rozwiązania „szyte na miarę"</li>
-              <li data-i18n="sD_b2">Pełna integracja z istniejącymi systemami</li>
-              <li data-i18n="sD_b3">Przewaga technologiczna nad konkurencją</li>
-              <li data-i18n="sD_b4">Realny wpływ na wyniki biznesowe</li>
-            </ul>
-            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
-              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── KARTA E: Consulting AI ── -->
-      <div class="service-card fade-in fade-in-d5">
-        <div class="service-header">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
-            </svg>
-          </div>
-          <h3 data-i18n="sE_title">Consulting AI</h3>
-          <p class="service-short" data-i18n="sE_short">Wysokomarżowe doradztwo strategiczne i analiza procesów biznesowych</p>
-        </div>
-        <button class="service-toggle-btn">
-          <span data-i18n="learn_more">Dowiedz się więcej</span>
-          <svg class="toggle-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="service-expand">
-          <div class="service-expand-inner">
-            <p class="expand-title" data-i18n="sE_h">Strategiczne doradztwo AI dla liderów biznesu.</p>
-            <p data-i18n="sE_p1">AI Consulting to usługa dedykowana firmom, które chcą świadomie i strategicznie wdrażać sztuczną inteligencję. Analizujemy Twoje procesy, identyfikujemy obszary o największym potencjale automatyzacji i tworzymy spersonalizowany plan transformacji cyfrowej.</p>
-            <p data-i18n="sE_p2">Współpraca przebiega w kilku etapach: audyt procesów, mapa możliwości AI, priorytetyzacja wdrożeń i wsparcie podczas implementacji. Dostarczamy konkretne rekomendacje — nie ogólniki. Nasze doradztwo przekłada się bezpośrednio na decyzje, które generują oszczędności i przychody.</p>
-            <p class="expand-title" data-i18n="benefits">Korzyści:</p>
-            <ul class="expand-list">
-              <li data-i18n="sE_b1">Jasna strategia AI dopasowana do Twojej branży</li>
-              <li data-i18n="sE_b2">Identyfikacja szybkich wygranych i długoterminowych szans</li>
-              <li data-i18n="sE_b3">Unikanie kosztownych błędów przy wdrożeniach</li>
-              <li data-i18n="sE_b4">Przewaga konkurencyjna oparta na danych</li>
-            </ul>
-            <a href="#contact" class="expand-cta" data-i18n="expand_cta">
-              👉 Dowiedz się za darmo, jak to może działać w Twojej firmie
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────── KATALOG AGENTÓW ─────────────────── -->
-<section id="agenci-teaser" class="section" style="padding-top:0">
-  <div class="container">
-    <div class="services-header fade-in">
-      <div class="label" data-i18n="ag_label">Katalog agentów</div>
-      <h2 data-i18n="ag_title">Poznaj agentów, których wdrażamy najczęściej</h2>
-      <p data-i18n="ag_sub">Osiem konkretnych agentów AI — od odbierania telefonów po pilnowanie płatności. Przy każdym pokazujemy krok po kroku, jak pracuje, i mówimy wprost, czego nie robi.</p>
-    </div>
-
-    <div class="fade-in fade-in-d1" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:36px">
-      <a href="/agenci/recepcjonistka-ai/" class="agent-chip">Recepcjonistka AI<span data-i18n="ag_c1">Odbiera telefon 24/7</span></a>
-      <a href="/agenci/agent-pierwszej-odpowiedzi/" class="agent-chip">Agent pierwszej odpowiedzi<span data-i18n="ag_c2">Odpisuje w minutę</span></a>
-      <a href="/agenci/agent-ofertowy/" class="agent-chip">Agent ofertowy<span data-i18n="ag_c3">Wycena tego samego dnia</span></a>
-      <a href="/agenci/agent-zwiadowczy/" class="agent-chip">Agent zwiadowczy<span data-i18n="ag_c4">Reklamy konkurencji</span></a>
-      <a href="/agenci/agent-marketingowy/" class="agent-chip">Agent marketingowy<span data-i18n="ag_c5">Posty i kreacje z faktami</span></a>
-      <a href="/agenci/agent-od-platnosci/" class="agent-chip">Agent od płatności<span data-i18n="ag_c6">Pilnuje należności</span></a>
-      <a href="/agenci/agent-rekrutacyjny/" class="agent-chip">Agent rekrutacyjny<span data-i18n="ag_c7">Przesiewa zgłoszenia</span></a>
-      <a href="/agenci/agent-od-dokumentow/" class="agent-chip">Agent od dokumentów<span data-i18n="ag_c8">Faktury bez przepisywania</span></a>
-    </div>
-
-    <div class="fade-in fade-in-d2" style="text-align:center;margin-top:36px">
-      <a href="/agenci/" class="btn btn-primary" data-i18n="ag_cta">Zobacz pełny katalog agentów</a>
-    </div>
-  </div>
-</section>
-
-<style>
-  .agent-chip{
-    display:flex;flex-direction:column;gap:3px;
-    background:var(--card-bg);border:1px solid var(--border);
-    border-radius:var(--radius-sm);padding:16px 18px;
-    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.94rem;
-    transition:border-color .25s,transform .25s,box-shadow .25s;
-  }
-  .agent-chip span{
-    font-family:'Inter',sans-serif;font-weight:400;font-size:.82rem;color:var(--muted);
-  }
-  .agent-chip:hover{
-    border-color:rgba(0,0,0,0.18);transform:translateY(-2px);
-    box-shadow:0 8px 28px rgba(0,0,0,0.056);
-  }
-</style>
-
-<!-- ─────────────────────────── FAQ ─────────────────────────────── -->
-<section id="faq" class="section">
-  <div class="container">
-    <div class="faq-header fade-in">
-      <div class="label">FAQ</div>
-      <h2 data-i18n="faq_title">Najczęściej zadawane pytania</h2>
-      <p data-i18n="faq_sub">Masz pytania? Mamy odpowiedzi.</p>
-    </div>
-    <div class="faq-list">
-
-      <div class="faq-item fade-in">
-        <div class="faq-question">
-          <span data-i18n="faq1_q">Czy AI jest odpowiednie dla mojej firmy, niezależnie od jej wielkości?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            <p data-i18n="faq1_a">Tak. Pracujemy zarówno z małymi firmami, jak i dużymi przedsiębiorstwami. Kluczowe jest to, że dostosowujemy rozwiązania do skali i budżetu klienta — nie ma jednego rozmiaru dla wszystkich. Często małe firmy osiągają największy zwrot z inwestycji, bo AI eliminuje wąskie gardła, które hamują ich wzrost.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-d1">
-        <div class="faq-question">
-          <span data-i18n="faq2_q">Jak długo trwa wdrożenie automatyzacji lub agenta AI?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            <p data-i18n="faq2_a">Proste automatyzacje i integracje wdrażamy w ciągu 1–2 tygodni. Bardziej zaawansowane systemy (agenci AI, aplikacje AI na miarę) wymagają zazwyczaj 3–6 tygodni. Zaczynamy od dokładnego audytu Twoich procesów, co pozwala nam precyzyjnie oszacować czas i zasoby już na etapie konsultacji.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-d2">
-        <div class="faq-question">
-          <span data-i18n="faq3_q">Czy potrzebuję wiedzy technicznej, żeby korzystać z Waszych rozwiązań?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            <p data-i18n="faq3_a">Absolutnie nie. Naszym zadaniem jest zajęcie się całą warstwą techniczną — Ty skupiasz się na biznesie. Dostarczamy gotowe do użycia rozwiązania z prostymi interfejsami, szkoleniami i dokumentacją. Jesteśmy też dostępni po wdrożeniu, gdy pojawiają się pytania.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-d3">
-        <div class="faq-question">
-          <span data-i18n="faq4_q">Jakie są koszty wdrożenia AI?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            <p data-i18n="faq4_a">Koszt zależy od zakresu rozwiązania, stopnia automatyzacji oraz integracji z Twoimi systemami. Każde wdrożenie jest dopasowane do konkretnego biznesu, dlatego przed wyceną analizujemy Twoje potrzeby i cele. Zawsze zaczynamy od bezpłatnej konsultacji, podczas której pokazujemy możliwe rozwiązania i proponujemy optymalne podejście dopasowane do Twojej sytuacji.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-d4">
-        <div class="faq-question">
-          <span data-i18n="faq5_q">Czy moje dane i dane klientów są bezpieczne?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            <p data-i18n="faq5_a">Bezpieczeństwo danych to nasz priorytet. Wszystkie wdrożenia są zgodne z RODO, stosujemy szyfrowanie end-to-end, a dane klientów nigdy nie są wykorzystywane do trenowania modeli zewnętrznych. Możemy również wdrożyć rozwiązania on-premise, jeśli wymagają tego Twoje regulacje wewnętrzne lub branżowe.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item fade-in fade-in-d5">
-        <div class="faq-question">
-          <span data-i18n="faq6_q">Co się dzieje po wdrożeniu — czy oferujecie wsparcie?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">
-            <p data-i18n="faq6_a">Tak. Oferujemy pakiety wsparcia posprzedażowego obejmujące monitoring systemów, aktualizacje, optymalizację wydajności i pomoc techniczną. Pracujemy z klientami długoterminowo — większość z nich traktuje nas jako stałego partnera technologicznego, który pomaga rozwijać i skalować ich ekosystem AI wraz z rozwojem firmy.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────── CONTACT ─────────────────────────── -->
-<section id="contact" class="section">
-  <div class="container">
-    <div class="contact-header fade-in">
-      <div class="label" data-i18n="contact_label">Kontakt</div>
-      <h2 data-i18n="contact_title">Zacznijmy współpracę</h2>
-      <p data-i18n="contact_sub">Napisz do nas — bezpłatna konsultacja, bez zobowiązań.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info fade-in">
-        <h3 data-i18n="contact_info_title">Porozmawiajmy o AI dla Twojej firmy</h3>
-        <p data-i18n="contact_info_p">Wypełnij formularz lub napisz bezpośrednio — odpowiemy w ciągu 24 godzin i umówimy bezpłatną rozmowę wstępną.</p>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <strong data-i18n="contact_email_label">Email</strong>
-            <span>bartek@aiforbusiness24.com</span>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <strong data-i18n="contact_hours_label">Czas odpowiedzi</strong>
-            <span data-i18n="contact_hours_val">do 24 godzin</span>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-          <div class="contact-detail-text">
-            <strong data-i18n="contact_location_label">Bezpłatna konsultacja</strong>
-            <span data-i18n="contact_location_val">Pierwsza rozmowa bez zobowiązań</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-form-card fade-in fade-in-d2">
-        <form id="contactForm" action="https://formspree.io/f/mzdkzjnn" method="POST" novalidate>
-          <div class="form-row">
-            <label data-i18n="form_name">Imię i nazwisko</label>
-            <input type="text" name="name" data-i18n-placeholder="form_name_ph" placeholder="Jan Kowalski" required />
-          </div>
-          <div class="form-row">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="jan@firma.pl" required />
-          </div>
-          <div class="form-row">
-            <label data-i18n="form_company">Firma</label>
-            <input type="text" name="company" data-i18n-placeholder="form_company_ph" placeholder="Nazwa firmy" />
-          </div>
-          <div class="form-row">
-            <label data-i18n="form_msg">Wiadomość</label>
-            <textarea name="message" data-i18n-placeholder="form_msg_ph" placeholder="Powiedz nam o swojej firmie i wyzwaniu..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary form-submit" data-i18n="form_send">Wyślij wiadomość →</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────── FOOTER ─────────────────────────── -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="nav-logo">ai<span>for</span>business24</span>
-        <p data-i18n="footer_tagline">Transformujemy firmy siłą sztucznej inteligencji — praktycznie, szybko, skutecznie.</p>
-      </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer_col1">Usługi</h4>
-        <ul>
-          <li><a href="#services" data-i18n="sA_title">AI Recepcjonistki</a></li>
-          <li><a href="#services" data-i18n="sB_title">Automatyzacje</a></li>
-          <li><a href="#services" data-i18n="sC_title">Agenci AI</a></li>
-          <li><a href="#services" data-i18n="sD_title">Aplikacje AI</a></li>
-          <li><a href="#services" data-i18n="sE_title">Consulting AI</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer_col2">Firma</h4>
-        <ul>
-          <li><a href="#about" data-i18n="nav_about">O nas</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer_col3">Kontakt</h4>
-        <ul>
-          <li><a href="mailto:bartek@aiforbusiness24.com">bartek@aiforbusiness24.com</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span data-i18n="footer_copy">© 2026 AI for Business 24, LLC · 131 Continental Dr, Suite 305, Newark, DE 19713, USA. Wszelkie prawa zastrzeżone.</span>
-      <span style="color:#a3a3a3;font-size:.78rem" data-i18n="footer_made">Zbudowane z pasją do AI</span>
-    </div>
-  </div>
-</footer>
-
-<!-- toast -->
-<div class="toast" id="toast"></div>
-
-<!-- ─────────────────────────── JS ───────────────────────────────── -->
 <script>
-/* ── i18n ─────────────────────────────────────────────────── */
-const T = {
-  pl: {
-    nav_about: 'O nas', nav_services: 'Usługi', nav_contact: 'Kontakt', nav_cta: 'Darmowa konsultacja',
-    nav_agents: 'Agenci AI',
-    ag_label: 'Katalog agentów',
-    ag_title: 'Poznaj agentów, których wdrażamy najczęściej',
-    ag_sub: 'Osiem konkretnych agentów AI — od odbierania telefonów po pilnowanie płatności. Przy każdym pokazujemy krok po kroku, jak pracuje, i mówimy wprost, czego nie robi.',
-    ag_c1: 'Odbiera telefon 24/7', ag_c2: 'Odpisuje w minutę', ag_c3: 'Wycena tego samego dnia', ag_c4: 'Reklamy konkurencji',
-    ag_c5: 'Posty i kreacje z faktami', ag_c6: 'Pilnuje należności', ag_c7: 'Przesiewa zgłoszenia', ag_c8: 'Faktury bez przepisywania',
-    ag_cta: 'Zobacz pełny katalog agentów',
-    hero_badge: 'AI for Business 24',
-    hero_title: 'AI, które realnie zmienia\u00A0Twój biznes\u00A0— nie jutro, a\u00A0dziś.',
-    hero_sub: 'Automatyzujemy, projektujemy i wdrażamy rozwiązania AI, które realnie zwiększają efektywność Twojej firmy — od pierwszego dnia.',
-    hero_cta1: 'Umów bezpłatną konsultację', hero_cta2: 'Zobacz usługi',
-    m1:'24/7 Active', m2:'5× Szybciej', m3:'100% Zautomatyzowane', m4:'AI bez limitów',
-    about_label:'O nas', about_title:'Transformujemy firmy siłą sztucznej inteligencji',
-    about_p1:'aiforbusiness24 to agencja specjalizująca się we wdrażaniu praktycznych rozwiązań AI dla firm każdej wielkości. Naszą misją jest sprawienie, by technologia AI była dostępna, realna i opłacalna — nie tylko dla korporacji, ale dla każdego biznesu.',
-    about_p2:'Łączymy głęboką wiedzę techniczną z rozumieniem procesów biznesowych. Nie tworzymy technologii dla samej technologii — tworzymy narzędzia, które realnie zwiększają Twoje zyski i oszczędzają czas.',
-    about_cta:'Poznaj nas bliżej',
-    stat1_num:'70%', stat1:'Oszczędność czasu', stat2_num:'E2E', stat2:'Automatyzacja procesów end-to-end', stat3_num:'24/7', stat3:'Działanie bez przerw',
-    serv_label:'Usługi', serv_title:'Co możemy zrobić dla Twojej firmy',
-    serv_sub:'Kompleksowe usługi AI — od automatyzacji po dedykowane aplikacje i doradztwo strategiczne.',
-    learn_more:'Dowiedz się więcej', collapse:'Zwiń',
-    sA_title:'AI Recepcjonistki', sA_short:'Głosowi asystenci obsługujący telefony 24/7, rezerwacje i integracja CRM',
-    sA_h:'Twoja firma nigdy nie przegapi telefonu od klienta.',
-    sA_p1:'AI Recepcjonistka to głosowy asystent, który odbiera połączenia 24/7, prowadzi naturalne rozmowy i wykonuje konkretne działania — tak jak prawdziwy pracownik. Może umawiać wizyty, odpowiadać na pytania, zbierać dane kontaktowe czy przekierowywać sprawy do odpowiednich osób.',
-    sA_p2:'System integruje się z Twoim CRM, kalendarzem i innymi narzędziami, dzięki czemu wszystkie informacje są automatycznie zapisywane i uporządkowane. Klient otrzymuje natychmiastową obsługę, a Twój zespół oszczędza czas.',
-    sA_b1:'Brak nieodebranych połączeń', sA_b2:'Dostępność 24/7 bez zwiększania zespołu',
-    sA_b3:'Automatyczne umawianie spotkań', sA_b4:'Lepsze doświadczenie klienta',
-    sB_title:'Automatyzacje', sB_short:'Procesy biznesowe bez ludzkiej interwencji — od leadów po raporty',
-    sB_h:'Eliminuj powtarzalną pracę i przyspiesz rozwój firmy.',
-    sB_p1:'Projektujemy i wdrażamy automatyzacje, które przejmują codzienne, czasochłonne zadania — od pozyskiwania i obsługi leadów, przez przetwarzanie danych, aż po generowanie raportów i wysyłkę powiadomień.',
-    sB_p2:'Łączymy Twoje systemy w jeden spójny ekosystem, dzięki czemu dane przepływają automatycznie między narzędziami bez potrzeby ręcznej ingerencji. To oznacza mniej błędów, większą efektywność i więcej czasu na działania strategiczne.',
-    sB_b1:'Redukcja kosztów operacyjnych', sB_b2:'Szybsze procesy biznesowe',
-    sB_b3:'Mniej błędów ludzkich', sB_b4:'Skalowalność bez zwiększania zespołu',
-    sC_title:'Agenci AI', sC_short:'Inteligentne systemy wykonujące złożone zadania: research, oferty, content',
-    sC_h:'Zautomatyzuj złożone zadania, które do tej pory wymagały pracy człowieka.',
-    sC_p1:'Agenci AI to inteligentne systemy, które potrafią analizować informacje, podejmować decyzje i wykonywać wieloetapowe zadania. Mogą przygotowywać oferty, prowadzić analizę informacji, analizować dane czy tworzyć treści — działając według ustalonych celów i logiki biznesowej.',
-    sC_p2:'To nie są proste chatboty — to cyfrowi „pracownicy", którzy wspierają Twój zespół w codziennych działaniach i zwiększają jego możliwości.',
-    sC_b1:'Automatyzacja złożonych procesów', sC_b2:'Szybsze przygotowywanie ofert i analiz',
-    sC_b3:'Wsparcie zespołu bez zwiększania zatrudnienia', sC_b4:'Większa produktywność',
-    sD_title:'Aplikacje AI', sD_short:'Dedykowane aplikacje i narzędzia SaaS dopasowane do Twojego biznesu',
-    sD_h:'Dedykowane rozwiązania dopasowane do Twojego biznesu.',
-    sD_p1:'Tworzymy aplikacje AI od podstaw — zaprojektowane pod konkretne potrzeby Twojej firmy. Każde rozwiązanie jest dopasowane do Twoich procesów, danych i celów biznesowych.',
-    sD_p2:'Dzięki temu zamiast korzystać z ogólnych narzędzi, otrzymujesz system, który dokładnie odpowiada na Twoje wyzwania i daje realną przewagę konkurencyjną.',
-    sD_apps_title:'Przykładowe produkty:',
-    sD_a1_t:'Generator ofert', sD_a1_d:'Automatyczne tworzenie spersonalizowanych propozycji w PDF',
-    sD_a2_t:'Analizator dokumentów', sD_a2_d:'Ekstrakcja i kategoryzacja danych z umów, faktur, raportów',
-    sD_a3_t:'Asystent branżowy', sD_a3_d:'Chatbot z wiedzą ekspercką dla konkretnej branży',
-    sD_a4_t:'Dashboard analityczny', sD_a4_d:'Wizualizacja KPI i metryk biznesowych z wielu źródeł',
-    sD_a5_t:'Content planner', sD_a5_d:'Planowanie i generowanie contentu social media',
-    sD_b1:'Rozwiązania „szyte na miarę"', sD_b2:'Pełna integracja z istniejącymi systemami',
-    sD_b3:'Przewaga technologiczna nad konkurencją', sD_b4:'Realny wpływ na wyniki biznesowe',
-    sE_title:'Consulting AI', sE_short:'Wysokomarżowe doradztwo strategiczne i analiza procesów biznesowych',
-    sE_h:'Strategiczne doradztwo AI dla liderów biznesu.',
-    sE_p1:'AI Consulting to usługa dedykowana firmom, które chcą świadomie i strategicznie wdrażać sztuczną inteligencję. Analizujemy Twoje procesy, identyfikujemy obszary o największym potencjale automatyzacji i tworzymy spersonalizowany plan transformacji cyfrowej.',
-    sE_p2:'Współpraca przebiega w kilku etapach: audyt procesów, mapa możliwości AI, priorytetyzacja wdrożeń i wsparcie podczas implementacji. Dostarczamy konkretne rekomendacje — nie ogólniki. Nasze doradztwo przekłada się bezpośrednio na decyzje, które generują oszczędności i przychody.',
-    sE_b1:'Jasna strategia AI dopasowana do Twojej branży', sE_b2:'Identyfikacja szybkich wygranych i długoterminowych szans',
-    sE_b3:'Unikanie kosztownych błędów przy wdrożeniach', sE_b4:'Przewaga konkurencyjna oparta na danych',
-    benefits:'Korzyści:',
-    expand_cta:'👉 Dowiedz się za darmo, jak to może działać w Twojej firmie',
-    faq_title:'Najczęściej zadawane pytania', faq_sub:'Masz pytania? Mamy odpowiedzi.',
-    faq1_q:'Czy AI jest odpowiednie dla mojej firmy, niezależnie od jej wielkości?',
-    faq1_a:'Tak. Pracujemy zarówno z małymi firmami, jak i dużymi przedsiębiorstwami. Kluczowe jest to, że dostosowujemy rozwiązania do skali i budżetu klienta — nie ma jednego rozmiaru dla wszystkich. Często małe firmy osiągają największy zwrot z inwestycji, bo AI eliminuje wąskie gardła, które hamują ich wzrost.',
-    faq2_q:'Jak długo trwa wdrożenie automatyzacji lub agenta AI?',
-    faq2_a:'Proste automatyzacje i integracje wdrażamy w ciągu 1–2 tygodni. Bardziej zaawansowane systemy (agenci AI, aplikacje AI na miarę) wymagają zazwyczaj 3–6 tygodni. Zaczynamy od dokładnego audytu Twoich procesów, co pozwala nam precyzyjnie oszacować czas i zasoby już na etapie konsultacji.',
-    faq3_q:'Czy potrzebuję wiedzy technicznej, żeby korzystać z Waszych rozwiązań?',
-    faq3_a:'Absolutnie nie. Naszym zadaniem jest zajęcie się całą warstwą techniczną — Ty skupiasz się na biznesie. Dostarczamy gotowe do użycia rozwiązania z prostymi interfejsami, szkoleniami i dokumentacją. Jesteśmy też dostępni po wdrożeniu, gdy pojawiają się pytania.',
-    faq4_q:'Jakie są koszty wdrożenia AI?',
-    faq4_a:'Koszt zależy od zakresu rozwiązania, stopnia automatyzacji oraz integracji z Twoimi systemami. Każde wdrożenie jest dopasowane do konkretnego biznesu, dlatego przed wyceną analizujemy Twoje potrzeby i cele. Zawsze zaczynamy od bezpłatnej konsultacji, podczas której pokazujemy możliwe rozwiązania i proponujemy optymalne podejście dopasowane do Twojej sytuacji.',
-    faq5_q:'Czy moje dane i dane klientów są bezpieczne?',
-    faq5_a:'Bezpieczeństwo danych to nasz priorytet. Wszystkie wdrożenia są zgodne z RODO, stosujemy szyfrowanie end-to-end, a dane klientów nigdy nie są wykorzystywane do trenowania modeli zewnętrznych. Możemy również wdrożyć rozwiązania on-premise, jeśli wymagają tego Twoje regulacje wewnętrzne lub branżowe.',
-    faq6_q:'Co się dzieje po wdrożeniu — czy oferujecie wsparcie?',
-    faq6_a:'Tak. Oferujemy pakiety wsparcia posprzedażowego obejmujące monitoring systemów, aktualizacje, optymalizację wydajności i pomoc techniczną. Pracujemy z klientami długoterminowo — większość z nich traktuje nas jako stałego partnera technologicznego, który pomaga rozwijać i skalować ich ekosystem AI wraz z rozwojem firmy.',
-    contact_label:'Kontakt', contact_title:'Zacznijmy współpracę',
-    contact_sub:'Napisz do nas — bezpłatna konsultacja, bez zobowiązań.',
-    contact_info_title:'Porozmawiajmy o AI dla Twojej firmy',
-    contact_info_p:'Wypełnij formularz lub napisz bezpośrednio — odpowiemy w ciągu 24 godzin i umówimy bezpłatną rozmowę wstępną.',
-    contact_email_label:'Email', contact_hours_label:'Czas odpowiedzi', contact_hours_val:'do 24 godzin',
-    contact_location_label:'Bezpłatna konsultacja', contact_location_val:'Pierwsza rozmowa bez zobowiązań',
-    form_name:'Imię i nazwisko', form_name_ph:'Jan Kowalski',
-    form_company:'Firma', form_company_ph:'Nazwa firmy',
-    form_msg:'Wiadomość', form_msg_ph:'Powiedz nam o swojej firmie i wyzwaniu...',
-    form_send:'Wyślij wiadomość →',
-    footer_tagline:'Transformujemy firmy siłą sztucznej inteligencji — praktycznie, szybko, skutecznie.',
-    footer_col1:'Usługi', footer_col2:'Firma', footer_col3:'Kontakt',
-    footer_copy:'© 2026 AI for Business 24, LLC · 131 Continental Dr, Suite 305, Newark, DE 19713, USA. Wszelkie prawa zastrzeżone.',
-    footer_made:'Zbudowane z pasją do AI',
-    toast_success:'Wiadomość wysłana! Odezwiemy się wkrótce.',
-  },
-  en: {
-    nav_about:'About', nav_services:'Services', nav_contact:'Contact', nav_cta:'Free consultation',
-    nav_agents:'AI Agents',
-    ag_label:'Agent catalogue',
-    ag_title:'Meet the agents we deploy most often',
-    ag_sub:'Eight specific AI agents — from answering phones to chasing overdue invoices. For each one we show step by step how it works, and state plainly what it does not do.',
-    ag_c1:'Answers calls 24/7', ag_c2:'Replies within a minute', ag_c3:'Quotes the same day', ag_c4:'Competitor ads',
-    ag_c5:'Fact-checked content', ag_c6:'Chases receivables', ag_c7:'Screens applications', ag_c8:'Invoices without retyping',
-    ag_cta:'See the full agent catalogue',
-    hero_badge:'AI for Business 24',
-    hero_title:'AI that truly transforms\u00A0your business\u00A0— not tomorrow, but\u00A0today.',
-    hero_sub:'We automate, design and deploy AI solutions that genuinely boost your business efficiency — from day one.',
-    hero_cta1:'Book a free consultation', hero_cta2:'View services',
-    m1:'24/7 Active', m2:'5× Faster', m3:'100% Automated', m4:'AI without limits',
-    about_label:'About us', about_title:'We transform businesses with the power of AI',
-    about_p1:'aiforbusiness24 is an agency specialising in the practical deployment of AI solutions for businesses of all sizes. Our mission is to make AI technology accessible, real and profitable — not just for corporations, but for every business.',
-    about_p2:'We combine deep technical expertise with an understanding of business processes. We don\'t build technology for its own sake — we build tools that genuinely increase your revenue and save your time.',
-    about_cta:'Get to know us',
-    stat1_num:'70%', stat1:'Time savings', stat2_num:'E2E', stat2:'End-to-end process automation', stat3_num:'24/7', stat3:'Non-stop operation',
-    serv_label:'Services', serv_title:'What we can do for your business',
-    serv_sub:'Comprehensive AI services — from automation to bespoke applications and strategic consulting.',
-    learn_more:'Learn more', collapse:'Collapse',
-    sA_title:'AI Receptionists', sA_short:'Voice assistants handling calls 24/7, bookings & CRM integration',
-    sA_h:'Your business will never miss a customer call again.',
-    sA_p1:'An AI Receptionist is a voice assistant that answers calls 24/7, conducts natural conversations and takes specific actions — just like a real employee. It can schedule appointments, answer questions, collect contact details or escalate matters to the right people.',
-    sA_p2:'The system integrates with your CRM, calendar and other tools, so all information is automatically saved and organised. Customers receive instant service, and your team saves time.',
-    sA_b1:'No missed calls', sA_b2:'24/7 availability without growing your team',
-    sA_b3:'Automated appointment scheduling', sA_b4:'Better customer experience',
-    sB_title:'Automations', sB_short:'Business processes without human intervention — from leads to reports',
-    sB_h:'Eliminate repetitive work and accelerate your business growth.',
-    sB_p1:'We design and implement automations that take over everyday, time-consuming tasks — from lead generation and management, through data processing, to report generation and notification sending.',
-    sB_p2:'We connect your systems into one cohesive ecosystem, so data flows automatically between tools without manual intervention. This means fewer errors, greater efficiency and more time for strategic activities.',
-    sB_b1:'Reduction in operational costs', sB_b2:'Faster business processes',
-    sB_b3:'Fewer human errors', sB_b4:'Scalability without growing your team',
-    sC_title:'AI Agents', sC_short:'Intelligent systems for complex tasks: research, proposals, content',
-    sC_h:'Automate complex tasks that previously required human effort.',
-    sC_p1:'AI Agents are intelligent systems that can analyse information, make decisions and execute multi-step tasks. They can prepare proposals, conduct research, analyse data or create content — operating according to defined goals and business logic.',
-    sC_p2:'These are not simple chatbots — they are digital "employees" who support your team in everyday activities and multiply its capabilities.',
-    sC_b1:'Automation of complex processes', sC_b2:'Faster proposal and analysis preparation',
-    sC_b3:'Team support without additional hiring', sC_b4:'Greater productivity',
-    sD_title:'AI Apps', sD_short:'Custom applications and SaaS tools tailored to your business',
-    sD_h:'Bespoke solutions tailored to your business.',
-    sD_p1:'We build AI applications from scratch — designed for the specific needs of your company. Every solution is tailored to your processes, data and business goals.',
-    sD_p2:'Instead of using generic tools, you get a system that precisely addresses your challenges and delivers a real competitive advantage.',
-    sD_apps_title:'Example products:',
-    sD_a1_t:'Proposal Generator', sD_a1_d:'Automatic creation of personalised proposals in PDF',
-    sD_a2_t:'Document Analyser', sD_a2_d:'Extraction and categorisation of data from contracts, invoices, reports',
-    sD_a3_t:'Industry Assistant', sD_a3_d:'Chatbot with expert knowledge for a specific industry',
-    sD_a4_t:'Analytics Dashboard', sD_a4_d:'KPI and business metrics visualisation from multiple sources',
-    sD_a5_t:'Content Planner', sD_a5_d:'Planning and generating social media content',
-    sD_b1:'Tailor-made solutions', sD_b2:'Full integration with existing systems',
-    sD_b3:'Technological advantage over competitors', sD_b4:'Real impact on business results',
-    sE_title:'AI Consulting', sE_short:'Strategic advisory and business process analysis',
-    sE_h:'Strategic AI advisory for business leaders.',
-    sE_p1:'AI Consulting is a service dedicated to companies that want to deploy artificial intelligence consciously and strategically. We analyse your processes, identify areas with the greatest automation potential, and create a personalised digital transformation plan.',
-    sE_p2:'Collaboration proceeds in several stages: process audit, AI opportunity mapping, implementation prioritisation, and support during rollout. We deliver specific recommendations — not generalities. Our advisory directly informs decisions that generate savings and revenue.',
-    sE_b1:'Clear AI strategy tailored to your industry', sE_b2:'Identification of quick wins and long-term opportunities',
-    sE_b3:'Avoiding costly mistakes in deployments', sE_b4:'Data-driven competitive advantage',
-    benefits:'Benefits:',
-    expand_cta:'👉 Find out for free how this can work in your business',
-    faq_title:'Frequently Asked Questions', faq_sub:'Have questions? We have answers.',
-    faq1_q:'Is AI suitable for my business, regardless of its size?',
-    faq1_a:'Yes. We work with both small companies and large enterprises. The key is that we tailor solutions to the client\'s scale and budget — there\'s no one-size-fits-all. Often small businesses achieve the greatest ROI because AI eliminates the bottlenecks holding back their growth.',
-    faq2_q:'How long does it take to deploy an automation or AI agent?',
-    faq2_a:'Simple automations and integrations are deployed within 1–2 weeks. More advanced systems (AI agents, bespoke AI applications) typically require 3–6 weeks. We start with a thorough audit of your processes, allowing us to accurately estimate time and resources at the consultation stage.',
-    faq3_q:'Do I need technical knowledge to use your solutions?',
-    faq3_a:'Absolutely not. Our job is to handle the entire technical layer — you focus on business. We deliver ready-to-use solutions with simple interfaces, training and documentation. We\'re also available after deployment when questions arise.',
-    faq4_q:'What are the costs of AI implementation?',
-    faq4_a:'The cost depends on the scope of the solution, the level of automation, and the integrations with your systems. Every deployment is tailored to a specific business, so before quoting we analyse your needs and goals. We always start with a free consultation, during which we present possible solutions and propose the optimal approach suited to your situation.',
-    faq5_q:'Are my data and my customers\' data secure?',
-    faq5_a:'Data security is our priority. All deployments comply with GDPR, we use end-to-end encryption, and customer data is never used to train external models. We can also deploy on-premise solutions if required by your internal or industry regulations.',
-    faq6_q:'What happens after deployment — do you offer support?',
-    faq6_a:'Yes. We offer post-sale support packages covering system monitoring, updates, performance optimisation and technical assistance. We work with clients long-term — most of them treat us as a permanent technology partner who helps grow and scale their AI ecosystem alongside business development.',
-    contact_label:'Contact', contact_title:"Let's work together",
-    contact_sub:'Write to us — free consultation, no obligations.',
-    contact_info_title:'Let\'s talk about AI for your business',
-    contact_info_p:'Fill in the form or write directly — we\'ll respond within 24 hours and arrange a free introductory call.',
-    contact_email_label:'Email', contact_hours_label:'Response time', contact_hours_val:'within 24 hours',
-    contact_location_label:'Free consultation', contact_location_val:'First call with no obligations',
-    form_name:'Full name', form_name_ph:'John Smith',
-    form_company:'Company', form_company_ph:'Company name',
-    form_msg:'Message', form_msg_ph:'Tell us about your business and challenge...',
-    form_send:'Send message →',
-    footer_tagline:'Transforming businesses with the power of AI — practically, quickly, effectively.',
-    footer_col1:'Services', footer_col2:'Company', footer_col3:'Contact',
-    footer_copy:'© 2026 AI for Business 24, LLC · 131 Continental Dr, Suite 305, Newark, DE 19713, USA. All rights reserved.',
-    footer_made:'Built with a passion for AI',
-    toast_success:'Message sent! We\'ll be in touch soon.',
+(() => {
+  const spokojnie = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const czekaj = ms => new Promise(r => setTimeout(r, spokojnie ? Math.min(ms, 60) : ms));
+
+  /* Nawigacja: tło po przewinięciu, menu na telefonie */
+  const nav = document.getElementById('nav');
+  const odswiezNav = () => nav.classList.toggle('scroll', scrollY > 20);
+  addEventListener('scroll', odswiezNav, { passive: true }); odswiezNav();
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('otwarte'); burger.setAttribute('aria-expanded', o); });
+  document.querySelectorAll('#menu-mob a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('otwarte'); burger.setAttribute('aria-expanded', false); }));
+
+  /* Wjazd sekcji przy przewijaniu */
+  const widoczne = new Set();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('on'); io.unobserve(e.target);
+    widoczne.add(e.target); e.target.dispatchEvent(new Event('widoczny'));
+  }), { threshold: 0.15 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  /* Uruchom pętlę dopiero, gdy element jest na ekranie (i pauzuj poza nim) */
+  function naEkranie(el, cb) {
+    let aktywne = false;
+    new IntersectionObserver(es => es.forEach(e => { aktywne = e.isIntersecting; if (aktywne) cb(); }), { threshold: 0.2 }).observe(el);
+    return () => aktywne;
   }
-};
 
-let lang = 'pl';
+  const IKONY = {
+    tel: '<path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/>',
+    mail: '<path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6"/>',
+    oferta: '<path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+    platnosc: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+    dok: '<path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6M8 14h8M8 17h5"/>',
+    post: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>',
+    ludzie: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/>',
+  };
+  const ikona = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IKONY[k]}</svg>`;
 
-function applyLang(l) {
-  lang = l;
-  const dict = T[l];
-  document.documentElement.lang = l;
+  /* ── Hero: kanał zdarzeń agentów (przykładowy dzień) ── */
+  const ZDARZENIA = [
+    { i: 'tel', a: 'Recepcjonistka AI', t: '23:14', x: 'Odebrała telefon i umówiła wizytę — <span class="ok">czwartek 10:00</span>' },
+    { i: 'mail', a: 'Agent pierwszej odpowiedzi', t: '23:20', x: 'Odpisał na zapytanie ze strony w <span class="ok">40 sekund</span>' },
+    { i: 'oferta', a: 'Agent ofertowy', t: '07:05', x: 'Przygotował ofertę dla „Kowalski Bud” — <span class="ok">12 400 zł</span>' },
+    { i: 'dok', a: 'Agent od dokumentów', t: '08:12', x: 'Odczytał 14 faktur i wpisał je do zestawienia kosztów' },
+    { i: 'platnosc', a: 'Agent od płatności', t: '09:30', x: 'Przypomniał o fakturze FV/214 — <span class="ok">opłacona</span>' },
+    { i: 'post', a: 'Agent marketingowy', t: '10:00', x: 'Przygotował 3 posty na Instagram do akceptacji' },
+    { i: 'ludzie', a: 'Agent rekrutacyjny', t: '11:40', x: 'Przejrzał 38 CV i wybrał 5 do rozmowy' },
+  ];
+  const feed = document.getElementById('feed');
+  let fi = 0;
+  const dodajZdarzenie = () => {
+    const z = ZDARZENIA[fi++ % ZDARZENIA.length];
+    const el = document.createElement('div');
+    el.className = 'zdarzenie';
+    el.innerHTML = `<span class="zd-ikona">${ikona(z.i)}</span><div class="zd-tresc"><div class="zd-agent"><span>${z.a}</span><span>${z.t}</span></div><div class="zd-akcja">${z.x}</div></div>`;
+    feed.prepend(el);
+    while (feed.children.length > 5) feed.lastElementChild.remove();
+  };
+  for (let k = 0; k < 3; k++) dodajZdarzenie();
+  [...feed.children].forEach(c => c.style.animation = 'none');
+  if (!spokojnie) setInterval(() => { if (!document.hidden) dodajZdarzenie(); }, 2600);
 
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.getAttribute('data-i18n');
-    if (dict[k] !== undefined) el.textContent = dict[k];
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const k = el.getAttribute('data-i18n-placeholder');
-    if (dict[k] !== undefined) el.placeholder = dict[k];
-  });
+  /* ── Taśma zadań ── */
+  const ZADANIA1 = [['📞','Odbiera telefony'],['📅','Umawia wizyty'],['✉️','Odpisuje na maile'],['💬','Odpowiada na WhatsAppie'],['🎯','Kwalifikuje leady'],['📄','Przygotowuje oferty'],['💸','Przypomina o płatnościach'],['🧾','Czyta faktury']];
+  const ZADANIA2 = [['📊','Składa raporty'],['📝','Pisze posty'],['🔎','Śledzi konkurencję'],['👥','Przesiewa CV'],['🗂️','Porządkuje CRM'],['⭐','Prosi o opinie'],['🌍','Tłumaczy wiadomości'],['📦','Informuje o wysyłce']];
+  const pigulki = l => l.map(([e, t]) => `<div class="zadanie"><span>${e}</span>${t}</div>`).join('');
+  document.getElementById('tasma1').innerHTML = pigulki(ZADANIA1) + pigulki(ZADANIA1);
+  document.getElementById('tasma2').innerHTML = pigulki(ZADANIA2) + pigulki(ZADANIA2);
 
-  // update toggle btn label
-  document.getElementById('langToggle').textContent = l === 'pl' ? 'EN' : 'PL';
-
-  // update open service cards' buttons
-  document.querySelectorAll('.service-card.open .service-toggle-btn span[data-i18n]').forEach(el => {
-    el.textContent = dict['collapse'];
-  });
-  document.querySelectorAll('.service-card:not(.open) .service-toggle-btn span[data-i18n]').forEach(el => {
-    el.textContent = dict['learn_more'];
-  });
-}
-
-function toggleLang() {
-  applyLang(lang === 'pl' ? 'en' : 'pl');
-}
-
-document.getElementById('langToggle').addEventListener('click', toggleLang);
-document.getElementById('mobileLang').addEventListener('click', () => { toggleLang(); closeMobile(); });
-
-/* ── Navbar scroll ──────────────────────────────────────── */
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
-
-/* ── Hamburger ──────────────────────────────────────────── */
-const ham = document.getElementById('hamburger');
-const mob = document.getElementById('mobileMenu');
-function closeMobile() { ham.classList.remove('open'); mob.classList.remove('open'); document.body.style.overflow = ''; }
-ham.addEventListener('click', () => {
-  const opening = !mob.classList.contains('open');
-  ham.classList.toggle('open'); mob.classList.toggle('open');
-  document.body.style.overflow = opening ? 'hidden' : '';
-});
-mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
-
-/* ── Service cards expand ───────────────────────────────── */
-document.querySelectorAll('.service-toggle-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.closest('.service-card');
-    const isOpen = card.classList.contains('open');
-    const dict = T[lang];
-    card.classList.toggle('open');
-    const span = btn.querySelector('span[data-i18n]');
-    if (span) span.textContent = isOpen ? dict['learn_more'] : dict['collapse'];
-  });
-});
-
-/* ── FAQ accordion ──────────────────────────────────────── */
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-question').addEventListener('click', () => {
-    const isOpen = item.classList.contains('open');
-    // close all
-    document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-});
-
-/* ── Intersection Observer (fade-in) ────────────────────── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-
-/* ── Contact form ───────────────────────────────────────── */
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  const btn = form.querySelector('.form-submit');
-  btn.disabled = true;
-  btn.textContent = '...';
-
-  const data = new FormData(form);
-  try {
-    const res = await fetch('https://formspree.io/f/mzdkzjnn', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-    const toast = document.getElementById('toast');
-    if (res.ok) {
-      toast.textContent = T[lang]['toast_success'];
-      toast.className = 'toast success show';
-      form.reset();
-    } else {
-      toast.textContent = 'Błąd wysyłki — spróbuj ponownie.';
-      toast.className = 'toast show';
+  /* ── Krok 1: zadania skreślane po kolei ── */
+  const lista = [...document.querySelectorAll('#lista-zadan > div')];
+  const krok1 = naEkranie(document.getElementById('lista-zadan'), () => {});
+  if (spokojnie) lista.forEach(d => d.classList.add('zrobione'));
+  else (async () => {
+    for (;;) {
+      if (!krok1()) { await czekaj(500); continue; }
+      for (const d of lista) { await czekaj(900); d.classList.add('zrobione'); }
+      await czekaj(2200);
+      lista.forEach(d => d.classList.remove('zrobione'));
+      await czekaj(700);
     }
-    setTimeout(() => toast.classList.remove('show'), 4000);
-  } catch {
-    alert('Błąd połączenia — spróbuj ponownie.');
-  }
-  btn.disabled = false;
-  btn.textContent = T[lang]['form_send'];
-});
+  })();
 
-/* ── Particle canvas ────────────────────────────────────── */
-(function() {
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  window.addEventListener('resize', resize, { passive: true });
-  resize();
-
-  const NUM = 70;
-  for (let i = 0; i < NUM; i++) {
-    particles.push({
-      x: Math.random() * W, y: Math.random() * H,
-      r: Math.random() * 1.8 + 0.4,
-      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-      alpha: Math.random() * 0.5 + 0.15
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,0,0,${0.5*p.alpha})`;
-      ctx.fill();
-    });
-
-    // draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,0,0,${0.5*0.07 * (1 - dist/120)})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
+  /* ── Krok 2: agent „uczy się” — tekst pisany literka po literce ── */
+  const uczy = document.getElementById('uczy');
+  const NAUKA = ['Twojego cennika i godzin otwarcia', 'jak odpowiadasz klientom', 'najczęstszych pytań i odpowiedzi', 'Twojego kalendarza i CRM'];
+  const krok2 = naEkranie(uczy, () => {});
+  if (spokojnie) uczy.textContent = NAUKA[0];
+  else (async () => {
+    for (let k = 0; ; k = (k + 1) % NAUKA.length) {
+      const t = NAUKA[k];
+      while (!krok2()) await czekaj(500);
+      for (let n = 0; n <= t.length; n++) { uczy.innerHTML = t.slice(0, n) + '<span class="kursor"></span>'; await czekaj(38); }
+      await czekaj(1600);
     }
-    requestAnimationFrame(draw);
+  })();
+
+  /* ── Krok 3: pasek postępu i powiadomienie ── */
+  const wyk = document.getElementById('wykonane');
+  const WYK = [['Umawiam wizytę klientki', 'Czwartek 10:00 · SMS wysłany'], ['Odpisuję na zapytanie', 'Lead dodany do CRM'], ['Wysyłam przypomnienie o fakturze', 'Klient potwierdził płatność']];
+  const krok3 = naEkranie(wyk, () => {});
+  if (spokojnie) wyk.classList.add('biegnie', 'koniec');
+  else (async () => {
+    for (let k = 0; ; k = (k + 1) % WYK.length) {
+      while (!krok3()) await czekaj(500);
+      document.getElementById('wyk-zadanie').textContent = WYK[k][0];
+      document.getElementById('wyk-info').textContent = WYK[k][1];
+      wyk.classList.remove('biegnie', 'koniec'); void wyk.offsetWidth;
+      wyk.classList.add('biegnie'); await czekaj(2500);
+      wyk.classList.add('koniec'); await czekaj(2600);
+    }
+  })();
+
+  /* ── Agent w akcji: rozmowa + kroki w tle ── */
+  const SCENY = [
+    {
+      ikona: 'tel', tytul: 'Recepcjonistka AI · połączenie przychodzące', pod: 'Wtorek, 19:42 — salon zamknięty od godziny',
+      rozmowa: [
+        ['klient', 'Klientka', 'Dzień dobry, chciałabym umówić się na koloryzację jeszcze w tym tygodniu.'],
+        ['agent', 'Agent', 'Dzień dobry! Mam wolne terminy w czwartek o 10:00 i w piątek o 15:30. Który pasuje?', 0],
+        ['klient', 'Klientka', 'Czwartek o dziesiątej.'],
+        ['agent', 'Agent', 'Zapisane: czwartek 10:00, koloryzacja. Za chwilę wyślę SMS z potwierdzeniem. Do zobaczenia!', 2],
+      ],
+      kroki: [['Rozpoznał usługę', 'koloryzacja, czas ok. 2 h'], ['Sprawdził kalendarz', 'dwa wolne okna w tym tygodniu'], ['Zapisał wizytę', 'w systemie rezerwacji salonu'], ['Wysłał SMS', 'potwierdzenie z adresem i godziną']],
+      wynik: ['Efekt', 'Wizyta umówiona po godzinach — bez udziału pracownika'],
+    },
+    {
+      ikona: 'mail', tytul: 'Agent pierwszej odpowiedzi · formularz na stronie', pod: 'Niedziela, 21:08',
+      rozmowa: [
+        ['klient', 'Marek', 'Ile kosztuje remont łazienki 6 m²? Chciałbym zacząć w przyszłym miesiącu.'],
+        ['agent', 'Agent', 'Dzień dobry Panie Marku! Żeby przygotować wycenę: czy w łazience jest wanna czy prysznic i czy płytki są już wybrane?', 1],
+        ['klient', 'Marek', 'Prysznic, płytki kupię sam.'],
+        ['agent', 'Agent', 'Dziękuję! Przekazuję to naszemu kierownikowi. Proponuję krótką rozmowę we wtorek o 9:00 — pasuje?', 3],
+      ],
+      kroki: [['Odpowiedział w 40 sekund', 'w niedzielę wieczorem'], ['Zadał pytania kwalifikujące', 'zakres, termin, materiały'], ['Dodał leada do CRM', 'z notatką i budżetem'], ['Zaproponował termin', 'z kalendarza handlowca']],
+      wynik: ['Efekt', 'Klient zapisany na rozmowę, zanim zapytał konkurencję'],
+    },
+    {
+      ikona: 'dok', tytul: 'Agent od dokumentów · skrzynka księgowa', pod: 'Poniedziałek, 08:12',
+      rozmowa: [
+        ['system', '', '📎 Nowy mail: „Faktura za październik” · FV_214_10_2026.pdf'],
+        ['agent', 'Agent', 'Odczytałem fakturę: Hurtownia Mrówka, 3 480,00 zł brutto, termin płatności 28.10.', 0],
+        ['agent', 'Agent', 'Dodałem ją do zestawienia kosztów w kategorii „materiały”.', 2],
+        ['agent', 'Agent', 'Ustawiłem przypomnienie na 26.10 — dwa dni przed terminem płatności.', 3],
+      ],
+      kroki: [['Odczytał PDF', 'kontrahent, kwoty, terminy'], ['Sprawdził dane', 'NIP i duplikaty'], ['Wpisał do arkusza', 'kategoria: materiały'], ['Ustawił przypomnienie', 'o płatności 26.10']],
+      wynik: ['Efekt', 'Faktura zaksięgowana bez przepisywania ani jednej cyfry'],
+    },
+  ];
+  const dymki = document.getElementById('dymki'), krokiTla = document.getElementById('kroki-tla'), wynik = document.getElementById('wynik');
+  const zakladki = [...document.querySelectorAll('.demo-zakladki button')];
+  let scena = 0, przebieg = 0;
+  const demoWidoczne = naEkranie(document.getElementById('demo'), () => {});
+
+  async function graj(s) {
+    const moj = ++przebieg;
+    const S = SCENY[s];
+    zakladki.forEach((b, k) => { b.classList.toggle('on', k === s); b.setAttribute('aria-selected', k === s); });
+    document.getElementById('demo-ikona').innerHTML = ikona(S.ikona);
+    document.getElementById('demo-tytul').textContent = S.tytul;
+    document.getElementById('demo-podtytul').textContent = S.pod;
+    dymki.innerHTML = ''; wynik.classList.remove('on');
+    krokiTla.innerHTML = S.kroki.map(([b, t]) => `<div class="krok-tla"><i>✓</i><div><b>${b}</b><span>${t}</span></div></div>`).join('');
+    wynik.innerHTML = `<small>${S.wynik[0]}</small>${S.wynik[1]}`;
+    const kroki = [...krokiTla.children];
+    let zapalone = 0;
+    for (const [kto, imie, tekst, dokad] of S.rozmowa) {
+      while (!demoWidoczne()) { await czekaj(400); if (moj !== przebieg) return; }
+      if (kto !== 'system') {
+        const p = document.createElement('div');
+        p.className = 'pisze' + (kto === 'klient' ? ' klient' : '');
+        p.innerHTML = '<i></i><i></i><i></i>';
+        dymki.append(p); await czekaj(kto === 'agent' ? 1100 : 900); p.remove();
+      } else await czekaj(500);
+      if (moj !== przebieg) return;
+      const d = document.createElement('div');
+      d.className = 'dymek ' + kto;
+      d.innerHTML = (imie ? `<small>${imie}</small>` : '') + tekst;
+      dymki.append(d);
+      if (dokad !== undefined) for (; zapalone <= dokad; zapalone++) { await czekaj(450); if (moj !== przebieg) return; kroki[zapalone].classList.add('on'); }
+      await czekaj(1300);
+      if (moj !== przebieg) return;
+    }
+    for (; zapalone < kroki.length; zapalone++) { await czekaj(400); kroki[zapalone].classList.add('on'); }
+    await czekaj(400); wynik.classList.add('on');
+    await czekaj(4200);
+    if (moj === przebieg && !spokojnie) graj((s + 1) % SCENY.length);
   }
-  draw();
+  zakladki.forEach((b, k) => b.addEventListener('click', () => graj(k)));
+  graj(0);
+
+  /* ── Licznik rozmowy w kafelku recepcjonistki ── */
+  const licznik = document.querySelector('.glos-gora');
+  let sek = 47;
+  if (licznik && !spokojnie) setInterval(() => { sek++; licznik.lastChild.textContent = `Rozmowa trwa · ${String(sek / 60 | 0).padStart(2, '0')}:${String(sek % 60).padStart(2, '0')}`; }, 1000);
+
+  /* ── Formularz kontaktowy (Formspree) ── */
+  const form = document.getElementById('contactForm'), toast = document.getElementById('toast');
+  const pokaz = t => { toast.textContent = t; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 4200); };
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button'); btn.disabled = true; btn.textContent = 'Wysyłanie…';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (res.ok) { pokaz('Dziękujemy! Odezwiemy się w ciągu 24 godzin.'); form.reset(); }
+      else pokaz('Nie udało się wysłać — spróbuj ponownie albo napisz na bartek@aiforbusiness24.com.');
+    } catch { pokaz('Błąd połączenia — spróbuj ponownie.'); }
+    btn.disabled = false; btn.textContent = 'Wyślij wiadomość →';
+  });
 })();
-
-/* ── Smooth scroll for nav links ────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
 </script>
 </body>
 </html>
