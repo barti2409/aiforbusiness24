@@ -66,6 +66,7 @@ function page(a, others) {
   <ul class="nav-links">
     <li><a href="/agenci/" class="active">Agenci AI</a></li>
     <li><a href="/#services">Usługi</a></li>
+    <li><a href="/cennik/">Cennik</a></li>
     <li><a href="/#about">O nas</a></li>
     <li><a href="/blog/">Blog</a></li>
     <li><a href="/#contact" class="nav-cta">Kontakt</a></li>
