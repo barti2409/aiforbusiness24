@@ -40,22 +40,48 @@
     .kwota .liczba { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 2.3rem; line-height: 1; }
     .kwota .jedn { font-size: .85rem; color: var(--muted); }
 
-    /* Rolki — trzy warianty obok siebie */
-    .rolki { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .rolka { position: relative; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; text-align: center; }
-    .rolka.wyrozniona { border-color: var(--blue); background: linear-gradient(180deg, rgba(0,0,0,0.064), #ffffff 60%); box-shadow: 0 13px 40px rgba(0,0,0,.14); }
-    .rolka .znaczek {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--blue); color: #fff; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-      padding: 4px 12px; border-radius: 99px; white-space: nowrap;
+    /* Rolki — kalkulator pakietów: przełącznik 1 / 10 / 20 */
+    .kalk { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; padding: 26px; box-shadow: 0 18px 50px rgba(0,0,0,.06); }
+    .kalk-wybor { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); background: #F5F5F5; border-radius: 99px; padding: 5px; margin-top: 14px; }
+    .kalk-wybor button {
+      position: relative; z-index: 1; border: 0; background: none; cursor: pointer; padding: 12px 8px; border-radius: 99px;
+      font: 600 .92rem 'Inter', sans-serif; color: var(--muted); transition: color .3s;
     }
-    .rolka h3 { font-size: 1.05rem; margin-bottom: 4px; }
-    .rolka .ile { font-size: .85rem; color: var(--muted); margin-bottom: 18px; }
-    .rolka .liczba { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 2.6rem; line-height: 1; }
-    .rolka .jedn { font-size: .85rem; color: var(--muted); margin-top: 6px; }
-    .rolka .suma { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .88rem; color: var(--muted); }
-    .rolka .suma b { color: var(--white); }
-    .rolka .oszczedzasz { display: inline-block; margin-top: 8px; font-size: .78rem; font-weight: 600; color: var(--ok); }
+    .kalk-wybor button.on { color: #fff; }
+    .kalk-wybor button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .kalk-suwak {
+      position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px) / 3); border-radius: 99px; background: var(--blue);
+      box-shadow: 0 6px 18px rgba(0,0,0,.18); transition: transform .45s cubic-bezier(.65,0,.25,1);
+    }
+    .kalk-znaczek {
+      position: absolute; top: -24px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+      font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ok);
+    }
+    .kalk-panel { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: center; margin-top: 30px; }
+    .kalk-cena { display: flex; align-items: baseline; gap: 10px; }
+    .kalk-cena .liczba { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -.04em; font-size: clamp(3.6rem, 9vw, 5.4rem); line-height: .9; font-variant-numeric: tabular-nums; }
+    .kalk-cena .jedn { color: var(--muted); font-size: .95rem; }
+    .kalk-opis { margin-top: 12px; font-size: .92rem; min-height: 2.9em; }
+    .kalk-dane { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .kalk-dane div { background: #FAFAFA; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+    .kalk-dane span { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .kalk-dane b { font-size: 1.35rem; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+    .kalk-dane b.ok { color: var(--ok); }
+    .kalk-pasek { grid-column: 1 / -1; }
+    .kalk-pasek-tor { position: relative; height: 10px; border-radius: 99px; overflow: hidden; background: repeating-linear-gradient(-45deg, rgba(21,128,61,.22) 0 6px, rgba(21,128,61,.1) 6px 12px); }
+    .kalk-pasek-wypelnienie { position: absolute; inset: 0 auto 0 0; width: 100%; background: var(--blue); border-radius: 99px; transition: width .7s cubic-bezier(.65,0,.25,1); }
+    .kalk-pasek-opis { display: flex; justify-content: space-between; margin-top: 8px; font-size: .8rem; color: var(--muted); }
+    .kalk-pasek-opis b { color: var(--ok); }
+
+    /* Karty wjeżdżają po kolei, gdy sekcja pojawi się na ekranie */
+    @keyframes wjazd { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .reveal:not(.on) .cena, .reveal:not(.on) .uwaga, .reveal:not(.on) .kalk { opacity: 0; }
+    .reveal.on .cena, .reveal.on .uwaga, .reveal.on .kalk { animation: wjazd .6s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal.on .cena, .reveal.on .uwaga, .reveal.on .kalk { animation: none; }
+      .kalk-suwak, .kalk-pasek-wypelnienie { transition: none; }
+    }
+
     .podtytul { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin: 44px 0 22px; display: flex; align-items: center; gap: 12px; }
     .podtytul::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
@@ -78,12 +104,14 @@
     .uwaga p { font-size: .88rem; }
 
     @media (max-width: 900px) {
-      .ceny, .rolki, .uwagi { grid-template-columns: 1fr; }
+      .ceny, .uwagi { grid-template-columns: 1fr; }
       .ai { grid-template-columns: 1fr; }
-      .rolki { gap: 26px; }
+      .kalk-panel { grid-template-columns: 1fr; gap: 20px; }
     }
     @media (max-width: 620px) {
       .wycena-pasek .btn { width: 100%; }
+      .kalk { padding: 20px 16px; }
+      .kalk-wybor button { font-size: .82rem; padding: 11px 4px; }
     }
   </style>
   <script type="application/ld+json">
@@ -158,31 +186,27 @@
       </div>
 
       <h3 class="podtytul">Montaż rolek (Reels, TikTok, Shorts)</h3>
-      <div class="rolki">
-        <article class="rolka">
-          <h3>Pojedyncza rolka</h3>
-          <p class="ile">Na próbę albo okazjonalnie</p>
-          <div class="liczba">75 $</div>
-          <p class="jedn">za rolkę</p>
-          <p class="suma">Płacisz za każdą rolkę osobno</p>
-        </article>
-
-        <article class="rolka">
-          <h3>Pakiet 10 rolek</h3>
-          <p class="ile">Miesięcznie</p>
-          <div class="liczba">65 $</div>
-          <p class="jedn">za rolkę</p>
-          <p class="suma"><b>650 $</b> / miesiąc<br><span class="oszczedzasz">Oszczędzasz 100 $ miesięcznie</span></p>
-        </article>
-
-        <article class="rolka wyrozniona">
-          <span class="znaczek">Najlepsza cena</span>
-          <h3>Pakiet 20 rolek</h3>
-          <p class="ile">Miesięcznie</p>
-          <div class="liczba">60 $</div>
-          <p class="jedn">za rolkę</p>
-          <p class="suma"><b>1 200 $</b> / miesiąc<br><span class="oszczedzasz">Oszczędzasz 300 $ miesięcznie</span></p>
-        </article>
+      <div class="kalk" data-i="0">
+        <div class="kalk-wybor" role="radiogroup" aria-label="Liczba rolek miesięcznie">
+          <span class="kalk-suwak" aria-hidden="true"></span>
+          <button type="button" role="radio" data-n="1" data-cena="75" data-opis="Płacisz za każdą rolkę osobno — dobre na próbę albo okazjonalnie.">1 rolka</button>
+          <button type="button" role="radio" data-n="10" data-cena="65" data-opis="10 rolek w każdym miesiącu, czyli 2–3 publikacje tygodniowo.">10 / mies.</button>
+          <button type="button" role="radio" data-n="20" data-cena="60" data-opis="20 rolek w każdym miesiącu — publikacja niemal w każdy dzień roboczy."><span class="kalk-znaczek">Najlepsza cena</span>20 / mies.</button>
+        </div>
+        <div class="kalk-panel">
+          <div>
+            <div class="kalk-cena"><span class="liczba" id="k-cena">65 $</span><span class="jedn">za rolkę</span></div>
+            <p class="kalk-opis" id="k-opis" aria-live="polite">10 rolek w każdym miesiącu, czyli 2–3 publikacje tygodniowo.</p>
+          </div>
+          <div class="kalk-dane">
+            <div><span id="k-suma-etyk">Miesięcznie</span><b id="k-suma">650 $</b></div>
+            <div><span>Oszczędzasz</span><b class="ok" id="k-osz">100 $</b></div>
+          </div>
+          <div class="kalk-pasek">
+            <div class="kalk-pasek-tor"><div class="kalk-pasek-wypelnienie" id="k-pasek"></div></div>
+            <div class="kalk-pasek-opis"><span>Cena za rolkę w porównaniu z pojedynczą (75 $)</span><b id="k-proc">−13%</b></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -238,11 +262,67 @@
 </footer>
 
 <script>
-  // Animacja wejścia sekcji (.reveal → .on), jak na /agenci/.
+  const spokojnie = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' $';
+
+  // Płynna zmiana liczby (easeOutCubic) — ceny „doliczają się” do wartości.
+  function animuj(el, od, doo, ms = 700) {
+    if (spokojnie || od === doo) { el.textContent = fmt(doo); return; }
+    const t0 = performance.now();
+    cancelAnimationFrame(el._raf);
+    const krok = t => {
+      const p = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(od + (doo - od) * e);
+      if (p < 1) el._raf = requestAnimationFrame(krok);
+    };
+    el._raf = requestAnimationFrame(krok);
+  }
+
+  // Kolejność wjazdu kart w każdej siatce.
+  document.querySelectorAll('.ceny, .ai, .uwagi').forEach(g => [...g.children].forEach((k, i) => k.style.setProperty('--i', i)));
+
+  // Ceny w kartach liczą od zera, gdy sekcja wjedzie na ekran.
+  const kwoty = [...document.querySelectorAll('.kwota .liczba')];
+  kwoty.forEach(el => { el.dataset.cel = parseInt(el.textContent, 10); if (!spokojnie) el.textContent = fmt(0); });
+
   const io = 'IntersectionObserver' in window && new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target) }
+    if (!e.isIntersecting) return;
+    e.target.classList.add('on'); io.unobserve(e.target);
+    e.target.querySelectorAll('.kwota .liczba').forEach((el, i) => setTimeout(() => animuj(el, 0, +el.dataset.cel), 250 + i * 90));
   }), { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('on'));
+  if (!io) kwoty.forEach(el => el.textContent = fmt(+el.dataset.cel));
+
+  // Kalkulator rolek.
+  const PELNA = 75;
+  const kalk = document.querySelector('.kalk');
+  const przyciski = [...kalk.querySelectorAll('.kalk-wybor button')];
+  const $ = id => document.getElementById(id);
+  let stan = { cena: 65, suma: 650, osz: 100 };
+  function wybierz(b) {
+    const n = +b.dataset.n, cena = +b.dataset.cena, i = przyciski.indexOf(b);
+    const nowy = { cena, suma: n * cena, osz: n * (PELNA - cena) };
+    przyciski.forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-checked', x === b); x.tabIndex = x === b ? 0 : -1; });
+    kalk.querySelector('.kalk-suwak').style.transform = `translateX(${i * 100}%)`;
+    animuj($('k-cena'), stan.cena, nowy.cena, 500);
+    animuj($('k-suma'), stan.suma, nowy.suma, 500);
+    animuj($('k-osz'), stan.osz, nowy.osz, 500);
+    $('k-opis').textContent = b.dataset.opis;
+    $('k-suma-etyk').textContent = n > 1 ? 'Miesięcznie' : 'Razem';
+    $('k-pasek').style.width = (cena / PELNA * 100) + '%';
+    const proc = Math.round((1 - cena / PELNA) * 100);
+    $('k-proc').textContent = proc ? '−' + proc + '%' : 'cena bazowa';
+    stan = nowy;
+  }
+  przyciski.forEach(b => b.addEventListener('click', () => wybierz(b)));
+  kalk.querySelector('.kalk-wybor').addEventListener('keydown', e => {
+    const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (!d) return;
+    e.preventDefault();
+    const b = przyciski[(przyciski.indexOf(document.activeElement) + d + 3) % 3];
+    b.focus(); wybierz(b);
+  });
+  wybierz(przyciski[1]);
 </script>
 </body>
 </html>
