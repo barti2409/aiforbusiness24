@@ -10,7 +10,7 @@
 
   var API = "https://panel-ab24.vercel.app/api/strona/czat";
   var AGENT_GLOSOWY = "agent_5201m818br4xemc8j7fmt8p4nx49"; // agent ElevenLabs „Agent strony — AI for Business 24”; puste = bez przycisku głosu
-  var POWITANIE = "Cześć! 👋 Jestem asystentem AI for Business 24. Napisz, czym zajmuje się Twoja firma i co zabiera Wam najwięcej czasu, a sprawdzimy, czy możemy pomóc.";
+  var POWITANIE = "Cześć! 👋 Tu Magda, asystentka AI for Business 24. Napisz, czym zajmuje się Twoja firma i co zabiera Wam najwięcej czasu, a sprawdzimy, czy możemy pomóc.";
   var PODPOWIEDZI = ["Mam salon beauty", "Prowadzę sklep internetowy", "Mam biuro nieruchomości", "Nie odbieramy telefonów po godzinach"];
 
   var sesja;
@@ -69,8 +69,8 @@
   var btn = document.createElement("button");
   btn.className = "ab24c-btn";
   btn.type = "button";
-  btn.setAttribute("aria-label", "Porozmawiaj z agentem AI");
-  btn.innerHTML = LOGO_JASNE + "<span>Porozmawiaj z agentem AI</span><i></i>";
+  btn.setAttribute("aria-label", "Porozmawiaj z Magdą, asystentką AI");
+  btn.innerHTML = LOGO_JASNE + "<span>Porozmawiaj z Magdą (AI)</span><i></i>";
   document.body.appendChild(btn);
 
   var okno, lista, pole, wyslij, podp;
@@ -91,7 +91,7 @@
     okno.className = "ab24c-okno";
     okno.setAttribute("role", "dialog");
     okno.setAttribute("aria-label", "Czat z agentem AI for Business 24");
-    okno.innerHTML = '<div class="ab24c-glowa">' + LOGO + '<div><b>Agent AI · AI for Business 24</b><small><i></i>odpowiada od razu</small></div><button class="ab24c-zamknij" type="button" aria-label="Zamknij">×</button></div>' +
+    okno.innerHTML = '<div class="ab24c-glowa">' + LOGO + '<div><b>Magda · asystentka AI</b><small><i></i>odpowiada od razu</small></div><button class="ab24c-zamknij" type="button" aria-label="Zamknij">×</button></div>' +
       '<div class="ab24c-lista" aria-live="polite"></div><div class="ab24c-podp"></div>' +
       (AGENT_GLOSOWY ? '<button class="ab24c-glos" type="button">🎙️ Porozmawiaj głosowo</button>' : "") +
       '<form class="ab24c-form"><input id="ab24c-pole" type="text" autocomplete="off" maxlength="1000" placeholder="Napisz wiadomość…" aria-label="Wiadomość"><button type="submit">Wyślij</button></form>' +
