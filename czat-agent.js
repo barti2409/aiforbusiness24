@@ -9,7 +9,7 @@
   window.__ab24Czat = true;
 
   var API = "https://panel-ab24.vercel.app/api/strona/czat";
-  var AGENT_GLOSOWY = ""; // id agenta ElevenLabs (Conversational AI); puste = bez przycisku głosu
+  var AGENT_GLOSOWY = "agent_5201m818br4xemc8j7fmt8p4nx49"; // agent ElevenLabs „Agent strony — AI for Business 24”; puste = bez przycisku głosu
   var POWITANIE = "Cześć! 👋 Jestem asystentem AI for Business 24. Napisz, czym zajmuje się Twoja firma i co zabiera Wam najwięcej czasu, a sprawdzimy, czy możemy pomóc.";
   var PODPOWIEDZI = ["Mam salon beauty", "Prowadzę sklep internetowy", "Mam biuro nieruchomości", "Nie odbieramy telefonów po godzinach"];
 
@@ -144,10 +144,11 @@
       el.setAttribute("agent-id", AGENT_GLOSOWY);
       document.body.appendChild(el);
       var s = document.createElement("script");
-      s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed"; s.async = true;
+      s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed@0.25.1/dist/index.js"; s.async = true; s.type = "text/javascript";
       document.body.appendChild(s);
     }
-    okno.style.display = "none"; btn.style.display = "flex";
+    // Widżet ElevenLabs ma własny pływający przycisk w rogu — nasz chowamy, żeby się nie nakładały.
+    okno.style.display = "none"; btn.style.display = "none";
   }
 
   btn.onclick = otworz;
