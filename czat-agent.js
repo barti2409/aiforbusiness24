@@ -10,7 +10,7 @@
 
   var API = "https://panel-ab24.vercel.app/api/strona/czat";
   var AGENT_GLOSOWY = ""; // id agenta ElevenLabs (Conversational AI); puste = bez przycisku głosu
-  var POWITANIE = "Cześć! 👋 Jestem asystentem AI for Business 24. Opowiedz w dwóch zdaniach, czym zajmuje się Twoja firma, a pokażę Ci, jak agenci AI i automatyzacje mogłyby wyglądać właśnie u Ciebie.";
+  var POWITANIE = "Cześć! 👋 Jestem asystentem AI for Business 24. Napisz, czym zajmuje się Twoja firma i co zabiera Wam najwięcej czasu, a sprawdzimy, czy możemy pomóc.";
   var PODPOWIEDZI = ["Mam salon beauty", "Prowadzę sklep internetowy", "Mam biuro nieruchomości", "Nie odbieramy telefonów po godzinach"];
 
   var sesja;
