@@ -139,7 +139,7 @@ body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Int
         onConnect: function () { start = Date.now(); zegar = setInterval(czas, 500); czas(); $("podpis").textContent = "Rozmowa trwa"; $("rozlacz").hidden = false; animuj(); },
         onDisconnect: koniec,
         onError: function (m) { $("blad").textContent = "Błąd połączenia: " + m; $("blad").hidden = false; },
-        onMessage: function (p) { if (p && p.message) dym(p.message, p.source === "user" ? "ja" : "ai"); },
+        onMessage: function (p) { if (!p || !p.message) return; var t = p.source === "user" ? p.message : p.message.replace(/\[([^\]]*)\]/g, function (m, w) { return /^[A-ZĄĆĘŁŃÓŚŹŻ]/.test(w) ? w : ""; }).replace(/\s{2,}/g, " ").trim(); if (t) dym(t, p.source === "user" ? "ja" : "ai"); },
         onModeChange: function (p) { awatar.classList.toggle("mowi", p.mode === "speaking"); },
       });
     } catch (e) {
