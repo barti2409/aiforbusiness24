@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recepcjonistka AI dla restauracji — demo | aiforbusiness24</title>
+<meta name="description" content="Zadzwoń do Giulii, recepcjonistki AI wymyślonej restauracji Trattoria Sole, i zobacz, jak rezerwacja pojawia się na żywo. Demo AI for Business 24.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Demo recepcjonistki AI (23.11.2026): po lewej „telefon” z rozmową na żywo, po prawej tablica rezerwacji restauracji.
+   Układ pod nagrywanie ekranu do rolki (16:9 i pion). Restauracja Trattoria Sole jest wymyślona. */
+:root { --tlo: #f6f1e7; --karta: #fffdf8; --ink: #2b2118; --szary: #8a7a68; --linia: #eadfcd; --terakota: #b4472c; --oliwka: #5c7c3a; --ok: #2f9e55; --noc: #121214; }
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Inter, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-left)) 40px }
+.top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap }
+.top .demo { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--terakota); background: #fbe7df; padding: 6px 12px; border-radius: 99px }
+.marka { font-family: Fraunces, Georgia, serif; font-size: 30px; font-weight: 700; color: var(--terakota); letter-spacing: -.01em }
+.marka small { display: block; font: 500 13px Inter, sans-serif; color: var(--szary); letter-spacing: 0 }
+.uklad { margin-top: 24px; display: grid; gap: 24px; grid-template-columns: 400px minmax(0, 1fr); align-items: start }
+@media (max-width: 900px) { .uklad { grid-template-columns: 1fr } }
+
+/* telefon */
+.tel { background: var(--noc); color: #fff; border-radius: 44px; padding: 22px; min-height: 640px; display: flex; flex-direction: column; box-shadow: 0 30px 80px rgba(43,33,24,.25), inset 0 0 0 2px #2a2a2e }
+.tel-glowa { text-align: center; padding: 16px 0 10px }
+.awatar { width: 88px; height: 88px; border-radius: 88px; margin: 0 auto 12px; background: radial-gradient(circle at 35% 30%, #f2b36b, var(--terakota)); display: grid; place-items: center; font: 700 34px Fraunces, serif; color: #fff; position: relative }
+.awatar.mowi::after { content: ""; position: absolute; inset: -8px; border-radius: 99px; border: 3px solid rgba(242,179,107,.7); animation: puls 1s ease-in-out infinite }
+@keyframes puls { 0%,100% { transform: scale(1); opacity: .9 } 50% { transform: scale(1.08); opacity: .4 } }
+.tel h2 { margin: 0; font-size: 22px; font-weight: 700 }
+.tel .pod { color: #a9a9b2; font-size: 13px }
+.czas { font-family: "JetBrains Mono", monospace; color: #7ee2a0; font-size: 14px; margin-top: 6px; min-height: 20px }
+.fala { display: flex; justify-content: center; gap: 4px; height: 34px; align-items: center; margin: 8px 0 }
+.fala i { width: 4px; border-radius: 4px; background: #f2b36b; height: 6px; transition: height .12s }
+.rozmowa { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding: 10px 2px; max-height: 360px }
+.dym { max-width: 86%; padding: 9px 13px; border-radius: 18px; font-size: 14px; line-height: 1.4; animation: wej .25s ease }
+.dym.ai { align-self: flex-start; background: #2a2a2e; border-bottom-left-radius: 6px }
+.dym.ja { align-self: flex-end; background: #0a84ff; border-bottom-right-radius: 6px }
+.dym.sys { align-self: center; background: transparent; color: #7ee2a0; font-size: 12px; font-weight: 600 }
+@keyframes wej { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+.przyciski { display: flex; justify-content: center; gap: 18px; padding-top: 12px }
+.kolo { width: 72px; height: 72px; border-radius: 72px; border: 0; cursor: pointer; display: grid; place-items: center; transition: transform .15s }
+.kolo:hover { transform: scale(1.05) }
+.kolo svg { width: 32px; height: 32px }
+.zadzwon { background: #34c759 } .rozlacz { background: #ff3b30 } .rozlacz svg { transform: rotate(135deg) }
+.podpis { text-align: center; color: #a9a9b2; font-size: 12px; margin-top: 8px }
+.blad { color: #ff8a80; text-align: center; font-size: 13px; margin-top: 8px }
+
+/* tablica */
+.tab { background: var(--karta); border-radius: 28px; padding: 22px; box-shadow: 0 1px 0 var(--linia), 0 20px 50px rgba(43,33,24,.06) }
+.tab h3 { margin: 0; font-family: Fraunces, Georgia, serif; font-size: 24px }
+.tab .pod { color: var(--szary); font-size: 13px; margin: 2px 0 16px; display: flex; align-items: center; gap: 8px }
+.tab .pod i { width: 8px; height: 8px; border-radius: 8px; background: var(--ok); box-shadow: 0 0 0 4px rgba(47,158,85,.2) }
+.dzien { font-size: 12px; font-weight: 700; color: var(--szary); text-transform: uppercase; letter-spacing: .06em; margin: 16px 0 8px }
+.rez { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; padding: 12px 14px; border-radius: 16px; background: #fff; border: 1px solid var(--linia); margin-bottom: 8px; transition: background 1s, box-shadow 1s }
+.rez .g { font: 700 18px "JetBrains Mono", monospace }
+.rez .k { font-weight: 700 }
+.rez .u { color: var(--szary); font-size: 13px }
+.rez .o { font-weight: 700; color: var(--oliwka); white-space: nowrap }
+.rez.nowa { background: #eaf7ee; box-shadow: 0 0 0 3px var(--ok); animation: wej .4s ease }
+.rez .nowa-tag { display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 800; color: #fff; background: var(--ok); padding: 2px 8px; border-radius: 99px; vertical-align: 2px }
+.rez.manager .o { color: var(--terakota) }
+.pusto { color: var(--szary); padding: 20px 0 }
+.stopka { margin-top: 26px; text-align: center; color: var(--szary); font-size: 12px }
+.stopka a { color: var(--terakota) }
+@media (prefers-reduced-motion: reduce) { .dym, .rez.nowa, .awatar.mowi::after { animation: none } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="marka">Trattoria Sole<small>cucina italiana · ul. Słoneczna 12, Warszawa</small></div>
+    <span class="demo">Demo · recepcjonistka AI</span>
+  </header>
+
+  <div class="uklad">
+    <section class="tel" aria-label="Rozmowa telefoniczna z recepcjonistką AI">
+      <div class="tel-glowa">
+        <div class="awatar" id="awatar">G</div>
+        <h2>Trattoria Sole</h2>
+        <div class="pod">Giulia · recepcjonistka AI</div>
+        <div class="czas" id="czas"></div>
+        <div class="fala" id="fala" aria-hidden="true"></div>
+      </div>
+      <div class="rozmowa" id="rozmowa" aria-live="polite"></div>
+      <div class="przyciski">
+        <button class="kolo zadzwon" id="zadzwon" type="button" aria-label="Zadzwoń"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button>
+        <button class="kolo rozlacz" id="rozlacz" type="button" aria-label="Rozłącz" hidden><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button>
+      </div>
+      <div class="podpis" id="podpis">Kliknij zieloną słuchawkę i zarezerwuj stolik głosem</div>
+      <div class="blad" id="blad" hidden></div>
+    </section>
+
+    <section class="tab" aria-label="Rezerwacje">
+      <h3>Rezerwacje</h3>
+      <div class="pod"><i></i>aktualizuje się na żywo</div>
+      <div id="lista"><div class="pusto">Wczytuję…</div></div>
+    </section>
+  </div>
+
+  <p class="stopka">Trattoria Sole to restauracja wymyślona na potrzeby pokazu. Recepcjonistkę AI dla Twojej firmy przygotuje <a href="https://www.aiforbusiness24.com">AI for Business 24</a>.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@elevenlabs/client@1.35.0/dist/lib.iife.js"></script>
+<script>
+(function () {
+  var AGENT = "agent_1401m83fy3sbfxn8jvragsgpfjk9";
+  var LISTA = "https://panel-ab24.vercel.app/api/demo/restauracja/lista";
+  var $ = function (id) { return document.getElementById(id); };
+  var rozmowa = $("rozmowa"), fala = $("fala"), awatar = $("awatar");
+  for (var i = 0; i < 24; i++) fala.appendChild(document.createElement("i"));
+  var paski = fala.querySelectorAll("i");
+  var sesja = null, start = 0, zegar = null, anim = null;
+  var znane = null, nowe = {};
+
+  function dym(tekst, kto) {
+    var d = document.createElement("div");
+    d.className = "dym " + kto; d.textContent = tekst;
+    rozmowa.appendChild(d); rozmowa.scrollTop = rozmowa.scrollHeight;
+  }
+  function czas() { var s = Math.floor((Date.now() - start) / 1000); $("czas").textContent = String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
+  function animuj() {
+    var v = 0;
+    try { v = sesja ? Math.max(sesja.getOutputVolume() || 0, (sesja.getInputVolume() || 0) * 0.6) : 0; } catch (e) {}
+    paski.forEach(function (p, i) { p.style.height = (6 + v * 60 * (0.5 + 0.5 * Math.abs(Math.sin(Date.now() / 140 + i)))) + "px"; });
+    anim = requestAnimationFrame(animuj);
+  }
+
+  $("zadzwon").onclick = async function () {
+    $("blad").hidden = true;
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      $("podpis").textContent = "Łączę…"; $("zadzwon").hidden = true;
+      sesja = await ElevenLabsClient.Conversation.startSession({
+        agentId: AGENT,
+        connectionType: "webrtc",
+        onConnect: function () { start = Date.now(); zegar = setInterval(czas, 500); czas(); $("podpis").textContent = "Rozmowa trwa"; $("rozlacz").hidden = false; animuj(); },
+        onDisconnect: koniec,
+        onError: function (m) { $("blad").textContent = "Błąd połączenia: " + m; $("blad").hidden = false; },
+        onMessage: function (p) { if (p && p.message) dym(p.message, p.source === "user" ? "ja" : "ai"); },
+        onModeChange: function (p) { awatar.classList.toggle("mowi", p.mode === "speaking"); },
+      });
+    } catch (e) {
+      $("zadzwon").hidden = false; $("podpis").textContent = "Kliknij zieloną słuchawkę i zarezerwuj stolik głosem";
+      $("blad").textContent = e && e.name === "NotAllowedError" ? "Zezwól przeglądarce na mikrofon, żeby porozmawiać." : "Nie udało się połączyć. Spróbuj ponownie."; $("blad").hidden = false;
+    }
+  };
+  function koniec() {
+    clearInterval(zegar); cancelAnimationFrame(anim); awatar.classList.remove("mowi");
+    paski.forEach(function (p) { p.style.height = "6px"; });
+    $("rozlacz").hidden = true; $("zadzwon").hidden = false; $("podpis").textContent = "Połączenie zakończone · zadzwoń ponownie";
+    if (sesja) dym("Połączenie zakończone", "sys");
+    sesja = null; odswiez();
+  }
+  $("rozlacz").onclick = function () { if (sesja) sesja.endSession(); };
+
+  function osoby(n) { return n === 1 ? "1 osoba" : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? n + " osoby" : n + " osób"; }
+  function esc(s) { return String(s || "").replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  async function odswiez() {
+    try {
+      var r = await fetch(LISTA, { cache: "no-store" }).then(function (x) { return x.json(); });
+      var lista = r.rezerwacje || [];
+      if (znane) lista.forEach(function (x) { if (!znane[x.id]) nowe[x.id] = Date.now(); });
+      znane = {}; lista.forEach(function (x) { znane[x.id] = 1; });
+      if (!lista.length) { $("lista").innerHTML = '<div class="pusto">Brak rezerwacji. Zadzwoń i zarezerwuj pierwszy stolik.</div>'; return; }
+      var html = "", dzien = "";
+      lista.forEach(function (x) {
+        var czesci = x.etykieta.split(" "), godz = czesci.pop(), d = czesci.join(" ").replace(/,$/, "");
+        if (d !== dzien) { dzien = d; html += '<div class="dzien">' + esc(d) + "</div>"; }
+        var swieza = nowe[x.id] && Date.now() - nowe[x.id] < 60000;
+        html += '<div class="rez' + (swieza ? " nowa" : "") + (x.status === "do_managera" ? " manager" : "") + '"><div class="g">' + esc(godz) + '</div><div><div class="k">' + esc(x.imie) + (swieza ? '<span class="nowa-tag">NOWA · przed chwilą</span>' : "") + '</div>' +
+          (x.uwagi ? '<div class="u">' + esc(x.uwagi) + "</div>" : "") + '</div><div class="o">' + (x.status === "do_managera" ? "manager oddzwoni" : osoby(x.osoby)) + "</div></div>";
+      });
+      $("lista").innerHTML = html;
+    } catch (e) {}
+  }
+  odswiez(); setInterval(odswiez, 3000);
+})();
+</script>
+</body>
+</html>
