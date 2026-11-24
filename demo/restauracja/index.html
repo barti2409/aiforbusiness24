@@ -65,6 +65,39 @@ body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Int
 .pusto { color: var(--szary); padding: 20px 0 }
 .stopka { margin-top: 26px; text-align: center; color: var(--szary); font-size: 12px }
 .stopka a { color: var(--terakota) }
+/* „Julia teraz” (24.11.2026): co robi recepcjonistka i szkic rezerwacji wypełniany na żywo — jak w rolce AB24.
+   Dane tylko z tego, co już przychodzi do strony (napisy rozmowy, zdarzenia narzędzi, tablica) — bez zmian w agencie. */
+.prawa { display: flex; flex-direction: column; gap: 18px }
+.teraz { background: #fff; border-radius: 28px; padding: 18px 20px 20px; box-shadow: 0 1px 0 var(--linia), 0 20px 50px rgba(43,33,24,.08); border: 1px solid var(--linia) }
+.teraz-g { display: flex; align-items: center; gap: 12px }
+.teraz-g .aw { width: 40px; height: 40px; border-radius: 40px; background: radial-gradient(circle at 35% 30%, #f2b36b, var(--terakota)); color: #fff; display: grid; place-items: center; font: 700 18px Fraunces, serif }
+.teraz-g b { font-size: 18px }
+.live { margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #b9b2a7; background: #f4efe7; padding: 5px 12px; border-radius: 99px }
+.live i { width: 8px; height: 8px; border-radius: 8px; background: #c9c1b4 }
+.teraz.aktywna .live { color: #ff3b30; background: #fff1f0 } .teraz.aktywna .live i { background: #ff3b30; animation: miga 1s infinite }
+@keyframes miga { 50% { opacity: .3 } }
+.krok { margin-top: 14px; display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 18px; background: var(--noc); color: #fff; min-height: 58px }
+.krok .ik { font-size: 24px; width: 30px; text-align: center }
+.krok .tx { flex: 1; font-size: 19px; font-weight: 700; letter-spacing: -.01em }
+.krok .tx.nowy { animation: wjazd .35s ease }
+@keyframes wjazd { from { opacity: 0; transform: translateX(14px) } to { opacity: 1; transform: none } }
+.kolko { display: block; width: 22px; height: 22px; border-radius: 22px; border: 3px solid rgba(242,179,107,.25); border-top-color: #f2b36b; animation: obrot .8s linear infinite }
+@keyframes obrot { to { transform: rotate(360deg) } }
+.ptaszek { display: grid; width: 24px; height: 24px; border-radius: 24px; background: var(--ok); display: grid; place-items: center; animation: wej .25s ease }
+.sloty { display: flex; gap: 8px; margin-top: 10px }
+.sloty span { flex: 1; text-align: center; padding: 7px 0; border-radius: 12px; background: #f4efe7; font: 700 14px "JetBrains Mono", monospace; border: 2px solid transparent; transition: all .25s }
+.sloty span.skan { border-color: var(--terakota); background: #fbe7df }
+.sloty span.zaj { color: #c3b8a8; text-decoration: line-through }
+.sloty span.ok { background: var(--ok); color: #fff; transform: scale(1.06) }
+.pola { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px }
+.pole { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: #faf7f2; border: 2px solid transparent; min-width: 0; transition: background .6s, border-color .6s }
+.pole.szer { grid-column: span 2 }
+.pole em { font-style: normal; width: 66px; flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--szary); text-transform: uppercase; letter-spacing: .05em }
+.pole b { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.pole b:empty::before { content: "—"; color: #cfc6b8; font-weight: 500 }
+.pole.swieze { background: #fbe7df; border-color: rgba(180,71,44,.45) }
+.pole.pelne { background: #f6f2ec }
+.pole.ok b { color: var(--ok) }
 @media (prefers-reduced-motion: reduce) { .dym, .rez.nowa, .awatar.mowi::after { animation: none } }
 </style>
 </head>
@@ -93,11 +126,29 @@ body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Int
       <div class="blad" id="blad" hidden></div>
     </section>
 
+    <div class="prawa">
+    <section class="teraz" id="teraz" aria-label="Co teraz robi recepcjonistka">
+      <div class="teraz-g"><div class="aw">J</div><b>Julia teraz</b><span class="live"><i></i>NA ŻYWO</span></div>
+      <div class="krok"><span class="ik" id="krok-ik">☎️</span><span class="tx" id="krok-tx">Czeka na telefon</span><span id="krok-st"></span></div>
+      <div class="sloty" id="sloty" hidden></div>
+      <div class="pola" id="pola">
+        <div class="pole" data-p="dzien"><em>Dzień</em><b></b></div>
+        <div class="pole" data-p="godzina"><em>Godzina</em><b></b></div>
+        <div class="pole" data-p="osoby"><em>Osoby</em><b></b></div>
+        <div class="pole" data-p="stolik"><em>Stolik</em><b></b></div>
+        <div class="pole" data-p="imie"><em>Imię</em><b></b></div>
+        <div class="pole" data-p="telefon"><em>Telefon</em><b></b></div>
+        <div class="pole szer" data-p="email"><em>E-mail</em><b></b></div>
+        <div class="pole szer" data-p="uwagi"><em>Uwagi</em><b></b></div>
+      </div>
+    </section>
+
     <section class="tab" aria-label="Rezerwacje">
       <h3>Twój panel rezerwacji</h3>
       <div class="pod"><i></i>aktualizuje się na żywo</div>
       <div id="lista"><div class="pusto">Wczytuję…</div></div>
     </section>
+    </div>
   </div>
 
   <p class="stopka">Trattoria Sole to restauracja wymyślona na potrzeby pokazu. Recepcjonistkę AI dla Twojej firmy przygotuje <a href="https://www.aiforbusiness24.com">AI for Business 24</a>.</p>
@@ -136,10 +187,11 @@ body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Int
       sesja = await ElevenLabsClient.Conversation.startSession({
         agentId: AGENT,
         connectionType: "webrtc",
-        onConnect: function () { start = Date.now(); zegar = setInterval(czas, 500); czas(); $("podpis").textContent = "Rozmowa trwa"; $("rozlacz").hidden = false; animuj(); },
+        onConnect: function () { T.start(); start = Date.now(); zegar = setInterval(czas, 500); czas(); $("podpis").textContent = "Rozmowa trwa"; $("rozlacz").hidden = false; animuj(); },
         onDisconnect: koniec,
         onError: function (m) { $("blad").textContent = "Błąd połączenia: " + m; $("blad").hidden = false; },
-        onMessage: function (p) { if (!p || !p.message) return; var t = p.source === "user" ? p.message : p.message.replace(/\[([^\]]*)\]/g, function (m, w) { return /^[A-ZĄĆĘŁŃÓŚŹŻ]/.test(w) ? w : ""; }).replace(/\s{2,}/g, " ").trim(); if (t) dym(t, p.source === "user" ? "ja" : "ai"); },
+        onMessage: function (p) { if (!p || !p.message) return; var t = p.source === "user" ? p.message : p.message.replace(/\[([^\]]*)\]/g, function (m, w) { return /^[A-ZĄĆĘŁŃÓŚŹŻ]/.test(w) ? w : ""; }).replace(/\s{2,}/g, " ").trim(); if (t) { dym(t, p.source === "user" ? "ja" : "ai"); T.tekst(t, p.source === "user" ? "ja" : "ai"); } },
+        onAgentToolResponse: function (ev) { T.narzedzie(ev); },
         onModeChange: function (p) { awatar.classList.toggle("mowi", p.mode === "speaking"); },
       });
     } catch (e) {
@@ -152,9 +204,166 @@ body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Int
     paski.forEach(function (p) { p.style.height = "6px"; });
     $("rozlacz").hidden = true; $("zadzwon").hidden = false; $("podpis").textContent = "Połączenie zakończone · zadzwoń ponownie";
     if (sesja) dym("Połączenie zakończone", "sys");
+    T.koniec();
     sesja = null; odswiez();
   }
   $("rozlacz").onclick = function () { if (sesja) sesja.endSession(); };
+
+  /* ── „Julia teraz”: kroki i szkic rezerwacji z napisów rozmowy, zdarzeń narzędzi i tablicy ───────── */
+  var T = (function () {
+    var LICZ = { jeden: 1, jedna: 1, jednej: 1, jednego: 1, jedną: 1, dwa: 2, dwie: 2, "dwóch": 2, dwoje: 2, dwojga: 2, "dwójkę": 2, "dwójki": 2, trzy: 3, trzech: 3, troje: 3, trojga: 3, cztery: 4, czterech: 4, czworo: 4, "pięć": 5, "pięciu": 5, "sześć": 6, "sześciu": 6, siedem: 7, siedmiu: 7, osiem: 8, "ośmiu": 8, "dziewięć": 9, "dziewięciu": 9, "dziesięć": 10, "dziesięciu": 10, "jedenaście": 11, "dwanaście": 12 };
+    var CYFRY = { zero: "0", jeden: "1", jedynka: "1", dwa: "2", trzy: "3", cztery: "4", "pięć": "5", "sześć": "6", siedem: "7", osiem: "8", "dziewięć": "9" };
+    var GODZ = { dwunast: 12, trzynast: 13, czternast: 14, "piętnast": 15, szesnast: 16, siedemnast: 17, osiemnast: 18, "dziewiętnast": 19, dwudziest: 20, pierwsz: 13, drug: 14, trzeci: 15, czwart: 16, "piąt": 17, "szóst": 18, "siódm": 19, "ósm": 20 };
+    var MIN = { "trzydzieści": 30, "piętnaście": 15, "czterdzieści pięć": 45, "dwadzieścia": 20, "czterdzieści": 40, "dziesięć": 10 };
+    var DNI = { poniedzia: 1, wtor: 2, "środ": 3, czwart: 4, "piąt": 5, sobot: 6, niedziel: 0 };
+    var KR = ["nd", "pon", "wt", "śr", "czw", "pt", "sob"];
+    var MIES = ["stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "września", "października", "listopada", "grudnia"];
+    var NIE_IMIE = /^(tak|nie|dobrze|jasne|okej|ok|proszę|dzień|dzien|mam|to|ja|numer|telefon|halo|super|świetnie|oczywiście|czy|a|i|e+|yyy?)$/i;
+    var pola = {}, ostAgent = "", czekaWynik = false, skan = null, godzinaH = null, aktywna = false;
+    document.querySelectorAll("#pola .pole").forEach(function (el) { pola[el.dataset.p] = el; });
+
+    function krok(ik, tx, stan) {
+      $("krok-ik").textContent = ik;
+      var el = $("krok-tx");
+      if (el.textContent !== tx) { el.textContent = tx; el.classList.remove("nowy"); void el.offsetWidth; el.classList.add("nowy"); }
+      $("krok-st").innerHTML = stan === "ok" ? '<span class="ptaszek"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' : stan === "kreci" ? '<span class="kolko"></span>' : "";
+    }
+    function ustaw(p, w, ok) {
+      var el = pola[p]; if (!el || !w) return;
+      var b = el.querySelector("b"); if (b.dataset.v === w) return;
+      b.dataset.v = w; el.classList.remove("pelne"); el.classList.add("swieze"); el.classList.toggle("ok", !!ok);
+      var i = 0; (function pisz() { b.textContent = w.slice(0, ++i); if (i < w.length) setTimeout(pisz, Math.max(12, 260 / w.length)); })();
+      setTimeout(function () { el.classList.remove("swieze"); el.classList.add("pelne"); }, 1600);
+    }
+    function wyczysc() {
+      Object.keys(pola).forEach(function (p) { var b = pola[p].querySelector("b"); b.textContent = ""; delete b.dataset.v; pola[p].className = "pole" + (p === "email" || p === "uwagi" ? " szer" : ""); });
+      $("sloty").hidden = true; godzinaH = null; czekaWynik = false; ostAgent = "";
+    }
+    var dwa = function (n) { return String(n).padStart(2, "0"); };
+    function etDnia(d) { return KR[d.getDay()] + " " + d.getDate() + "." + dwa(d.getMonth() + 1); }
+
+    // ── wyciąganie danych z tekstu ──
+    function godzina(t) {
+      var m = t.match(/\b([01]?\d|2[0-3])[:.]([0-5]\d)\b/);
+      if (m && +m[1] >= 10) return dwa(m[1]) + ":" + m[2];
+      m = t.match(/wpół do (\S+)/);
+      if (m) for (var k in GODZ) if (m[1].indexOf(k) === 0) return dwa(GODZ[k] - 1) + ":30";
+      m = t.match(/(?:\bna|\bo|\bokoło|\bgodzin[aęy]?)\s+(dwunast|trzynast|czternast|piętnast|szesnast|siedemnast|osiemnast|dziewiętnast|dwudziest|pierwsz|drug|trzeci|czwart|piąt|szóst|siódm|ósm)\S*(?:\s+(trzydzieści|piętnaście|czterdzieści pięć|czterdzieści|dwadzieścia|dziesięć))?/);
+      if (m) return dwa(GODZ[m[1]]) + ":" + dwa(m[2] ? MIN[m[2]] : 0);
+      m = t.match(/(?:\bna|\bo)\s+(1[1-9]|2[0-2])\b(?!\s*(?:os|osób|osoby|min|zł|euro))/);
+      if (m) return m[1] + ":00";
+      return null;
+    }
+    function dzien(t) {
+      var d = new Date();
+      if (/pojutrze/.test(t)) { d.setDate(d.getDate() + 2); return "pojutrze, " + etDnia(d); }
+      if (/\bjutro\b|jutrzejsz/.test(t)) { d.setDate(d.getDate() + 1); return "jutro, " + etDnia(d); }
+      if (/\bdzi(?:ś|siaj)\b|dzisiejsz/.test(t)) return "dziś, " + etDnia(d);
+      var m = t.match(/\b(\d{1,2})\s+(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)/);
+      if (m) { var x = new Date(d.getFullYear(), MIES.indexOf(m[2]), +m[1]); if (x < d) x.setFullYear(x.getFullYear() + 1); return etDnia(x); }
+      m = t.match(/\b(?:w|we|na)\s+(poniedzia|wtor|środ|czwart|piąt|sobot|niedziel)\S*/);
+      if (m) { var cel = DNI[m[1]], r = (cel - d.getDay() + 7) % 7 || 7; d.setDate(d.getDate() + r); return etDnia(d); }
+      return null;
+    }
+    function ileOsob(t) {
+      if (/we dwoje|we dwójkę|dla dwojga|dla pary/.test(t)) return 2;
+      var m = t.match(/(\d{1,2}|[a-ząćęłńóśźż]+)\s+(?:osób|osoby|osobę|os\.|gości|dorosłych)/);
+      if (m) return /^\d+$/.test(m[1]) ? +m[1] : LICZ[m[1]] || null;
+      m = t.match(/stolik\s+(?:dla|na)\s+(\d{1,2}|[a-ząćęłńóśźż]+)\b/);
+      if (m) return /^\d+$/.test(m[1]) ? +m[1] : LICZ[m[1]] || null;
+      return null;
+    }
+    function telefon(t) {
+      var c = t.replace(/[a-ząćęłńóśźż]+/g, function (w) { return CYFRY[w] !== undefined ? CYFRY[w] : " | "; }).replace(/[^\d|]/g, "").split("|").join("");
+      var m = c.match(/\d{9,12}/);
+      return m ? m[0].replace(/(\d{3})(?=\d)/g, "$1 ").trim() : null;
+    }
+    function email(t) {
+      var s = t.replace(/\s+małpa\s+/g, "@").replace(/\s+kropka\s+/g, ".").replace(/\s+myślnik\s+/g, "-");
+      var m = s.match(/[a-z0-9._+-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+/i);
+      return m ? m[0].toLowerCase().replace(/\.$/, "") : null;
+    }
+    function imie(t, oryg, poPytaniu) {
+      var m = oryg.match(/(?:mam na imię|nazywam się|na imię|na nazwisko|imię to|tu|z tej strony)\s+([A-ZŁŚŻŹĆŃÓ][a-ząćęłńóśźż]+)/);
+      if (m && m[1] !== "Julia") return m[1];
+      // odpowiedź na pytanie o imię: pierwsze słowo, jeśli nie jest zwykłym słowem („tak”, „dobrze”…)
+      if (poPytaniu) { var x = oryg.replace(/[.,!?:]/g, " ").trim().split(/\s+/)[0] || ""; if (x.length > 2 && !NIE_IMIE.test(x) && !LICZ[x.toLowerCase()]) return x[0].toUpperCase() + x.slice(1); }
+      return null;
+    }
+    function uwagi(t) {
+      var u = [];
+      var a = t.match(/alergi\S*\s+na\s+([a-ząćęłńóśźż]+(?:\s+[a-ząćęłńóśźż]+)?)/); if (a) u.push("alergia na " + a[1]);
+      if (/wegań/.test(t)) u.push("dania wegańskie"); else if (/wegetari/.test(t)) u.push("wegetariańskie");
+      if (/bezglut|gluten/.test(t)) u.push("bez glutenu");
+      if (/urodzin/.test(t)) u.push("urodziny"); if (/rocznic/.test(t)) u.push("rocznica");
+      if (/przy oknie/.test(t)) u.push("stolik przy oknie"); if (/taras|ogródk/.test(t)) u.push("taras");
+      if (/dzieck|krzesełk|wózek/.test(t)) u.push("z dzieckiem");
+      return u;
+    }
+    var zebrane = [];
+    function zbierz(oryg, odKlienta) {
+      var t = oryg.toLowerCase();
+      var g = godzina(t); if (g) { ustaw("godzina", g); godzinaH = g; }
+      var d = dzien(t); if (d) ustaw("dzien", d);
+      var o = ileOsob(t); if (o) ustaw("osoby", String(o));
+      var tel = telefon(t); if (tel && odKlienta) ustaw("telefon", tel);
+      var e = email(t); if (e) ustaw("email", e);
+      var im = imie(t, oryg, odKlienta && /(imi[eę]|nazwisk|na kogo)[^.?!]*\?|poproszę (?:o )?imi/.test(ostAgent) && !/zgadza/.test(ostAgent)); if (im && (odKlienta || /na (?:nazwisko|imię)/.test(t))) ustaw("imie", im);
+      uwagi(t).forEach(function (x) { if (zebrane.indexOf(x) < 0) zebrane.push(x); }); if (zebrane.length) ustaw("uwagi", zebrane.join(" · "));
+    }
+
+    // ── skan godzin przy sprawdzaniu stolika ──
+    function sloty() {
+      var h = godzinaH || "14:00", p = h.split(":").map(Number), baza = p[0] * 60 + p[1], el = $("sloty");
+      var lista = [-60, -30, 0, 30, 60].map(function (dm) { var m = baza + dm; return dwa(Math.floor(m / 60)) + ":" + dwa(m % 60); });
+      el.innerHTML = lista.map(function (x) { return "<span>" + x + "</span>"; }).join(""); el.hidden = false;
+      var sp = el.querySelectorAll("span"), i = 0; clearInterval(skan);
+      skan = setInterval(function () { sp.forEach(function (s, k) { s.classList.toggle("skan", k === i % 5); if (k < i % 5 && k !== 2) s.classList.add("zaj"); }); i++; }, 180);
+    }
+    function wynikSlotow(wolny) {
+      clearInterval(skan); var sp = $("sloty").querySelectorAll("span");
+      sp.forEach(function (s, k) { s.classList.remove("skan"); if (k === 2) s.classList.add(wolny ? "ok" : "zaj"); });
+    }
+
+    return {
+      start: function () { aktywna = true; $("teraz").classList.add("aktywna"); wyczysc(); zebrane = []; krok("📞", "Odbiera telefon", "kreci"); },
+      koniec: function () { aktywna = false; $("teraz").classList.remove("aktywna"); clearInterval(skan); if ($("krok-tx").textContent !== "Rezerwacja w panelu") krok("☎️", "Rozmowa zakończona"); },
+      tekst: function (t, kto) {
+        if (!aktywna) return;
+        if (kto === "ja") { krok("👂", "Słucha gościa", "kreci"); zbierz(t, true); return; }
+        var l = t.toLowerCase(); ostAgent = l;
+        zbierz(t, false);
+        if (czekaWynik) {
+          czekaWynik = false;
+          if (/niestety|zajęt|brak wolnych|nie mamy|nie ma już/.test(l)) { wynikSlotow(false); ustaw("stolik", "zajęty · inne godziny"); krok("🔁", "Proponuje inny termin", "ok"); return; }
+          wynikSlotow(true); ustaw("stolik", "wolny ✓", true); krok("✅", "Wolny stolik o " + (godzinaH || "tej godzinie"), "ok"); return;
+        }
+        if (/sprawdz|sprawdzę|chwileczk|moment|zerknę/.test(l)) { krok("🔎", "Sprawdza wolne stoliki", "kreci"); sloty(); return; }
+        if (/którą godzin|ilu osób|ile osób|na kiedy|jaki dzień|który dzień/.test(l)) { krok("📅", "Dopytuje o termin", "kreci"); return; }
+        if (/w czym mogę pomóc|z tej strony/.test(l)) { krok("👋", "Wita gościa", "ok"); return; }
+        if (/podsumow|czy wszystko się zgadza/.test(l)) { krok("🔁", "Podsumowuje rezerwację", "kreci"); return; }
+        if (/już zapisuj|zapisuję|wpisuję|rezerwacja (?:jest )?potwierdzon/.test(l)) { krok("⚡", "Wpisuje rezerwację", "kreci"); return; }
+        if (/(imi[eę]|nazwisk|telefon|numer|e-?mail|adres)[^.]*\?|poproszę (?:o )?(imi|numer|adres)/.test(l)) { krok("📝", "Zapisuje dane gościa", "kreci"); return; }
+        if (/wegań|wegetari|menu|dani|pizz|risott|makaron|polecam|deser|kuchni/.test(l)) { krok("📖", "Odpowiada o menu", "ok"); return; }
+        if (/do zobaczenia|zapraszamy|miłego dnia/.test(l)) { krok("✅", "Rezerwacja gotowa", "ok"); return; }
+        krok("💬", "Rozmawia z gościem", "kreci");
+      },
+      narzedzie: function (ev) {
+        if (!aktywna || !ev) return;
+        var n = ev.tool_name || ev.toolName || "";
+        if (/sprawdz/.test(n)) { czekaWynik = true; krok("🔎", "Sprawdziła dostępność", "ok"); if ($("sloty").hidden) sloty(); }
+        else if (/rezerw/.test(n)) { krok("⚡", "Wpisuje do panelu", "kreci"); setTimeout(odswiez, 300); setTimeout(odswiez, 1500); }
+      },
+      rezerwacja: function (x) {
+        var czesci = x.etykieta.split(" "), g = czesci.pop(), d = czesci.join(" ").replace(/,$/, "");
+        ustaw("godzina", g); ustaw("osoby", String(x.osoby)); ustaw("imie", x.imie); if (x.uwagi) ustaw("uwagi", x.uwagi);
+        var dt = new Date(x.start); ustaw("dzien", (pola.dzien.querySelector("b").dataset.v || "").split(",")[0].match(/jutro|dziś|pojutrze/) ? pola.dzien.querySelector("b").dataset.v : etDnia(dt));
+        ustaw("stolik", x.status === "do_managera" ? "manager oddzwoni" : "zarezerwowany ✓", x.status !== "do_managera");
+        if ($("sloty").hidden === false) wynikSlotow(true);
+        krok("✅", "Rezerwacja w panelu", "ok");
+      },
+    };
+  })();
 
   function osoby(n) { return n === 1 ? "1 osoba" : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? n + " osoby" : n + " osób"; }
   function esc(s) { return String(s || "").replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -162,7 +371,7 @@ body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Int
     try {
       var r = await fetch(LISTA, { cache: "no-store" }).then(function (x) { return x.json(); });
       var lista = r.rezerwacje || [];
-      if (znane) lista.forEach(function (x) { if (!znane[x.id]) nowe[x.id] = Date.now(); });
+      if (znane) lista.forEach(function (x) { if (!znane[x.id]) { nowe[x.id] = Date.now(); if (sesja || Date.now() - start < 120000) T.rezerwacja(x); } });
       znane = {}; lista.forEach(function (x) { znane[x.id] = 1; });
       if (!lista.length) { $("lista").innerHTML = '<div class="pusto">Brak rezerwacji. Zadzwoń i zarezerwuj pierwszy stolik.</div>'; return; }
       var html = "", dzien = "";
