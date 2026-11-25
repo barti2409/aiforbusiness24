@@ -842,6 +842,12 @@
     setTimeout(() => o.classList.add('open'), 10);
     goStep(1);
   }
+  // Otwarcie quizu bezpośrednio z adresu aiforbusiness24.com/#quiz (naklejki z linkiem w relacjach Stories)
+  function openQuizZHasha() {
+    if (['#quiz', '#formularz', '#konsultacja'].includes(location.hash.toLowerCase())) openQuiz();
+  }
+  window.addEventListener('DOMContentLoaded', openQuizZHasha);
+  window.addEventListener('hashchange', openQuizZHasha);
   function closeQuiz() {
     const o = document.getElementById('quiz-overlay');
     o.classList.remove('open');
