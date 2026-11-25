@@ -7,7 +7,7 @@
 <meta name="description" content="Klientka dzwoni do salonu o 21:04. Odbiera agent głosowy AI: podaje cenę, sprawdza wolne terminy i umawia wizytę. Posłuchaj całej rozmowy.">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Posłuchaj, jak agent AI odbiera telefon po godzinach">
-<meta property="og:description" content="Klientka dzwoni o 21:04, salon jest zamknięty. Agent podaje cenę, sprawdza terminy i umawia wizytę — cała rozmowa, 1 min 17 s.">
+<meta property="og:description" content="Klientka dzwoni o 21:04, salon jest zamknięty. Agent podaje cenę, sprawdza terminy i umawia wizytę — cała rozmowa, 51 sekund.">
 <meta property="og:image" content="https://aiforbusiness24.com/demo/telefon/og.jpg">
 <meta property="og:url" content="https://aiforbusiness24.com/demo/telefon/">
 <meta property="og:type" content="website">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 /* Demo „Agent odbiera telefon” (25.11.2026) — link z wiadomości do osób, które skomentowały TELEFON pod rolką 04.
-   Nagranie: rozmowa wygenerowana w ElevenLabs (text-to-dialogue, głosy Melania = agentka, Olenka = klientka),
+   Nagranie: rozmowa wygenerowana w ElevenLabs (text-to-dialogue, głos Luiza = agentka, ten sam co Julia z Trattoria Sole, Olenka = klientka),
    czasy dymków z whisper.cpp --dtw (+4,7 s na dzwonek i odebranie). Salon Bella i klientka są wymyślone. */
 :root { --tlo: #f5f5f7; --karta: #fff; --ink: #0a0a0a; --szary: #6e6e73; --jasny: #a1a1a6; --linia: #e5e5ea; --ok: #16a34a; --niebieski: #0a84ff;
   --grad: linear-gradient(90deg, #0A84FF 0%, #5E5CE6 35%, #BF5AF2 65%, #FF375F 100%); }
@@ -137,10 +137,10 @@ h1 { margin: 10px 0 12px; font-size: clamp(30px, 5vw, 50px); line-height: 1.06; 
         <div class="stan" id="stan">przychodzące · 21:04</div>
         <div class="fala" id="fala"></div>
       </div>
-      <div class="rozmowa" id="rozmowa"><div class="pusto" id="pusto">Naciśnij zielony przycisk, żeby odsłuchać całą rozmowę (1 min 17 s). Tekst pojawi się na bieżąco.</div></div>
+      <div class="rozmowa" id="rozmowa"><div class="pusto" id="pusto">Naciśnij zielony przycisk, żeby odsłuchać całą rozmowę (51 s). Tekst pojawi się na bieżąco.</div></div>
       <div class="ster">
         <button class="graj" id="graj" aria-label="Odtwórz nagranie"><svg viewBox="0 0 24 24" id="ikona"><path d="M8 5v14l11-7z"/></svg></button>
-        <div class="pasek"><input type="range" id="suwak" min="0" max="82" step="0.1" value="0" aria-label="Przewiń nagranie"><div class="cz"><span id="teraz">0:00</span><span id="calosc">1:22</span></div></div>
+        <div class="pasek"><input type="range" id="suwak" min="0" max="56" step="0.1" value="0" aria-label="Przewiń nagranie"><div class="cz"><span id="teraz">0:00</span><span id="calosc">0:56</span></div></div>
       </div>
       <audio id="audio" src="rozmowa.mp3" preload="auto"></audio>
     </div>
@@ -158,7 +158,7 @@ h1 { margin: 10px 0 12px; font-size: clamp(30px, 5vw, 50px); line-height: 1.06; 
         </div>
         <div class="wizyta" id="wizyta">
           <div class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-          <div><b>Nowa wizyta: śr 10:00 · koloryzacja</b><br><small>Aleksandra Nowak · umówiła asystentka AI o 21:05</small></div>
+          <div><b>Nowa wizyta: śr 10:00 · koloryzacja</b><br><small>Aleksandra Nowak · umówiła asystentka AI o 21:04</small></div>
         </div>
       </div>
       <div class="karta">
@@ -166,10 +166,10 @@ h1 { margin: 10px 0 12px; font-size: clamp(30px, 5vw, 50px); line-height: 1.06; 
         <div class="opis">w trakcie jednej rozmowy, bez udziału salonu</div>
         <ul class="lista" id="lista">
           <li data-t="0"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Odebrał telefon po godzinach otwarcia<span class="t"></span></li>
-          <li data-t="15.2"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Podał cenę z cennika salonu<span class="t"></span></li>
-          <li data-t="19.5"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Dopytał o szczegóły i podał czas wizyty<span class="t"></span></li>
-          <li data-t="41.2"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Sprawdził wolne terminy w kalendarzu<span class="t"></span></li>
-          <li data-t="62.7"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Umówił wizytę i wpisał ją do kalendarza<span class="t"></span></li>
+          <li data-t="12.24"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Podał cenę z cennika salonu<span class="t"></span></li>
+          <li data-t="16.52"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Podał czas trwania wizyty<span class="t"></span></li>
+          <li data-t="23.02"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Sprawdził wolne terminy w kalendarzu<span class="t"></span></li>
+          <li data-t="39.16"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Umówił wizytę i wpisał ją do kalendarza<span class="t"></span></li>
         </ul>
       </div>
     </div>
@@ -197,23 +197,21 @@ h1 { margin: 10px 0 12px; font-size: clamp(30px, 5vw, 50px); line-height: 1.06; 
 // [start, koniec, kto, tekst] — czasy w nagraniu (rozmowa zaczyna się po 4,7 s dzwonienia i odebrania)
 const P = 4.7;
 const ROZ = [
-  [0.00, 3.86, "ai", "Dobry wieczór, salon fryzjerski Bella, tu wirtualna asystentka."],
-  [4.48, 8.52, "ai", "Salon jest już zamknięty, ale chętnie pomogę. W czym mogę pomóc?"],
-  [9.82, 14.0, "kl", "Dobry wieczór! Chciałam zapytać, ile kosztuje u państwa koloryzacja?"],
-  [15.2, 22.32, "ai", "Koloryzacja kosztuje od 350 zł. Dokładna cena zależy od długości włosów. Jakie ma pani włosy?"],
-  [23.6, 24.82, "kl", "Mniej więcej do ramion."],
-  [25.48, 36.08, "ai", "Przy włosach do ramion to zwykle 350–420 zł, razem z pielęgnacją. Wizyta trwa około 2,5 godziny. Chciałaby się pani umówić?"],
-  [37.3, 39.66, "kl", "Tak, najlepiej jeszcze w tym tygodniu, rano."],
-  [41.22, 47.64, "ai", "Już sprawdzam… Mam wolne w środę o 10:00 albo w piątek o 9:00. Który termin pani pasuje?"],
-  [48.96, 51.04, "kl", "Środa o dziesiątej będzie idealnie."],
-  [52.32, 55.62, "ai", "Świetnie. Na jakie imię i nazwisko zapisać wizytę?"],
-  [56.88, 58.06, "kl", "Aleksandra Nowak."],
-  [59.46, 64.76, "ai", "Dziękuję, pani Aleksandro. Zapisuję: koloryzacja, środa, godzina 10:00."],
-  [65.5, 69.34, "ai", "Wizyta jest już w kalendarzu salonu. Czy mogę jeszcze w czymś pomóc?"],
-  [70.64, 72.64, "kl", "Nie, to wszystko. Dziękuję bardzo!"],
-  [73.96, 77.28, "ai", "Dziękuję za telefon i do zobaczenia w środę. Miłego wieczoru!"],
+  [0.00, 3.58, "ai", "Dobry wieczór, salon fryzjerski Bella, tu wirtualna asystentka."],
+  [4.14, 7.38, "ai", "Salon jest już zamknięty, ale chętnie pomogę. W czym mogę pomóc?"],
+  [7.70, 11.70, "kl", "Dobry wieczór! Chciałam zapytać, ile kosztuje u państwa koloryzacja?"],
+  [12.24, 19.80, "ai", "Koloryzacja kosztuje od 350 zł, razem z pielęgnacją. Wizyta trwa około 2,5 godziny. Chciałaby się pani umówić?"],
+  [20.18, 22.52, "kl", "Tak, najlepiej jeszcze w tym tygodniu, rano."],
+  [23.02, 28.50, "ai", "Już sprawdzam… Mam wolne w środę o 10:00 albo w piątek o 9:00. Który termin pani pasuje?"],
+  [28.62, 31.14, "kl", "Środa o dziesiątej będzie idealnie."],
+  [31.64, 34.46, "ai", "Świetnie. Na jakie imię i nazwisko zapisać wizytę?"],
+  [34.90, 36.08, "kl", "Aleksandra Nowak."],
+  [36.60, 41.04, "ai", "Dziękuję, pani Aleksandro. Zapisuję: koloryzacja, środa, godzina 10:00."],
+  [41.60, 45.12, "ai", "Wizyta jest już w kalendarzu salonu. Czy mogę jeszcze w czymś pomóc?"],
+  [45.38, 47.44, "kl", "Nie, to wszystko. Dziękuję bardzo!"],
+  [47.94, 51.10, "ai", "Dziękuję za telefon i do zobaczenia w środę. Miłego wieczoru!"],
 ];
-const KONIEC = 77.6;
+const KONIEC = 51.4;
 const $ = (id) => document.getElementById(id);
 const audio = $("audio"), roz = $("rozmowa"), fala = $("fala"), aw = $("aw");
 const N = 23; const pal = [];
@@ -229,8 +227,8 @@ function rysujRozmowe(t) {
   roz.innerHTML = "";
   if (t > 4.3) roz.insertAdjacentHTML("beforeend", `<div class="dym sys odeb">📞 połączenie odebrane przez asystentkę AI</div>`);
   ROZ.slice(0, ile).forEach(([, , kto, tekst]) => roz.insertAdjacentHTML("beforeend", `<div class="dym ${kto}"><small>${kto === "ai" ? "Asystentka AI" : "Klientka"}</small>${tekst}</div>`));
-  if (r >= KONIEC) roz.insertAdjacentHTML("beforeend", `<div class="dym sys kon">✓ wizyta umówiona · rozmowa 1:17</div>`);
-  if (t === 0) roz.innerHTML = `<div class="pusto">Naciśnij zielony przycisk, żeby odsłuchać całą rozmowę (1 min 17 s). Tekst pojawi się na bieżąco.</div>`;
+  if (r >= KONIEC) roz.insertAdjacentHTML("beforeend", `<div class="dym sys kon">✓ wizyta umówiona · rozmowa 0:51</div>`);
+  if (t === 0) roz.innerHTML = `<div class="pusto">Naciśnij zielony przycisk, żeby odsłuchać całą rozmowę (51 s). Tekst pojawi się na bieżąco.</div>`;
   roz.scrollTop = roz.scrollHeight;
 }
 function rysujPanel(t) {
@@ -238,21 +236,21 @@ function rysujPanel(t) {
   const sl = (k) => document.querySelector(`[data-s="${k}"]`);
   const sr = sl("sr10"), pt = sl("pt9");
   sr.className = "sl wol"; pt.className = "sl wol"; sr.textContent = "wolne"; pt.textContent = "wolne";
-  if (r >= 41.22 && r < 48.96) { sr.classList.add("swieci"); pt.classList.add("swieci"); }
-  if (r >= 48.96 && r < 62.72) { sr.className = "sl wyb"; sr.textContent = "wybrany termin"; }
-  if (r >= 62.72) { sr.className = "sl um"; sr.textContent = "A. Nowak · koloryzacja"; }
-  $("wizyta").classList.toggle("on", r >= 65.5);
+  if (r >= 23.02 && r < 28.62) { sr.classList.add("swieci"); pt.classList.add("swieci"); }
+  if (r >= 28.62 && r < 39.16) { sr.className = "sl wyb"; sr.textContent = "wybrany termin"; }
+  if (r >= 39.16) { sr.className = "sl um"; sr.textContent = "A. Nowak · koloryzacja"; }
+  $("wizyta").classList.toggle("on", r >= 41.6);
   document.querySelectorAll("#lista li").forEach((li) => {
     const tt = Number(li.dataset.t), ok = t > 4.3 && r >= tt;
     li.classList.toggle("ok", ok);
-    li.querySelector(".t").textContent = ok ? `21:0${tt > 60 ? 5 : 4}` : "";
+    li.querySelector(".t").textContent = ok ? "21:04" : "";
   });
 }
 function stan(t) {
   const r = t - P;
   if (t <= 0.01 && audio.paused) return "przychodzące · 21:04";
   if (r < -0.4) return "dzwoni…";
-  if (r >= KONIEC) return "zakończono · 1:17";
+  if (r >= KONIEC) return "zakończono · 0:51";
   return `połączenie · ${mmss(Math.max(0, r))}`;
 }
 function klatka() {
