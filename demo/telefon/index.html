@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agent AI odbiera telefon — posłuchaj rozmowy | aiforbusiness24</title>
+<meta name="description" content="Klientka dzwoni do salonu o 21:04. Odbiera agent głosowy AI: podaje cenę, sprawdza wolne terminy i umawia wizytę. Posłuchaj całej rozmowy.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Posłuchaj, jak agent AI odbiera telefon po godzinach">
+<meta property="og:description" content="Klientka dzwoni o 21:04, salon jest zamknięty. Agent podaje cenę, sprawdza terminy i umawia wizytę — cała rozmowa, 1 min 17 s.">
+<meta property="og:image" content="https://aiforbusiness24.com/demo/telefon/og.jpg">
+<meta property="og:url" content="https://aiforbusiness24.com/demo/telefon/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='116' fill='%230a0a0a'/><circle cx='203' cy='296' r='76' fill='none' stroke='%23fff' stroke-width='42'/><rect x='258' y='220' width='42' height='152' rx='21' fill='%23fff'/><rect x='336' y='232' width='42' height='140' rx='21' fill='%23fff'/><path d='M357 118 C 360.5 149, 374 162.5, 405 166 C 374 169.5, 360.5 183, 357 214 C 353.5 183, 340 169.5, 309 166 C 340 162.5, 353.5 149, 357 118 Z' fill='%23fff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Demo „Agent odbiera telefon” (25.11.2026) — link z wiadomości do osób, które skomentowały TELEFON pod rolką 04.
+   Nagranie: rozmowa wygenerowana w ElevenLabs (text-to-dialogue, głosy Melania = agentka, Olenka = klientka),
+   czasy dymków z whisper.cpp --dtw (+4,7 s na dzwonek i odebranie). Salon Bella i klientka są wymyślone. */
+:root { --tlo: #f5f5f7; --karta: #fff; --ink: #0a0a0a; --szary: #6e6e73; --jasny: #a1a1a6; --linia: #e5e5ea; --ok: #16a34a; --niebieski: #0a84ff;
+  --grad: linear-gradient(90deg, #0A84FF 0%, #5E5CE6 35%, #BF5AF2 65%, #FF375F 100%); }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--tlo); color: var(--ink); font: 16px/1.5 Inter, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased }
+a { color: inherit }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 22px 16px 48px }
+.top { display: flex; align-items: center; gap: 12px }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -.02em }
+.logo svg { width: 34px; height: 34px }
+.logo .s { color: var(--jasny) }
+.pill { margin-left: auto; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 99px; background: #fff; border: 1px solid var(--linia); color: var(--szary) }
+.hero { text-align: center; margin: 44px auto 30px; max-width: 760px }
+.hero .nad { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent }
+h1 { margin: 10px 0 12px; font-size: clamp(30px, 5vw, 50px); line-height: 1.06; letter-spacing: -.035em; font-weight: 800 }
+.hero p { margin: 0; color: var(--szary); font-size: 18px }
+.uklad { display: grid; gap: 22px; grid-template-columns: 420px minmax(0, 1fr); align-items: start }
+@media (max-width: 900px) { .uklad { grid-template-columns: 1fr } }
+.uklad > * { min-width: 0 }
+
+/* telefon */
+.tel { background: #0b0b0d; color: #fff; border-radius: 44px; padding: 22px 20px; box-shadow: 0 30px 80px rgba(0,0,0,.22), inset 0 0 0 2px #26262a; display: flex; flex-direction: column; min-height: 640px }
+.tel-g { text-align: center; padding: 10px 0 6px }
+.aw { position: relative; width: 84px; height: 84px; margin: 0 auto 12px; border-radius: 84px; background: var(--grad); display: grid; place-items: center }
+.aw svg { width: 40px; height: 40px }
+.aw.mowi::after { content: ""; position: absolute; inset: -8px; border-radius: 99px; border: 3px solid rgba(191,90,242,.6); animation: puls 1s ease-in-out infinite }
+@keyframes puls { 0%,100% { transform: scale(1); opacity: .9 } 50% { transform: scale(1.08); opacity: .35 } }
+.tel h2 { margin: 0; font-size: 21px; font-weight: 700 }
+.tel .pod { color: #a1a1a6; font-size: 13px }
+.stan { font-family: "JetBrains Mono", monospace; font-size: 14px; color: #7ee2a0; margin-top: 4px; min-height: 21px }
+.fala { display: flex; justify-content: center; align-items: center; gap: 4px; height: 40px; margin: 6px 0 2px }
+.fala i { width: 4px; height: 5px; border-radius: 4px; background: #5e5ce6; transition: height .08s }
+.fala i.k { background: #0a84ff }
+.rozmowa { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 8px 2px; overflow-y: auto; max-height: 340px; scroll-behavior: smooth }
+.dym { max-width: 86%; padding: 9px 13px; border-radius: 18px; font-size: 14.5px; line-height: 1.4; animation: wej .25s ease }
+.dym small { display: block; font-size: 11px; font-weight: 700; opacity: .6; margin-bottom: 2px; letter-spacing: .02em }
+.dym.ai { align-self: flex-start; background: #232327; border-bottom-left-radius: 6px }
+.dym.kl { align-self: flex-end; background: var(--niebieski); border-bottom-right-radius: 6px }
+.dym.sys { align-self: center; background: none; color: #7ee2a0; font-size: 12px; font-weight: 600; padding: 2px }
+@keyframes wej { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+.pusto { margin: auto; text-align: center; color: #8e8e93; font-size: 14px; max-width: 260px }
+.ster { display: flex; align-items: center; gap: 14px; padding-top: 14px }
+.graj { width: 64px; height: 64px; flex-shrink: 0; border: 0; border-radius: 64px; background: #34c759; cursor: pointer; display: grid; place-items: center; transition: transform .15s }
+.graj:hover { transform: scale(1.05) }
+.graj svg { width: 28px; height: 28px; fill: #fff }
+.pasek { flex: 1 }
+.pasek input { width: 100%; accent-color: #5e5ce6 }
+.pasek .cz { display: flex; justify-content: space-between; font: 500 12px "JetBrains Mono", monospace; color: #8e8e93 }
+
+/* panel salonu */
+.panel { display: flex; flex-direction: column; gap: 22px }
+.karta { background: var(--karta); border-radius: 28px; padding: 22px; box-shadow: 0 1px 0 var(--linia), 0 20px 50px rgba(0,0,0,.05) }
+.karta h3 { margin: 0; font-size: 20px; letter-spacing: -.02em }
+.karta .opis { color: var(--szary); font-size: 13px; margin: 2px 0 16px; display: flex; align-items: center; gap: 8px }
+.karta .opis i { width: 8px; height: 8px; border-radius: 8px; background: var(--ok); box-shadow: 0 0 0 4px rgba(22,163,74,.18) }
+.kal { display: grid; grid-template-columns: 50px repeat(3, minmax(0, 1fr)); gap: 6px; font-size: 13px }
+@media (max-width: 480px) { .karta { padding: 18px 14px } .kal { grid-template-columns: 40px repeat(3, minmax(0, 1fr)) } .sl { font-size: 11px; padding: 5px 6px } }
+.kal .h { font-weight: 700; color: var(--szary); text-align: center; padding-bottom: 4px }
+.kal .g { font: 700 13px "JetBrains Mono", monospace; color: var(--jasny); display: flex; align-items: center }
+.sl { min-height: 42px; border-radius: 12px; padding: 6px 9px; font-size: 12px; line-height: 1.25; transition: all .35s ease; border: 1px solid transparent }
+.sl.zaj { background: #f2f2f5; color: #9a9aa0 }
+.sl.wol { border: 1px dashed #d1d1d6; color: #b0b0b5 }
+.sl.wol.swieci { border: 2px solid #5e5ce6; color: #5e5ce6; background: rgba(94,92,230,.07); font-weight: 700 }
+.sl.wyb { border: 2px solid #5e5ce6; background: rgba(94,92,230,.14); color: #3d3bb8; font-weight: 800 }
+.sl.um { background: #e8f8ee; border: 2px solid var(--ok); color: #0f6b30; font-weight: 700; animation: bum .5s ease }
+@keyframes bum { 0% { transform: scale(.9) } 60% { transform: scale(1.05) } 100% { transform: none } }
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px }
+.lista li { display: flex; align-items: center; gap: 12px; color: #b0b0b5; font-weight: 600; transition: color .3s }
+.lista li b { width: 26px; height: 26px; border-radius: 26px; border: 2px solid #d1d1d6; display: grid; place-items: center; flex-shrink: 0; transition: all .3s }
+.lista li b svg { width: 14px; height: 14px; opacity: 0 }
+.lista li.ok { color: var(--ink) }
+.lista li.ok b { background: var(--ok); border-color: var(--ok) }
+.lista li.ok b svg { opacity: 1 }
+.lista li span.t { margin-left: auto; font: 500 12px "JetBrains Mono", monospace; color: var(--jasny) }
+.wizyta { display: none; margin-top: 14px; padding: 14px 16px; border-radius: 18px; background: #0a0a0a; color: #fff; align-items: center; gap: 14px; animation: bum .5s ease }
+.wizyta.on { display: flex }
+.wizyta .ik { width: 44px; height: 44px; border-radius: 44px; background: var(--ok); display: grid; place-items: center; flex-shrink: 0 }
+.wizyta small { color: #a1a1a6 }
+
+/* CTA */
+.cta { margin-top: 34px; background: #0a0a0a; color: #fff; border-radius: 32px; padding: clamp(26px, 5vw, 44px); display: grid; gap: 22px; grid-template-columns: minmax(0, 1fr) auto; align-items: center }
+@media (max-width: 760px) { .cta { grid-template-columns: 1fr } }
+.cta h2 { margin: 0 0 8px; font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -.03em; line-height: 1.1 }
+.cta p { margin: 0; color: #a1a1a6 }
+.cta ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; color: #d1d1d6; font-size: 15px }
+.cta ul li::before { content: "✓"; color: #7ee2a0; font-weight: 800; margin-right: 10px }
+.btny { display: flex; flex-direction: column; gap: 10px; min-width: 240px }
+.btn { display: block; text-align: center; text-decoration: none; font-weight: 700; padding: 15px 22px; border-radius: 99px }
+.btn.b { background: #fff; color: #0a0a0a }
+.btn.c { border: 1px solid #3a3a3c; color: #fff }
+.uwaga { margin-top: 18px; text-align: center; color: var(--jasny); font-size: 12.5px }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="/" aria-label="AI for Business 24 — strona główna">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="116" fill="#0a0a0a"/><circle cx="203" cy="296" r="76" fill="none" stroke="#fff" stroke-width="42"/><rect x="258" y="220" width="42" height="152" rx="21" fill="#fff"/><rect x="336" y="232" width="42" height="140" rx="21" fill="#fff"/><path d="M357 118 C 360.5 149, 374 162.5, 405 166 C 374 169.5, 360.5 183, 357 214 C 353.5 183, 340 169.5, 309 166 C 340 162.5, 353.5 149, 357 118 Z" fill="#fff"/></svg>
+      <span>ai<span class="s">for</span>business24</span>
+    </a>
+    <span class="pill">Nagranie demo</span>
+  </div>
+
+  <div class="hero">
+    <span class="nad">Agent głosowy AI</span>
+    <h1>Posłuchaj, jak agent odbiera telefon po godzinach</h1>
+    <p>Wtorek, 21:04. Salon jest zamknięty, a klientka dzwoni zapytać o koloryzację. Odbiera agent: podaje cenę, sprawdza wolne terminy i od razu umawia wizytę.</p>
+  </div>
+
+  <div class="uklad">
+    <!-- telefon z nagraniem -->
+    <div class="tel">
+      <div class="tel-g">
+        <div class="aw" id="aw"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 8V5M9 13h.01M15 13h.01M10 16h4"/><circle cx="12" cy="4" r="1"/></svg></div>
+        <h2>Salon Bella</h2>
+        <div class="pod">asystentka AI odbiera połączenie</div>
+        <div class="stan" id="stan">przychodzące · 21:04</div>
+        <div class="fala" id="fala"></div>
+      </div>
+      <div class="rozmowa" id="rozmowa"><div class="pusto" id="pusto">Naciśnij zielony przycisk, żeby odsłuchać całą rozmowę (1 min 17 s). Tekst pojawi się na bieżąco.</div></div>
+      <div class="ster">
+        <button class="graj" id="graj" aria-label="Odtwórz nagranie"><svg viewBox="0 0 24 24" id="ikona"><path d="M8 5v14l11-7z"/></svg></button>
+        <div class="pasek"><input type="range" id="suwak" min="0" max="82" step="0.1" value="0" aria-label="Przewiń nagranie"><div class="cz"><span id="teraz">0:00</span><span id="calosc">1:22</span></div></div>
+      </div>
+      <audio id="audio" src="rozmowa.mp3" preload="auto"></audio>
+    </div>
+
+    <!-- panel salonu -->
+    <div class="panel">
+      <div class="karta">
+        <h3>Kalendarz salonu</h3>
+        <div class="opis"><i></i>agent widzi wolne terminy na żywo</div>
+        <div class="kal" id="kal">
+          <div></div><div class="h">śr</div><div class="h">czw</div><div class="h">pt</div>
+          <div class="g">9:00</div><div class="sl zaj">Ania · strzyżenie</div><div class="sl zaj">Kasia · balayage</div><div class="sl wol" data-s="pt9">wolne</div>
+          <div class="g">10:00</div><div class="sl wol" data-s="sr10">wolne</div><div class="sl zaj">Iza · koloryzacja</div><div class="sl zaj">Magda · modelowanie</div>
+          <div class="g">12:30</div><div class="sl zaj">Ola · pielęgnacja</div><div class="sl zaj">Basia · strzyżenie</div><div class="sl zaj">Ewa · koloryzacja</div>
+        </div>
+        <div class="wizyta" id="wizyta">
+          <div class="ik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <div><b>Nowa wizyta: śr 10:00 · koloryzacja</b><br><small>Aleksandra Nowak · umówiła asystentka AI o 21:05</small></div>
+        </div>
+      </div>
+      <div class="karta">
+        <h3>Co zrobił agent</h3>
+        <div class="opis">w trakcie jednej rozmowy, bez udziału salonu</div>
+        <ul class="lista" id="lista">
+          <li data-t="0"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Odebrał telefon po godzinach otwarcia<span class="t"></span></li>
+          <li data-t="15.2"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Podał cenę z cennika salonu<span class="t"></span></li>
+          <li data-t="19.5"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Dopytał o szczegóły i podał czas wizyty<span class="t"></span></li>
+          <li data-t="41.2"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Sprawdził wolne terminy w kalendarzu<span class="t"></span></li>
+          <li data-t="62.7"><b><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b>Umówił wizytę i wpisał ją do kalendarza<span class="t"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <h2>Chcesz takiego agenta w swojej firmie?</h2>
+      <p>Uczymy go Twoich usług, cen i godzin, a głos i sposób mówienia dopasowujemy do Twojej firmy.</p>
+      <ul>
+        <li>odbiera, kiedy Ty nie możesz — wieczorem, w weekend, w trakcie pracy</li>
+        <li>umawia wizyty w Twoim kalendarzu</li>
+        <li>rano widzisz, kto dzwonił i na kiedy jest umówiony</li>
+      </ul>
+    </div>
+    <div class="btny">
+      <a class="btn b" href="/#contact">Bezpłatna konsultacja</a>
+      <a class="btn c" href="mailto:bartek@aiforbusiness24.com?subject=Agent%20g%C5%82osowy%20AI">bartek@aiforbusiness24.com</a>
+    </div>
+  </div>
+  <p class="uwaga">Przykładowa rozmowa przygotowana na potrzeby demo: salon Bella, klientka i ceny są wymyślone, oba głosy wygenerowało AI.</p>
+</div>
+
+<script>
+// [start, koniec, kto, tekst] — czasy w nagraniu (rozmowa zaczyna się po 4,7 s dzwonienia i odebrania)
+const P = 4.7;
+const ROZ = [
+  [0.00, 3.86, "ai", "Dobry wieczór, salon fryzjerski Bella, tu wirtualna asystentka."],
+  [4.48, 8.52, "ai", "Salon jest już zamknięty, ale chętnie pomogę. W czym mogę pomóc?"],
+  [9.82, 14.0, "kl", "Dobry wieczór! Chciałam zapytać, ile kosztuje u państwa koloryzacja?"],
+  [15.2, 22.32, "ai", "Koloryzacja kosztuje od 350 zł. Dokładna cena zależy od długości włosów. Jakie ma pani włosy?"],
+  [23.6, 24.82, "kl", "Mniej więcej do ramion."],
+  [25.48, 36.08, "ai", "Przy włosach do ramion to zwykle 350–420 zł, razem z pielęgnacją. Wizyta trwa około 2,5 godziny. Chciałaby się pani umówić?"],
+  [37.3, 39.66, "kl", "Tak, najlepiej jeszcze w tym tygodniu, rano."],
+  [41.22, 47.64, "ai", "Już sprawdzam… Mam wolne w środę o 10:00 albo w piątek o 9:00. Który termin pani pasuje?"],
+  [48.96, 51.04, "kl", "Środa o dziesiątej będzie idealnie."],
+  [52.32, 55.62, "ai", "Świetnie. Na jakie imię i nazwisko zapisać wizytę?"],
+  [56.88, 58.06, "kl", "Aleksandra Nowak."],
+  [59.46, 64.76, "ai", "Dziękuję, pani Aleksandro. Zapisuję: koloryzacja, środa, godzina 10:00."],
+  [65.5, 69.34, "ai", "Wizyta jest już w kalendarzu salonu. Czy mogę jeszcze w czymś pomóc?"],
+  [70.64, 72.64, "kl", "Nie, to wszystko. Dziękuję bardzo!"],
+  [73.96, 77.28, "ai", "Dziękuję za telefon i do zobaczenia w środę. Miłego wieczoru!"],
+];
+const KONIEC = 77.6;
+const $ = (id) => document.getElementById(id);
+const audio = $("audio"), roz = $("rozmowa"), fala = $("fala"), aw = $("aw");
+const N = 23; const pal = [];
+for (let i = 0; i < N; i++) { const b = document.createElement("i"); fala.appendChild(b); pal.push(b); }
+const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+let pokazane = -1, analyser = null, dane = null;
+
+function rysujRozmowe(t) {
+  const r = t - P;
+  const ile = ROZ.filter((x) => r >= x[0]).length;
+  if (ile === pokazane && !(r >= KONIEC && !roz.querySelector(".kon")) && !(t > 4.3 && !roz.querySelector(".odeb"))) return;
+  pokazane = ile;
+  roz.innerHTML = "";
+  if (t > 4.3) roz.insertAdjacentHTML("beforeend", `<div class="dym sys odeb">📞 połączenie odebrane przez asystentkę AI</div>`);
+  ROZ.slice(0, ile).forEach(([, , kto, tekst]) => roz.insertAdjacentHTML("beforeend", `<div class="dym ${kto}"><small>${kto === "ai" ? "Asystentka AI" : "Klientka"}</small>${tekst}</div>`));
+  if (r >= KONIEC) roz.insertAdjacentHTML("beforeend", `<div class="dym sys kon">✓ wizyta umówiona · rozmowa 1:17</div>`);
+  if (t === 0) roz.innerHTML = `<div class="pusto">Naciśnij zielony przycisk, żeby odsłuchać całą rozmowę (1 min 17 s). Tekst pojawi się na bieżąco.</div>`;
+  roz.scrollTop = roz.scrollHeight;
+}
+function rysujPanel(t) {
+  const r = t - P;
+  const sl = (k) => document.querySelector(`[data-s="${k}"]`);
+  const sr = sl("sr10"), pt = sl("pt9");
+  sr.className = "sl wol"; pt.className = "sl wol"; sr.textContent = "wolne"; pt.textContent = "wolne";
+  if (r >= 41.22 && r < 48.96) { sr.classList.add("swieci"); pt.classList.add("swieci"); }
+  if (r >= 48.96 && r < 62.72) { sr.className = "sl wyb"; sr.textContent = "wybrany termin"; }
+  if (r >= 62.72) { sr.className = "sl um"; sr.textContent = "A. Nowak · koloryzacja"; }
+  $("wizyta").classList.toggle("on", r >= 65.5);
+  document.querySelectorAll("#lista li").forEach((li) => {
+    const tt = Number(li.dataset.t), ok = t > 4.3 && r >= tt;
+    li.classList.toggle("ok", ok);
+    li.querySelector(".t").textContent = ok ? `21:0${tt > 60 ? 5 : 4}` : "";
+  });
+}
+function stan(t) {
+  const r = t - P;
+  if (t <= 0.01 && audio.paused) return "przychodzące · 21:04";
+  if (r < -0.4) return "dzwoni…";
+  if (r >= KONIEC) return "zakończono · 1:17";
+  return `połączenie · ${mmss(Math.max(0, r))}`;
+}
+function klatka() {
+  const t = audio.currentTime;
+  $("suwak").value = t; $("teraz").textContent = mmss(t);
+  $("stan").textContent = stan(t);
+  rysujRozmowe(t); rysujPanel(t);
+  const r = t - P, mowi = ROZ.find((x) => r >= x[0] && r < x[1]);
+  aw.classList.toggle("mowi", !!mowi && mowi[2] === "ai" && !audio.paused);
+  if (analyser && !audio.paused) {
+    analyser.getByteFrequencyData(dane);
+    pal.forEach((b, i) => { const v = dane[2 + i * 3] / 255; b.style.height = `${5 + v * 34}px`; b.className = mowi && mowi[2] === "kl" ? "k" : ""; });
+  } else pal.forEach((b) => (b.style.height = "5px"));
+  requestAnimationFrame(klatka);
+}
+$("graj").onclick = () => {
+  if (!analyser) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = ctx.createMediaElementSource(audio);
+      analyser = ctx.createAnalyser(); analyser.fftSize = 256; dane = new Uint8Array(analyser.frequencyBinCount);
+      src.connect(analyser); analyser.connect(ctx.destination);
+    } catch (e) { analyser = null; }
+  }
+  if (audio.paused) audio.play(); else audio.pause();
+};
+audio.onplay = () => ($("ikona").innerHTML = '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>');
+audio.onpause = audio.onended = () => ($("ikona").innerHTML = '<path d="M8 5v14l11-7z"/>');
+audio.onloadedmetadata = () => { $("suwak").max = audio.duration; $("calosc").textContent = mmss(audio.duration); };
+$("suwak").oninput = (e) => { audio.currentTime = Number(e.target.value); pokazane = -1; };
+requestAnimationFrame(klatka);
+</script>
+</body>
+</html>
