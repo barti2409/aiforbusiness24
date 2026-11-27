@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Automat przypomnień o fakturach — demo | aiforbusiness24</title>
+<meta name="description" content="Zobacz, jak automat sam przypomina klientom o nieopłaconych fakturach, dopasowuje przelewy i mówi Ci, do kogo zadzwonić. Demo AI for Business 24.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Automat przypomnień o fakturach — demo">
+<meta property="og:description" content="Przypomnienie dzień po terminie, kolejne po tygodniu, a w panelu widać, kto już zapłacił.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Demo automatu przypomnień o fakturach (27.11.2026) — do rolki 03 „Automat przypomnień” (CTA FAKTURY).
+   Symulacja w przeglądarce: kalendarz przesuwa się dzień po dniu, automat wysyła przypomnienia, dopasowuje
+   przelewy i eskaluje do właściciela. Firmy i kwoty jak w rolce, wszystko wymyślone. Bez API i bez kosztów. */
+:root { --tlo: #f5f5f7; --karta: #fff; --ink: #1d1d1f; --szary: #86868b; --linia: #e8e8ed; --nieb: #0a84ff; --fiolet: #bf5af2; --ok: #30a46c; --ostrz: #ff9f0a; --czer: #ff3b30; --noc: #111114 }
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { margin: 0; background: var(--tlo); color: var(--ink); font: 15px/1.45 Inter, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased }
+.wrap { max-width: 1220px; margin: 0 auto; padding: 24px 16px 40px }
+button { font: inherit; cursor: pointer }
+
+.top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap }
+.logo { width: 44px; height: 44px; border-radius: 13px; background: var(--noc); color: #fff; display: grid; place-items: center; font: 800 20px Inter, sans-serif; letter-spacing: -.04em; box-shadow: 0 8px 24px rgba(10,132,255,.35), 0 0 0 1px rgba(191,90,242,.35) }
+.tytul b { display: block; font-size: 20px; letter-spacing: -.02em }
+.tytul small { color: var(--szary); font-size: 13px }
+.demo { margin-left: auto; font-size: 12px; font-weight: 700; color: #6e3bd1; background: #f1e9ff; padding: 6px 12px; border-radius: 99px }
+
+/* pasek sterowania */
+.ster { margin-top: 18px; background: var(--karta); border-radius: 22px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; box-shadow: 0 1px 0 var(--linia) }
+.data { display: flex; align-items: center; gap: 10px }
+.data .kal { width: 46px; height: 46px; border-radius: 12px; background: #fff; border: 1px solid var(--linia); overflow: hidden; text-align: center; flex: none }
+.data .kal i { display: block; background: var(--czer); color: #fff; font: 700 10px Inter; font-style: normal; text-transform: uppercase; padding: 2px 0 }
+.data .kal b { font: 700 20px/26px Inter }
+.data .opis b { display: block; font-size: 16px }
+.data .opis span { color: var(--szary); font-size: 12px }
+.btns { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap }
+.btn { border: 0; border-radius: 99px; padding: 10px 16px; font-weight: 700; font-size: 14px; background: #eef0f4; color: var(--ink); transition: transform .12s }
+.btn:hover { transform: translateY(-1px) }
+.btn.glowny { background: var(--noc); color: #fff }
+.btn.glowny.gra { background: linear-gradient(100deg, var(--nieb), var(--fiolet)) }
+
+/* liczniki */
+.kpi { margin-top: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px }
+.kpi div { background: var(--karta); border-radius: 20px; padding: 14px 16px; box-shadow: 0 1px 0 var(--linia) }
+.kpi span { color: var(--szary); font-size: 12px; font-weight: 600 }
+.kpi b { display: block; font: 700 26px/1.2 "JetBrains Mono", monospace; letter-spacing: -.03em; margin-top: 2px; transition: color .3s }
+.kpi .zle b { color: var(--czer) } .kpi .dobrze b { color: var(--ok) }
+@media (max-width: 640px) { .kpi { grid-template-columns: 1fr 1fr } .kpi div:last-child { grid-column: 1 / -1 } .kpi b { font-size: 21px } }
+
+.uklad { margin-top: 14px; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr) 380px; align-items: start }
+@media (max-width: 960px) { .uklad { grid-template-columns: 1fr } }
+.karta { background: var(--karta); border-radius: 24px; padding: 18px; box-shadow: 0 1px 0 var(--linia), 0 18px 40px rgba(0,0,0,.04) }
+.karta h3 { margin: 0 0 2px; font-size: 18px; letter-spacing: -.01em }
+.karta .pod { color: var(--szary); font-size: 13px; margin-bottom: 12px }
+
+/* faktury */
+.fv { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 12px 14px; border-radius: 16px; border: 1px solid var(--linia); margin-bottom: 8px; transition: background .4s, box-shadow .4s }
+.fv .k { font-weight: 700 }
+.fv .n { color: var(--szary); font-size: 12px; font-family: "JetBrains Mono", monospace }
+.fv .kw { font: 700 16px "JetBrains Mono", monospace; text-align: right; white-space: nowrap }
+.fv .st { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center }
+.chip { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; background: #eef0f4; color: #515154 }
+.chip.ok { background: #e3f6ec; color: var(--ok) } .chip.ostrz { background: #fff3e0; color: #c26a00 } .chip.czer { background: #ffe9e7; color: var(--czer) } .chip.nieb { background: #e6f1ff; color: var(--nieb) } .chip.fiol { background: #f1e9ff; color: #6e3bd1 }
+.fv .akc { margin-left: auto; border: 0; background: none; color: var(--nieb); font-weight: 700; font-size: 12px; padding: 2px 4px }
+.fv.zaplacona { background: #f3fbf6 }
+.fv.zaplacona .kw { color: var(--ok) }
+.fv.blysk { box-shadow: 0 0 0 3px var(--nieb) }
+.fv.blysk-ok { box-shadow: 0 0 0 3px var(--ok) }
+.fv.alarm { box-shadow: 0 0 0 3px var(--czer); background: #fff7f6 }
+
+.dodaj { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--linia) }
+.dodaj summary { cursor: pointer; font-weight: 700; color: var(--nieb); list-style: none }
+.dodaj summary::-webkit-details-marker { display: none }
+.form { display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap: 8px; margin-top: 10px }
+.form input, .form select { width: 100%; border: 1px solid var(--linia); border-radius: 12px; padding: 10px 12px; font: inherit; background: #fafafa; min-width: 0 }
+@media (max-width: 640px) { .form { grid-template-columns: 1fr 1fr } .form .btn { grid-column: 1 / -1 } }
+.kanaly { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; font-size: 13px; color: var(--szary); align-items: center }
+.kanaly label { display: flex; align-items: center; gap: 6px; background: #f5f5f7; padding: 6px 10px; border-radius: 99px; color: var(--ink); font-weight: 600; cursor: pointer }
+
+/* automat teraz + telefon */
+.prawa { display: flex; flex-direction: column; gap: 14px }
+.teraz { background: var(--noc); color: #fff; border-radius: 24px; padding: 16px 18px; min-height: 92px }
+.teraz .g { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #a1a1a6 }
+.teraz .g i { width: 8px; height: 8px; border-radius: 8px; background: #48484a }
+.teraz.aktywny .g i { background: #30d158; box-shadow: 0 0 0 4px rgba(48,209,88,.2); animation: miga 1s infinite }
+@keyframes miga { 50% { opacity: .35 } }
+.teraz p { margin: 8px 0 0; font-size: 15px; line-height: 1.4 }
+.tel { background: #000; border-radius: 40px; padding: 10px; box-shadow: 0 24px 60px rgba(0,0,0,.2), inset 0 0 0 2px #2c2c2e }
+.ekran { background: #f2f2f7; border-radius: 32px; height: 400px; overflow: hidden; display: flex; flex-direction: column }
+.wysp { width: 96px; height: 26px; border-radius: 20px; background: #000; margin: 8px auto 0; flex: none }
+.czat-g { text-align: center; padding: 8px 0 10px; border-bottom: 1px solid #e0e0e5; background: #f9f9fb; flex: none }
+.czat-g .av { width: 38px; height: 38px; border-radius: 38px; margin: 0 auto 2px; background: linear-gradient(135deg, var(--nieb), var(--fiolet)); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 14px }
+.czat-g b { font-size: 13px } .czat-g span { display: block; font-size: 11px; color: var(--szary) }
+.czat { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px }
+.dym { max-width: 88%; padding: 9px 12px; border-radius: 18px; font-size: 13.5px; line-height: 1.38; background: #e5e5ea; align-self: flex-start; border-bottom-left-radius: 6px; animation: wej .3s ease }
+.dym small { display: block; color: var(--szary); font-size: 10.5px; margin-top: 4px }
+.dym.ja { align-self: flex-end; background: #34c759; color: #fff; border-bottom-left-radius: 18px; border-bottom-right-radius: 6px }
+.dym.ja small { color: rgba(255,255,255,.75) }
+.dym .zal { display: flex; align-items: center; gap: 8px; margin-top: 6px; background: #fff; border-radius: 10px; padding: 6px 8px; font-size: 12px; font-weight: 600 }
+.pusty { margin: auto; color: var(--szary); font-size: 13px; text-align: center; padding: 0 20px }
+@keyframes wej { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+.podtel { text-align: center; color: var(--szary); font-size: 12px; margin-top: 8px }
+
+/* oś zdarzeń */
+.os { position: relative; padding-left: 22px; max-height: 360px; overflow-y: auto }
+.os::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--nieb), var(--fiolet)); opacity: .35 }
+.zd { position: relative; padding: 0 0 12px; animation: wej .3s ease }
+.zd::before { content: ""; position: absolute; left: -20px; top: 4px; width: 12px; height: 12px; border-radius: 12px; background: #fff; border: 3px solid var(--nieb) }
+.zd.ok::before { border-color: var(--ok) } .zd.czer::before { border-color: var(--czer) } .zd.fiol::before { border-color: var(--fiolet) }
+.zd .d { font-size: 11px; font-weight: 700; color: var(--szary); text-transform: uppercase; letter-spacing: .04em }
+.zd .t { font-size: 13.5px }
+.zd .t b { font-weight: 700 }
+
+.cta { margin-top: 18px; background: linear-gradient(100deg, #0a84ff14, #bf5af214); border: 1px solid #e2d9fb; border-radius: 22px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap }
+.cta p { margin: 0; flex: 1; min-width: 240px }
+.cta a { text-decoration: none }
+.stopka { margin-top: 18px; text-align: center; color: var(--szary); font-size: 12px }
+.stopka a { color: var(--nieb) }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">ai</div>
+    <div class="tytul"><b>Automat przypomnień o fakturach</b><small>Przykładowa firma z wymyślonymi klientami</small></div>
+    <span class="demo">DEMO · aiforbusiness24</span>
+  </header>
+
+  <section class="ster" aria-label="Sterowanie symulacją">
+    <div class="data">
+      <div class="kal"><i id="kalM">lis</i><b id="kalD">27</b></div>
+      <div class="opis"><b id="dzisTxt">Dziś</b><span id="dzienSym">Dzień 0 symulacji: przesuwaj kalendarz i patrz, co robi automat</span></div>
+    </div>
+    <div class="btns">
+      <button class="btn glowny gra" id="graj">▶ Odtwórz 2 tygodnie</button>
+      <button class="btn" id="nastepny">Następny dzień →</button>
+      <button class="btn" id="reset">↺ Od nowa</button>
+    </div>
+  </section>
+
+  <section class="kpi" aria-label="Podsumowanie">
+    <div class="zle"><span>Po terminie, do odzyskania</span><b id="kpiPo">0 zł</b></div>
+    <div class="dobrze"><span>Wpłynęło po przypomnieniach</span><b id="kpiOdz">0 zł</b></div>
+    <div><span>Przypomnienia wysłane przez automat</span><b id="kpiIle">0</b></div>
+  </section>
+
+  <div class="uklad">
+    <section class="karta">
+      <h3>Faktury</h3>
+      <div class="pod">Status aktualizuje się sam, a wpłaty są dopasowywane z wyciągu bankowego.</div>
+      <div id="lista"></div>
+      <details class="dodaj">
+        <summary>＋ Dodaj własną fakturę do symulacji</summary>
+        <form class="form" id="form">
+          <input id="fKlient" placeholder="Klient, np. Twoja firma" maxlength="40" required>
+          <input id="fKwota" type="number" min="1" step="1" placeholder="Kwota zł" required>
+          <select id="fTermin" aria-label="Termin">
+            <option value="0">termin dziś</option><option value="1" selected>termin jutro</option><option value="3">za 3 dni</option><option value="-1">wczoraj</option>
+          </select>
+          <button class="btn glowny">Dodaj</button>
+        </form>
+        <div class="kanaly">Kanały przypomnień:
+          <label><input type="checkbox" id="kMail" checked> E-mail</label>
+          <label><input type="checkbox" id="kSms" checked> SMS</label>
+          <label><input type="checkbox" id="kWa"> WhatsApp</label>
+        </div>
+      </details>
+    </section>
+
+    <aside class="prawa">
+      <div class="teraz" id="teraz"><div class="g"><i></i>AUTOMAT TERAZ</div><p id="terazTxt">Czeka na kolejny dzień. Kliknij „Odtwórz”.</p></div>
+      <div>
+        <div class="tel"><div class="ekran">
+          <div class="wysp"></div>
+          <div class="czat-g"><div class="av">TF</div><b id="czatDo">Twoja Firma</b><span id="czatKanal">SMS · telefon klienta</span></div>
+          <div class="czat" id="czat"><div class="pusty">Tu zobaczysz wiadomość, którą dostaje Twój klient.</div></div>
+        </div></div>
+        <div class="podtel">Podgląd telefonu klienta</div>
+      </div>
+      <section class="karta">
+        <h3>Co zrobił automat</h3>
+        <div class="pod">Każdy krok zapisuje się w historii klienta.</div>
+        <div class="os" id="os"></div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="cta">
+    <p><b>Chcesz to u siebie?</b> Podpinamy się pod Twój program do faktur (np. Fakturownia, inFakt, wFirma) i bank, a treść i godziny przypomnień ustawiamy pod Twoją firmę.</p>
+    <a class="btn glowny gra" href="https://www.aiforbusiness24.com/#quiz">Bezpłatna konsultacja →</a>
+  </section>
+  <p class="stopka">Demo z wymyślonymi danymi · <a href="https://www.aiforbusiness24.com/">AI for Business 24</a></p>
+</div>
+
+<script>
+// Scenariusz jak w rolce: dzień po terminie grzeczne przypomnienie, po tygodniu kolejne, po 14 dniach telefon od właściciela.
+// zaplata = ile dni po terminie klient płaci (null = nie płaci, dopóki ktoś nie kliknie „wpłata”).
+const START = [
+  { klient: 'Studio Nova', nr: 'FV 10/124', kwota: 6850, termin: 0, zaplata: 2 },
+  { klient: 'Firma Lumen', nr: 'FV 10/118', kwota: 4200, termin: 0, zaplata: 8 },
+  { klient: 'Klient z Kontaktu', nr: 'FV 10/131', kwota: 7400, termin: 2, zaplata: 3 },
+  { klient: 'Biuro Optima', nr: 'FV 10/137', kwota: 3650, termin: 1, zaplata: null },
+  { klient: 'Kwiaciarnia Fiore', nr: 'FV 11/003', kwota: 1230, termin: 4, zaplata: -1 },
+  { klient: 'Salon Bella', nr: 'FV 11/009', kwota: 2980, termin: 6, zaplata: 2 },
+];
+const DNI = 16, ODSTEP = 1700;
+const $ = (id) => document.getElementById(id);
+const zl = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł';
+const dzis0 = new Date(); dzis0.setHours(12, 0, 0, 0);
+const data = (d) => { const x = new Date(dzis0); x.setDate(x.getDate() + d); return x };
+const krotko = (d) => data(d).toLocaleDateString('pl-PL', { day: 'numeric', month: 'short' });
+const dniaTyg = (d) => data(d).toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long' });
+let stan, dzien, timer = null, licznikNr = 200;
+
+function reset() {
+  stop();
+  dzien = 0;
+  stan = { faktury: START.map((f, i) => ({ ...f, id: i, przyp: 0, zaplacona: false, eskalacja: false })), wyslane: 0, odzyskane: 0 };
+  $('czat').innerHTML = '<div class="pusty">Tu zobaczysz wiadomość, którą dostaje Twój klient.</div>';
+  $('os').innerHTML = '';
+  ustawTeraz('Czeka na kolejny dzień. Kliknij „Odtwórz”.', false);
+  zdarzenie(0, 'Automat podłączony do programu do faktur i konta firmowego. Sprawdza faktury codziennie o 9:00.', 'fiol');
+  rysuj();
+}
+
+function kanaly() { const k = []; if ($('kMail').checked) k.push('e-mail'); if ($('kSms').checked) k.push('SMS'); if ($('kWa').checked) k.push('WhatsApp'); return k.length ? k : ['e-mail'] }
+
+function tresc(f, ktore) {
+  const po = dzien - f.termin;
+  if (ktore === 1) return `Dzień dobry, uprzejmie przypominamy o płatności za fakturę ${f.nr} na kwotę ${zl(f.kwota)}. Termin minął wczoraj. Jeśli przelew jest już w drodze, prosimy zignorować tę wiadomość 🙂`;
+  return `Dzień dobry, to drugie przypomnienie o fakturze ${f.nr} (${zl(f.kwota)}), która jest ${po} dni po terminie. Prosimy o wpłatę albo krótką odpowiedź, jeśli jest jakiś problem. Fakturę załączamy ponownie.`;
+}
+
+function pokazWiadomosc(f, txt) {
+  const k = kanaly();
+  $('czatDo').textContent = 'Twoja Firma → ' + f.klient;
+  $('czatKanal').textContent = k.join(' + ') + ' · telefon klienta';
+  const c = $('czat');
+  if (c.querySelector('.pusty')) c.innerHTML = '';
+  const d = document.createElement('div');
+  d.className = 'dym';
+  d.innerHTML = `${txt}<div class="zal">📄 ${f.nr}.pdf · link do płatności</div><small>${krotko(dzien)}, 9:00 · wysłane automatycznie</small>`;
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+function odpowiedzKlienta(f, txt) {
+  const c = $('czat'); const d = document.createElement('div');
+  d.className = 'dym ja'; d.innerHTML = `${txt}<small>${f.klient} · ${krotko(dzien)}</small>`;
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+
+function zdarzenie(d, txt, typ = '') {
+  const el = document.createElement('div');
+  el.className = 'zd ' + typ;
+  el.innerHTML = `<div class="d">${d === 0 && !txt.includes('<b>') ? 'start' : krotko(d)}</div><div class="t">${txt}</div>`;
+  const os = $('os'); os.prepend(el);
+}
+function ustawTeraz(txt, akt = true) { $('terazTxt').innerHTML = txt; $('teraz').classList.toggle('aktywny', akt) }
+function blysk(id, klasa) { const el = document.querySelector(`[data-id="${id}"]`); if (!el) return; el.classList.add(klasa); setTimeout(() => el.classList.remove(klasa), 1400) }
+
+function zaplac(f, reczna = false) {
+  if (f.zaplacona) return;
+  f.zaplacona = true; f.dzienZaplaty = dzien;
+  const poPrzyp = f.przyp > 0;
+  if (poPrzyp) stan.odzyskane += f.kwota;
+  zdarzenie(dzien, `💸 Przelew <b>${zl(f.kwota)}</b> od <b>${f.klient}</b> dopasowany do ${f.nr}.${poPrzyp ? ' Kolejne przypomnienia anulowane.' : ''}`, 'ok');
+  ustawTeraz(`Wpłynął przelew od <b>${f.klient}</b>: ${zl(f.kwota)}. Faktura ${f.nr} oznaczona jako zapłacona${reczna ? '' : ' (dopasowanie z wyciągu)'}.`);
+  if (poPrzyp && !reczna && f.klient === 'Studio Nova') odpowiedzKlienta(f, 'Dzień dobry, przepraszam, umknęło mi. Przelew wysłany ✅');
+  rysuj(); blysk(f.id, 'blysk-ok');
+}
+
+function krok() {
+  dzien++;
+  const akcje = [];
+  for (const f of stan.faktury) {
+    if (f.zaplacona) continue;
+    const po = dzien - f.termin;
+    if (f.zaplata !== null && po >= f.zaplata) { akcje.push(() => zaplac(f)); continue }
+    if (po === 1 && f.przyp === 0) akcje.push(() => przypomnij(f, 1));
+    else if (po === 7 && f.przyp === 1) akcje.push(() => przypomnij(f, 2));
+    else if (po === 14 && !f.eskalacja) akcje.push(() => eskaluj(f));
+  }
+  rysuj();
+  if (!akcje.length) ustawTeraz(`${dniaTyg(dzien).replace(/^./, (c) => c.toUpperCase())}: sprawdzone wszystkie faktury, dziś nic do wysłania.`, false);
+  akcje.forEach((a, i) => setTimeout(a, i * 420));
+  if (dzien >= DNI) stop();
+}
+
+function przypomnij(f, ktore) {
+  f.przyp = ktore; stan.wyslane++;
+  const txt = tresc(f, ktore);
+  pokazWiadomosc(f, txt);
+  zdarzenie(dzien, `${ktore === 1 ? '✉️ Grzeczne przypomnienie' : '🔔 Drugie przypomnienie'} do <b>${f.klient}</b> (${f.nr}, ${zl(f.kwota)}) · ${kanaly().join(' + ')}`, ktore === 1 ? '' : 'fiol');
+  ustawTeraz(`${ktore === 1 ? 'Dzień po terminie' : 'Tydzień po terminie'}: wysyłam ${ktore === 1 ? 'grzeczne' : 'drugie'} przypomnienie do <b>${f.klient}</b> o ${f.nr} (${zl(f.kwota)}).`);
+  rysuj(); blysk(f.id, 'blysk');
+}
+
+function eskaluj(f) {
+  f.eskalacja = true;
+  zdarzenie(dzien, `📞 <b>${f.klient}</b> 14 dni po terminie, dwa przypomnienia bez odpowiedzi. Powiadomienie do właściciela: warto zadzwonić.`, 'czer');
+  ustawTeraz(`<b>Do Ciebie:</b> ${f.klient} nie zapłaciło ${zl(f.kwota)} od 14 dni mimo dwóch przypomnień. Proponuję telefon, numer jest w karcie klienta.`);
+  rysuj(); blysk(f.id, 'alarm');
+}
+
+function rysuj() {
+  const d = data(dzien);
+  $('kalM').textContent = d.toLocaleDateString('pl-PL', { month: 'short' }).replace('.', '');
+  $('kalD').textContent = d.getDate();
+  $('dzisTxt').textContent = dniaTyg(dzien).replace(/^./, (c) => c.toUpperCase());
+  $('dzienSym').textContent = dzien === 0 ? 'Dzień 0 symulacji: przesuwaj kalendarz i patrz, co robi automat' : `Dzień ${dzien} symulacji`;
+  let po = 0;
+  const html = stan.faktury.map((f) => {
+    const dni = dzien - f.termin;
+    if (!f.zaplacona && dni > 0) po += f.kwota;
+    const chipy = [];
+    if (f.zaplacona) chipy.push(`<span class="chip ok">✓ zapłacona ${krotko(f.dzienZaplaty)}</span>`);
+    else if (dni < 0) chipy.push(`<span class="chip">termin ${krotko(f.termin)}</span>`);
+    else if (dni === 0) chipy.push(`<span class="chip nieb">termin dziś</span>`);
+    else chipy.push(`<span class="chip ${dni >= 14 ? 'czer' : 'ostrz'}">${dni} ${dni === 1 ? 'dzień' : 'dni'} po terminie</span>`);
+    if (f.przyp >= 1) chipy.push(`<span class="chip nieb">przypomnienie ${f.przyp === 2 ? '2/2' : '1/2'}</span>`);
+    if (f.eskalacja && !f.zaplacona) chipy.push(`<span class="chip czer">📞 zadzwoń</span>`);
+    const akc = f.zaplacona ? '' : `<button class="akc" data-wplata="${f.id}">Klient płaci</button>`;
+    return `<div class="fv ${f.zaplacona ? 'zaplacona' : ''} ${f.eskalacja && !f.zaplacona ? 'alarm' : ''}" data-id="${f.id}">
+      <div><div class="k">${f.klient}</div><div class="n">${f.nr}</div></div><div class="kw">${zl(f.kwota)}</div>
+      <div class="st">${chipy.join('')}${akc}</div></div>`;
+  }).join('');
+  $('lista').innerHTML = html;
+  $('kpiPo').textContent = zl(po);
+  $('kpiOdz').textContent = (stan.odzyskane ? '+' : '') + zl(stan.odzyskane);
+  $('kpiIle').textContent = stan.wyslane;
+}
+
+function graj() {
+  if (timer) return stop();
+  if (dzien >= DNI) reset();
+  $('graj').textContent = '❚❚ Pauza';
+  krok();
+  timer = setInterval(() => { if (dzien >= DNI) return stop(); krok() }, ODSTEP);
+}
+function stop() { clearInterval(timer); timer = null; $('graj').textContent = dzien >= DNI ? '↺ Odtwórz jeszcze raz' : '▶ Odtwórz 2 tygodnie' }
+
+$('graj').onclick = graj;
+$('nastepny').onclick = () => { stop(); krok() };
+$('reset').onclick = reset;
+$('lista').addEventListener('click', (e) => {
+  const id = e.target?.dataset?.wplata; if (id === undefined) return;
+  const f = stan.faktury.find((x) => x.id === Number(id)); if (f) zaplac(f, true);
+});
+$('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const klient = $('fKlient').value.trim().slice(0, 40), kwota = Math.round(Number($('fKwota').value));
+  if (!klient || !(kwota > 0)) return;
+  const f = { klient, nr: `FV 11/${licznikNr++}`, kwota, termin: dzien + Number($('fTermin').value), zaplata: null, id: stan.faktury.length, przyp: 0, zaplacona: false, eskalacja: false };
+  // faktura z terminem „wczoraj” — automat od razu wyśle pierwsze przypomnienie
+  stan.faktury.unshift(f);
+  zdarzenie(dzien, `➕ Nowa faktura <b>${f.nr}</b> dla <b>${klient}</b> (${zl(kwota)}) pobrana z programu do faktur.`, 'fiol');
+  $('form').reset();
+  rysuj(); blysk(f.id, 'blysk');
+  if (dzien - f.termin === 1) setTimeout(() => przypomnij(f, 1), 500);
+});
+reset();
+// #graj w adresie: symulacja rusza sama (nagrywanie ekranu do rolki)
+if (location.hash === '#graj') setTimeout(graj, 800);
+</script>
+</body>
+</html>
